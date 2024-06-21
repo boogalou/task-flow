@@ -1,0 +1,15 @@
+@layer component {
+  .input {
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border-radius: 4px;
+    border: 1px solid gray;
+    font-size: 16px;
+    padding: 0 15px;
+
+    &:focus {
+      border: 1px solid cornflowerblue;
+    }
+  }
+}

@@ -1,0 +1,15 @@
+//light-theme
+html[data-theme='light'] {
+--color-primary-font: #FFFFFF;
+--color-secondary-font: #F5F3FF;
+--color-primary: #00117D;
+--color-secondary: #00189D;
+}
+
+//dark-theme
+html[data-theme='dark'] {
+  --color-primary-font: #FFFFFF;
+  --color-secondary-font: #F5F3FF;
+  --color-primary: #00117D;
+  --color-secondary: #00189D;
+}

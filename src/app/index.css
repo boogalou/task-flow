@@ -1,0 +1,23 @@
+@import 'src/shared/styles/normalize.css';
+@layer reset, component, utility;
+@layer reset {
+    * {
+        font-family: Lato, serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    html body {
+        height: 100%;
+    }
+
+    #root {
+        height: 100vh;
+    }
+}
+
+
+
+
+
+

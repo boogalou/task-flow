@@ -1,0 +1,15 @@
+
+
+@layer component {
+    .button {
+        width: 100%;
+        height: 2.625rem;
+        background-color: red;
+        cursor: pointer;
+        
+        &--disabled {
+            background-color: #FEFEFE;
+        }
+    }
+}
+
