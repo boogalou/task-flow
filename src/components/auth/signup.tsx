@@ -2,7 +2,6 @@ import styles from './auth.module.scss';
 import cnBind from 'classnames/bind';
 import Input from '../../shared/ui-kit/input/input.tsx';
 import { Button } from '../../shared/ui-kit/button/Button.tsx';
-import { useState } from 'react';
 import { RegistrationData } from './types.ts';
 import { useAppDispatch } from '../../app/redux/reduxHooks.ts';
 import { signupRequest } from './model/auth.thunk.ts';
@@ -12,24 +11,19 @@ import { registrationValidationSchema } from './lib/validationSchema.ts';
 import { Link } from 'react-router-dom';
 import { routes } from '../../shared/routes/routes.ts';
 import { Icon } from '../../shared/ui-kit/icon/icon.tsx';
+import { useShowPassword } from './lib/useShowPassword.ts';
 
 const cx = cnBind.bind(styles);
 
 export function Signup() {
   const dispatch = useAppDispatch();
-  const [types, setTypes] = useState<{ [key in keyof RegistrationData]: string }>({
-    username: 'text',
+
+  const { types, toggleType } = useShowPassword({
+    username: 'username',
     email: 'email',
     password: 'password',
     confirmPassword: 'password',
   });
-
-  const toggleType = (field: keyof RegistrationData) => {
-    setTypes((prevTypes) => ({
-      ...prevTypes,
-      [field]: prevTypes[field] === 'password' ? 'text' : 'password',
-    }));
-  };
 
   const form = useForm<RegistrationData>({
     initialValues: {
@@ -74,12 +68,12 @@ export function Signup() {
                 label={field.label}
               />
               {field.name === 'password' || field.name === 'confirmPassword' ? (
-                <div className={cx('form__icon')} onClick={field.toggleType}>
-                  {field.type === 'password' ? (
-                    <Icon className={cx('icon--eye')} iconType={'eye-off'} />
-                  ) : (
-                    <Icon className={cx('icon--eye')} iconType={'eye'} />
-                  )}
+                <div className={cx('form__icon')}>
+                  <Icon
+                    className={cx('icon--eye')}
+                    onClick={field.toggleType}
+                    iconType={field.type === 'password' ? 'eye-off' : 'eye'}
+                  />
                 </div>
               ) : null}
               {field.touched && field.error && (
