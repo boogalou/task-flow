@@ -1,0 +1,58 @@
+@import 'src/shared/styles/index';
+
+.search {
+  $this: &;
+  position: relative;
+
+  @layer utility {
+    &__input {
+      height: 40px;
+      border: 1px solid var(--color-secondary-font);
+      border-radius: 16px;
+      padding: 0 50px;
+      background-color: var(--color-secondary);
+      color: var(--color-icon-bg);
+      opacity: 0;
+      width: 0;
+      transition: width 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940), opacity 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940);
+
+      &:focus {
+        border: 1px solid cornflowerblue;
+      }
+
+      &::placeholder {
+       color: var(--color-icon-bg);
+      }
+
+      &--visible {
+        width: 100%;
+        opacity: 1;
+      }
+    }
+
+    &__icon {
+      position: absolute;
+      top: 21px;
+      left: 15px;
+      transform: translateY(-50%);
+      svg {
+        stroke: var(--color-icon-bg);
+        width: $mobile-icon-size;
+        height: $mobile-icon-size;
+      }
+    }
+  }
+}
+
+@include respond-to(desktop) {
+  .search {
+
+    @layer utility {
+      &__input {
+        opacity: 1;
+        width: 100%;
+      }
+    }
+  }
+}
+

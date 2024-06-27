@@ -1,5 +1,4 @@
-import { RegistrationData } from "../types.ts";
-
+import { RegistrationData } from '../types.ts';
 
 interface InputField {
   id: string;
@@ -13,12 +12,12 @@ interface InputField {
   toggleType?: () => void;
 }
 
-export const inputFields = (
-  signupData: RegistrationData,
+export const registrationFields = (
+  data: RegistrationData,
   errors: Partial<RegistrationData>,
   touched: Partial<{ [key in keyof RegistrationData]: boolean }>,
   types: { [key in keyof RegistrationData]: string },
-  toggleType: (field: keyof RegistrationData) => void
+  toggleType: (field: keyof RegistrationData) => void,
 ): InputField[] => [
   {
     id: 'email',
@@ -26,7 +25,7 @@ export const inputFields = (
     type: 'email',
     placeholder: 'Email',
     label: 'Email',
-    value: signupData.email,
+    value: data.email,
     error: errors.email,
     touched: touched.email,
   },
@@ -36,7 +35,7 @@ export const inputFields = (
     type: 'text',
     placeholder: 'Username',
     label: 'Username',
-    value: signupData.username,
+    value: data.username,
     error: errors.username,
     touched: touched.username,
   },
@@ -46,7 +45,7 @@ export const inputFields = (
     type: types.password,
     placeholder: 'Password',
     label: 'Password',
-    value: signupData.password,
+    value: data.password,
     error: errors.password,
     touched: touched.password,
     toggleType: () => toggleType('password'),
@@ -57,7 +56,7 @@ export const inputFields = (
     type: types.confirmPassword,
     placeholder: 'Confirm password',
     label: 'Confirm password',
-    value: signupData.confirmPassword,
+    value: data.confirmPassword,
     error: errors.confirmPassword,
     touched: touched.confirmPassword,
     toggleType: () => toggleType('confirmPassword'),

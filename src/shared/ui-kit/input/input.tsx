@@ -1,26 +1,31 @@
+import { ForwardedRef, forwardRef, InputHTMLAttributes } from 'react';
 import styles from './input.module.scss';
-import cnBind from "classnames/bind";
-import { InputHTMLAttributes } from "react";
+import cnBind from 'classnames/bind';
 
 const cx = cnBind.bind(styles);
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   classNameInput?: string;
   classNameLabel?: string;
-  label?: string
+  label?: string;
 }
 
-function Input({ id, label, classNameLabel, classNameInput, ...restProps }: InputProps) {
-  return (
-    <>
-      <label className={ classNameLabel } htmlFor={id}>{ label }</label>
-      <input
-        className={ cx('input', classNameInput) }
-        id={id}
-        { ...restProps }
-      />
-    </>
-  );
-}
+const Input = forwardRef(
+  (
+    { id, label, classNameLabel, classNameInput, ...restProps }: InputProps,
+    ref: ForwardedRef<HTMLInputElement>,
+  ) => {
+    return (
+      <>
+        <label className={classNameLabel} htmlFor={id}>
+          {label}
+        </label>
+        <input className={cx('input', classNameInput)} id={id} ref={ref} {...restProps} />
+      </>
+    );
+  },
+);
+
+Input.displayName = 'Input';
 
 export default Input;

@@ -1,5 +1,5 @@
-import { ChangeEvent, FocusEvent, FormEvent, useState } from "react";
-import { ZodSchema, z } from "zod";
+import { ChangeEvent, FocusEvent, FormEvent, useState } from 'react';
+import { ZodSchema, z } from 'zod';
 
 export interface UseFormOptions<T> {
   initialValues: T;
@@ -9,8 +9,13 @@ export interface UseFormOptions<T> {
   validationSchema: ZodSchema<T>;
 }
 
-export function useForm<T>({ initialValues, validationSchema, onSubmit, validateOnChange = false, validateOnBlur = false }: UseFormOptions<T>) {
-
+export function useForm<T>({
+  initialValues,
+  validationSchema,
+  onSubmit,
+  validateOnChange = false,
+  validateOnBlur = false,
+}: UseFormOptions<T>) {
   const [values, setValues] = useState<T>(initialValues);
   const [error, setError] = useState<Partial<Record<keyof T, string>>>({});
   const [touched, setTouched] = useState<Partial<Record<keyof T, boolean>>>({});
@@ -92,5 +97,5 @@ export function useForm<T>({ initialValues, validationSchema, onSubmit, validate
     handleOnBlur,
     handleSubmit,
     resetForm,
-  }
+  };
 }

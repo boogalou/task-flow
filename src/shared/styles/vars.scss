@@ -1,15 +1,32 @@
-//light-theme
-html[data-theme='light'] {
---color-primary-font: #FFFFFF;
---color-secondary-font: #F5F3FF;
---color-primary: #00117D;
---color-secondary: #00189D;
+:root {
+  --color-danger: #EE4E4E;
+  --color-success: #B5CB99;
+  --color-icon-bg: #d5c4a1
 }
 
-//dark-theme
-html[data-theme='dark'] {
-  --color-primary-font: #FFFFFF;
-  --color-secondary-font: #F5F3FF;
-  --color-primary: #00117D;
-  --color-secondary: #00189D;
-}
+  /*light-theme*/
+  html[data-theme='light'] {
+    --color-secondary-font: #7D7C7C;
+    --color-primary-font: #445069;
+    --color-accent: #050C9C;
+    --color-secondary: #11009E;
+    --color-main-bg: #FFFFFF;
+    --color-link: #667BC6;
+
+  }
+
+  /*dark theme*/
+  html[data-theme='dark'] {
+    --color-primary-font: #ebdbb2;
+    --color-secondary-font: #d5c4a1;
+    --color-accent: #282828;
+    --color-secondary: #3c3836;
+    --color-main-bg: #282828;
+    --color-link: #6e8e7e;
+  }
+
+
+//icon-sizes
+$mobile-icon-size: 24px;
+$tablet-icon-size: 32px;
+$desktop-icon-size: 48px;

@@ -1,6 +1,7 @@
 @layer component {
   .icon {
     svg {
+      stroke: var(--color-icon-bg);
       width: 100%;
       height: 100%;
     }

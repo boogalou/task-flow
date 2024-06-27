@@ -1,5 +1,4 @@
-import { LoginData } from "../types.ts";
-
+import { LoginData } from '../types.ts';
 
 interface InputField {
   id: string;
@@ -13,12 +12,12 @@ interface InputField {
   toggleType?: () => void;
 }
 
-export const inputFields = (
-  signinData: LoginData,
+export const loginFields = (
+  data: LoginData,
   errors: Partial<LoginData>,
   touched: Partial<{ [key in keyof LoginData]: boolean }>,
   types: { [key in keyof LoginData]: string },
-  toggleType: (field: keyof LoginData) => void
+  toggleType: (field: keyof LoginData) => void,
 ): InputField[] => [
   {
     id: 'email',
@@ -26,7 +25,7 @@ export const inputFields = (
     type: 'email',
     placeholder: 'Email',
     label: 'Email',
-    value: signinData.email,
+    value: data.email,
     error: errors.email,
     touched: touched.email,
   },
@@ -36,7 +35,7 @@ export const inputFields = (
     type: types.password,
     placeholder: 'Password',
     label: 'Password',
-    value: signinData.password,
+    value: data.password,
     error: errors.password,
     touched: touched.password,
     toggleType: () => toggleType('password'),
