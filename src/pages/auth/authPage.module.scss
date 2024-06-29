@@ -28,7 +28,7 @@
 
     svg {
       path {
-        fill: var(--color-link);
+        stroke: var(--color-link);
       }
 
       path {
@@ -59,11 +59,7 @@
   &__splash {
     display: none;
   }
-
-
 }
-
-
 
 @include respond-to('desktop') {
   .auth-page {
