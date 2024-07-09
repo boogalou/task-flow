@@ -1,9 +1,17 @@
+@import 'src/shared/styles/index';
 
 .app-container {
   position: relative;
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 16px;
+  grid-template-columns: repeat(4, 1fr);
   height: 100vh;
   border: 2px solid crimson;
+
+  @include respond-to('tablet') {
+    grid-template-columns: repeat(8, 1fr);
+  }
+
+  @include respond-to('desktop') {
+    grid-template-columns: repeat(12, 1fr);
+  }
 }

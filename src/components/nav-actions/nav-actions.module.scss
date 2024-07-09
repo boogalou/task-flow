@@ -1,0 +1,43 @@
+@import 'src/shared/styles/index';
+
+.nav-actions {
+  $this: &;
+  border-bottom: 1px solid #EFEFEF;
+
+  @layer utility {
+    &__button {
+      display: flex;
+      align-items: center;
+      padding: 0 px-to-rem(16px) 0 px-to-rem(24px);
+      column-gap: px-to-rem(8px);
+      border: none;
+      background-color: transparent;
+    }
+  }
+
+  @layer utility {
+    &__icon {
+      svg {
+        fill: #EFEFEF;
+        stroke: black;
+      }
+    }
+  }
+
+  @include respond-to('desktop') {
+    &__button {
+      &:hover {
+        background-color: var(--color-accent);
+        color: var(--color-hover-font);
+
+        #{$this}__icon {
+          svg {
+            fill: black;
+            stroke: #EFEFEF;
+          }
+        }
+      }
+    }
+  }
+}
+

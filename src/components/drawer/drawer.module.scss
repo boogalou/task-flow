@@ -1,0 +1,44 @@
+@import 'src/shared/styles/index';
+
+.drawer {
+  $this: &;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-main-bg);
+  position: fixed;
+  row-gap: px-to-rem(24px);
+  top: 0;
+  left: 0;
+  width: 80%;
+  height: 100%;
+  z-index: 1000;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+
+  &--open {
+    transform: translate(0);
+    box-shadow: 19px 0 25px -20px rgba(0,0,0,0.63);
+
+    #{$this}__close-button {
+      display: block;
+    }
+  }
+
+  &__close-button {
+    position: absolute;
+    top: 50%;
+    right: px-to-rem(-40px);
+    width: px-to-rem(25px);
+    height: px-to-rem(40px);
+    border-radius: px-to-rem(8px);
+    background-color: rgba(128, 128, 128, 0.3);
+    border: none;
+    display: none;
+  }
+}
+
+@include respond-to('tablet') {
+  .drawer {
+    display: none;
+  }
+}

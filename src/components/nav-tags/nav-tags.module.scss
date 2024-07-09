@@ -1,0 +1,48 @@
+@import 'src/shared/styles/index';
+
+@mixin common-button {
+  background-color: transparent;
+  border: none;
+}
+
+.nav-tags {
+  $this: &;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #EFEFEF;
+
+  &__action {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 px-to-rem(24px) 0 px-to-rem(24px);
+  }
+
+  @layer utility {
+    &__button {
+      @include common-button;
+      display: flex;
+      align-items: center;
+      padding-left: px-to-rem(24px);
+
+    }
+
+    &__button--add {
+      @include common-button;
+      font-weight: bold;
+      width: px-to-rem(14px);
+
+      svg {
+        transform: rotate(45deg);
+        width: px-to-rem(14px);
+      }
+    }
+  }
+
+  @include respond-to('desktop') {
+    #{$this}__button:hover {
+      background-color: var(--color-accent);
+      color: var(--color-hover-font);
+    }
+  }
+}

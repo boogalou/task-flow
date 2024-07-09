@@ -1,0 +1,47 @@
+@import "src/shared/styles/index";
+
+.nav-date {
+  $this: &;
+  border-bottom: 1px solid #EFEFEF;
+
+  @layer utility {
+    &__button {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 px-to-rem(16px) 0 px-to-rem(24px);
+      background: transparent;
+      border: none;
+      color: var(--color-primary-font);
+      white-space: nowrap;
+    }
+
+    &__wrapper {
+      display: flex;
+      align-items: center;
+      column-gap: px-to-rem(8px);
+    }
+
+    &__icon {
+      width: px-to-rem(18px);
+      fill: black;
+    }
+  }
+
+  @include respond-to('desktop') {
+    &__button {
+      &:hover {
+        background-color: var(--color-accent);
+        border-radius: px-to-rem(4px);
+
+        #{$this}__button-label, #{$this}__counter {
+          color: white;
+        }
+
+        #{$this}__icon, {
+          fill: white;
+        }
+      }
+    }
+  }
+}

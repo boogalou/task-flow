@@ -1,6 +1,6 @@
-import { ForwardedRef, forwardRef, InputHTMLAttributes } from 'react';
 import styles from './input.module.scss';
 import cnBind from 'classnames/bind';
+import { ForwardedRef, forwardRef, InputHTMLAttributes } from 'react';
 
 const cx = cnBind.bind(styles);
 

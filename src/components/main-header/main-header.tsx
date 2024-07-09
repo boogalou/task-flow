@@ -1,4 +1,4 @@
-import styles from './header.module.scss';
+import styles from './main-header.module.scss';
 import cnBind from 'classnames/bind';
 import { Icon } from '../../shared/ui-kit/icon/icon.tsx';
 import { Search } from '../search/search.tsx';
@@ -6,12 +6,16 @@ import { Button } from '../../shared/ui-kit/button/Button.tsx';
 
 const cx = cnBind.bind(styles);
 
-export function Header() {
+interface HeaderProps {
+  onClick?: () => void;
+}
+
+export function MainHeader({ onClick }: HeaderProps) {
   return (
     <header className={cx('header')}>
-      <div className={cx('header__menu')}>
+      <Button className={cx('header__menu-button')} onClick={onClick}>
         <Icon className={cx('header__menu-icon')} iconType={'hamburger'} />
-      </div>
+      </Button>
       <div className={cx('header__search')}>
         <Search />
       </div>

@@ -1,15 +1,17 @@
+@import 'src/shared/styles/index';
+
 @layer component {
   .input {
     height: 100%;
     width: 100%;
     outline: none;
     border-radius: 4px;
-    border: 1px solid var(--color-secondary-font);
+    border: 2px solid var(--color-main-bg);
     font-size: 16px;
     padding: 0 15px;
 
     &:focus {
-      border: 1px solid var(--color-primary-font);
+      border: 2px solid var(--color-primary-font);
     }
   }
 }

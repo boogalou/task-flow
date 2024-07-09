@@ -17,12 +17,10 @@ const cx = cnBind.bind(styles);
 
 export function Signin() {
   const dispatch = useAppDispatch();
-
   const { types, toggleType } = useShowPassword({
     email: 'email',
     password: 'password',
   });
-
   const form = useForm<LoginData>({
     initialValues: {
       email: '',
@@ -64,13 +62,11 @@ export function Signin() {
             />
             {field.name === 'password' ? (
               <div className={cx('form__icon')}>
-                <div className={cx('form__icon')}>
-                  <Icon
-                    className={cx('icon--eye')}
-                    onClick={field.toggleType}
-                    iconType={field.type === 'password' ? 'eye-off' : 'eye'}
-                  />
-                </div>
+                <Icon
+                  className={cx('icon--eye')}
+                  onClick={field.toggleType}
+                  iconType={field.type === 'password' ? 'eye-off' : 'eye'}
+                />
               </div>
             ) : null}
             {field.touched && field.error && (

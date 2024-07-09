@@ -1,7 +1,7 @@
 :root {
   --color-danger: #EE4E4E;
   --color-success: #B5CB99;
-  --color-icon-bg: #d5c4a1
+
 }
 
   /*light-theme*/
@@ -9,9 +9,12 @@
     --color-secondary-font: #7D7C7C;
     --color-primary-font: #445069;
     --color-accent: #050C9C;
-    --color-secondary: #11009E;
-    --color-main-bg: #FFFFFF;
+    --color-secondary: #1D24CA;
+    --color-main-bg: #FEFEFE;
     --color-link: #667BC6;
+    --color-hover-font: #FEFEFE;
+    --color-icon-bg: #EFEFEF;
+    --color-large-font: #151515;
 
   }
 
@@ -23,6 +26,7 @@
     --color-secondary: #3c3836;
     --color-main-bg: #282828;
     --color-link: #6e8e7e;
+    --color-icon-bg: #d5c4a1
   }
 
 

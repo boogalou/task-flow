@@ -1,5 +1,9 @@
+@import 'src/shared/styles/index';
+
 @layer component {
   .icon {
+    width: $mobile-icon-size;
+    height: $mobile-icon-size;
     svg {
       stroke: var(--color-icon-bg);
       width: 100%;

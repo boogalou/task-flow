@@ -7,6 +7,13 @@ import { ReactComponent as Bell } from '../../assets/icons/bell.svg';
 import { ReactComponent as Search } from '../../assets/icons/search.svg';
 import { ReactComponent as Hamburger } from '../../assets/icons/hamburger-menu.svg';
 import { ReactComponent as QuestionMark } from '../../assets/icons/question-mark.svg';
+import { ReactComponent as CalendarOne } from '../../assets/icons/calendar-one.svg';
+import { ReactComponent as CalendarSeven } from '../../assets/icons/calendar-seven.svg';
+import { ReactComponent as CalendarAll } from '../../assets/icons/calendar-all.svg';
+import { ReactComponent as ArrowLeft } from '../../assets/icons/arrow-left.svg';
+import { ReactComponent as Cross } from '../../assets/icons/cross.svg';
+import { ReactComponent as TrashBin } from '../../assets/icons/trash-bin.svg';
+import { ReactComponent as CheckMark } from '../../assets/icons/checkmark-circle.svg';
 
 const keyGen = () => nanoid(12);
 
@@ -18,7 +25,14 @@ export type IconType =
   | 'bell'
   | 'search'
   | 'hamburger'
-  | 'question-mark';
+  | 'question-mark'
+  | 'calendar-one'
+  | 'calendar-seven'
+  | 'calendar-all'
+  | 'arrow-left'
+  | 'cross'
+  | 'trash-bin'
+  | 'checkmark';
 
 export const iconTypes = new Map([
   ['auth-splash', <AuthSplash key={keyGen()} />],
@@ -29,4 +43,11 @@ export const iconTypes = new Map([
   ['bell', <Bell key={keyGen()} />],
   ['hamburger', <Hamburger key={keyGen()} />],
   ['question-mark', <QuestionMark key={keyGen()} />],
+  ['calendar-one', <CalendarOne key={keyGen()} />],
+  ['calendar-seven', <CalendarSeven key={keyGen()} />],
+  ['calendar-all', <CalendarAll key={keyGen()} />],
+  ['arrow-left', <ArrowLeft key={keyGen()} />],
+  ['cross', <Cross key={keyGen()} />],
+  ['trash-bin', <TrashBin key={keyGen()} />],
+  ['checkmark', <CheckMark key={keyGen()} />],
 ]);
