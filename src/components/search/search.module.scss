@@ -36,11 +36,11 @@
       left: px-to-rem(15px);
       transform: translateY(-50%);
 
-      svg {
+
         stroke: var(--color-icon-bg);
-        width: $mobile-icon-size;
-        height: $mobile-icon-size;
-      }
+        width: $icon-size-md;
+        height: $icon-size-md;
+
     }
   }
 

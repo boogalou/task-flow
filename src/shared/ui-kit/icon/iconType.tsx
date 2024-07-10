@@ -13,7 +13,8 @@ import { ReactComponent as CalendarAll } from '../../assets/icons/calendar-all.s
 import { ReactComponent as ArrowLeft } from '../../assets/icons/arrow-left.svg';
 import { ReactComponent as Cross } from '../../assets/icons/cross.svg';
 import { ReactComponent as TrashBin } from '../../assets/icons/trash-bin.svg';
-import { ReactComponent as CheckMark } from '../../assets/icons/checkmark-circle.svg';
+import { ReactComponent as Success } from '../../assets/icons/checkmark-circle.svg';
+import { ReactComponent as Error } from '../../assets/icons/error.svg';
 
 const keyGen = () => nanoid(12);
 
@@ -32,7 +33,8 @@ export type IconType =
   | 'arrow-left'
   | 'cross'
   | 'trash-bin'
-  | 'checkmark';
+  | 'success'
+  | 'error';
 
 export const iconTypes = new Map([
   ['auth-splash', <AuthSplash key={keyGen()} />],
@@ -49,5 +51,6 @@ export const iconTypes = new Map([
   ['arrow-left', <ArrowLeft key={keyGen()} />],
   ['cross', <Cross key={keyGen()} />],
   ['trash-bin', <TrashBin key={keyGen()} />],
-  ['checkmark', <CheckMark key={keyGen()} />],
+  ['success', <Success key={keyGen()} />],
+  ['error', <Error key={keyGen()} />],
 ]);

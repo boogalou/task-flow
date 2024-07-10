@@ -1,10 +1,16 @@
+@use "sass:math";
+
+@function px-to-rem($px, $base-font-size: 16px) {
+  @return math.div($px, $base-font-size) * 1rem;
+}
+
 :root {
   --color-danger: #EE4E4E;
   --color-success: #B5CB99;
 
 }
 
-  /*light-theme*/
+  /*light theme*/
   html[data-theme='light'] {
     --color-secondary-font: #7D7C7C;
     --color-primary-font: #445069;
@@ -30,7 +36,23 @@
   }
 
 
-//icon-sizes
-$mobile-icon-size: 24px;
-$tablet-icon-size: 32px;
-$desktop-icon-size: 48px;
+/*icon-sizes*/
+$icon-size-xs: px-to-rem(8px);
+$icon-size-sm: px-to-rem(16px);
+$icon-size-md: px-to-rem(24px);
+$icon-size-lg: px-to-rem(32px);
+$icon-size-xl: px-to-rem(48px);
+
+/*spacing sizes*/
+$gap-xs: px-to-rem(4px);
+$gap-sm: px-to-rem(8px);
+$gap-md: px-to-rem(16px);
+$gap-lg: px-to-rem(24px);
+$gap-xl: px-to-rem(32px);
+
+
+/*border-radius*/
+$border-rad-4: px-to-rem(4px);
+$border-rad-8: px-to-rem(8px);
+$border-rad-16: px-to-rem(16px);
+$border-rad-50: 50%;

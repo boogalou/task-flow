@@ -8,9 +8,10 @@
     &__button {
       display: flex;
       align-items: center;
-      padding: 0 px-to-rem(16px) 0 px-to-rem(24px);
+      padding: 0 $gap-sm 0 $gap-lg;
       column-gap: px-to-rem(8px);
       border: none;
+      border-radius: $border-rad-4;
       background-color: transparent;
     }
   }
@@ -18,6 +19,8 @@
   @layer utility {
     &__icon {
       svg {
+        width: $icon-size-md;
+        height: $icon-size-md;
         fill: #EFEFEF;
         stroke: black;
       }
@@ -32,7 +35,7 @@
 
         #{$this}__icon {
           svg {
-            fill: black;
+            fill: var(--color-accent);
             stroke: #EFEFEF;
           }
         }

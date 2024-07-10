@@ -9,7 +9,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 px-to-rem(16px) 0 px-to-rem(24px);
+      padding: 0 $gap-md 0 $gap-lg;
       background: transparent;
       border: none;
       color: var(--color-primary-font);
@@ -23,7 +23,7 @@
     }
 
     &__icon {
-      width: px-to-rem(18px);
+      width: $icon-size-sm;
       fill: black;
     }
   }
@@ -32,7 +32,7 @@
     &__button {
       &:hover {
         background-color: var(--color-accent);
-        border-radius: px-to-rem(4px);
+        border-radius: $border-rad-4;
 
         #{$this}__button-label, #{$this}__counter {
           color: white;

@@ -13,7 +13,7 @@ interface ButtonData {
 }
 
 const buttonData: ButtonData[] = [
-  { id: 1, label: 'Completed', iconType: 'checkmark' },
+  { id: 1, label: 'Completed', iconType: 'success' },
   { id: 2, label: 'Trash', iconType: 'trash-bin' },
 ];
 

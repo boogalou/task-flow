@@ -3,8 +3,7 @@
 .main {
   display: grid;
   grid-template-columns: subgrid;
-  grid-template-rows: 80px auto;
-  grid-auto-rows: auto;
+  grid-template-rows: 50px auto;
   grid-column: 1 / -1;
 
   &__content {
@@ -14,6 +13,8 @@
   }
 
   @include respond-to('tablet') {
+    grid-template-rows: 60px auto;
+
     &__content {
       grid-column: 3 / -1;
       border: 1px solid #C539B4;
@@ -24,6 +25,7 @@
 
 
   @include respond-to('desktop') {
+    grid-template-rows: 80px auto;
     &__content {
       grid-column: 3 / -1;
 

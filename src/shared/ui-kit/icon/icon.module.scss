@@ -2,8 +2,8 @@
 
 @layer component {
   .icon {
-    width: $mobile-icon-size;
-    height: $mobile-icon-size;
+    width: $icon-size-md;
+    height: $icon-size-md;
     svg {
       stroke: var(--color-icon-bg);
       width: 100%;
