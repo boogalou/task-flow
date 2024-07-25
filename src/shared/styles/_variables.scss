@@ -12,15 +12,17 @@
 
   /*light theme*/
   html[data-theme='light'] {
-    --color-secondary-font: #7D7C7C;
     --color-primary-font: #445069;
+    --color-secondary-font: #7D7C7C;
+    --color-hover-bg: #E3E1D9;
     --color-accent: #050C9C;
     --color-secondary: #1D24CA;
     --color-main-bg: #FEFEFE;
     --color-link: #667BC6;
-    --color-hover-font: #FEFEFE;
-    --color-icon-bg: #EFEFEF;
-    --color-large-font: #151515;
+    --color-selected-font: #FEFEFE;
+    --color-selected: #050C9C;
+    --color-icon-bg: #A9A9A9;
+
 
   }
 
@@ -28,10 +30,13 @@
   html[data-theme='dark'] {
     --color-primary-font: #ebdbb2;
     --color-secondary-font: #d5c4a1;
+    --color-hover-bg: #3c3836;
     --color-accent: #282828;
     --color-secondary: #3c3836;
     --color-main-bg: #282828;
     --color-link: #6e8e7e;
+    --color-selected-font: #FEFEFE;
+    --color-selected: #3FA796;
     --color-icon-bg: #d5c4a1
   }
 

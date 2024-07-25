@@ -1,0 +1,28 @@
+@import 'src/shared/styles/index';
+
+.content {
+  display: flex;
+  flex-direction: column;
+  row-gap: $gap-md;
+  border: 2px solid orange;
+  height: 100%;
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    row-gap: $gap-sm;
+  }
+
+  &__title {}
+
+  &__subtitle {
+    font-weight: bold;
+
+    @include respond-to('tablet') {
+      display: none;
+    }
+  }
+
+
+
+}

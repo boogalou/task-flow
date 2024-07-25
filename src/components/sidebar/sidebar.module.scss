@@ -5,10 +5,11 @@
   display: none;
   background-color: var(--color-primary);
 
+
   &__navigation {
     display: flex;
     flex-direction: column;
-    row-gap: px-to-rem(24px);
+    row-gap: $gap-md;
   }
 
   @include respond-to('tablet') {
@@ -16,7 +17,7 @@
     flex-direction: column;
     grid-column: 1 / 3;
     grid-row: 1 / -1;
-    row-gap: px-to-rem(24px);
+    row-gap: $gap-xl;
 
 
 

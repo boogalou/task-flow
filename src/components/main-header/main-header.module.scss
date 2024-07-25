@@ -81,8 +81,6 @@
   }
 
   @include respond-to('desktop') {
-    height: px-to-rem(80px);
-
     &__search {
       grid-column: 1 / 6;
     }

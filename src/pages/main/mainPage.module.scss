@@ -5,10 +5,11 @@
   grid-template-columns: subgrid;
   grid-template-rows: 50px auto;
   grid-column: 1 / -1;
+  row-gap: $gap-xl;
 
   &__content {
     grid-column: 1 / -1;
-    padding: 0 16px;
+    padding: 0 $gap-md $gap-md $gap-md;
     background-color: var(--color-primary);
   }
 
@@ -18,14 +19,13 @@
     &__content {
       grid-column: 3 / -1;
       border: 1px solid #C539B4;
-      padding: 0;
+      padding: 0 $gap-lg $gap-lg $gap-lg;
     }
 
   }
 
 
   @include respond-to('desktop') {
-    grid-template-rows: 80px auto;
     &__content {
       grid-column: 3 / -1;
 

@@ -3,6 +3,7 @@ import cnBind from 'classnames/bind';
 import { MainHeader } from '../../components/main-header/main-header.tsx';
 import { Sidebar } from '../../components/sidebar/sidebar.tsx';
 import { useEffect, useState } from 'react';
+import { MainContent } from '../../components/main-content/main-content.tsx';
 
 const cx = cnBind.bind(styles);
 
@@ -36,7 +37,9 @@ export function MainPage() {
     <div className={cx('main')}>
       <MainHeader onClick={handleOnClickMenu} />
       <Sidebar drawerIsOpen={drawerIsOpen} onCloseDrawer={onCloseDrawer} />
-      <main className={cx('main__content')}></main>
+      <main className={cx('main__content')}>
+        <MainContent />
+      </main>
     </div>
   );
 }

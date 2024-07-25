@@ -1,8 +1,7 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import { authApi } from "../api/AuthApi.ts";
-import axios from "axios";
-import { LoginRequestData, RegistrationRequestData } from "../types.ts";
-
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import { authApi } from '../api/AuthApi.ts';
+import axios from 'axios';
+import { LoginRequestData, RegistrationRequestData } from '../types.ts';
 
 export const signupRequest = createAsyncThunk(
   'auth/signup',
@@ -12,10 +11,11 @@ export const signupRequest = createAsyncThunk(
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        return thunkApi.rejectWithValue(error.response?.data)
+        return thunkApi.rejectWithValue(error.response?.data);
       }
     }
-  });
+  },
+);
 
 export const signinRequest = createAsyncThunk(
   'auth/signin',
@@ -25,7 +25,8 @@ export const signinRequest = createAsyncThunk(
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        return thunkApi.rejectWithValue(error.response?.data)
+        return thunkApi.rejectWithValue(error.response?.data);
       }
     }
-  });
+  },
+);

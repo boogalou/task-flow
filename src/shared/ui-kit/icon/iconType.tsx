@@ -1,3 +1,6 @@
+const icons = import.meta.glob('./src/shared/assets/icons/*', {
+  import: 'default',
+});
 import { nanoid } from '@reduxjs/toolkit';
 import { ReactComponent as AuthSplash } from '../../assets/icons/auth_screen.svg';
 import { ReactComponent as Eye } from '../../assets/icons/eye.svg';
@@ -15,6 +18,12 @@ import { ReactComponent as Cross } from '../../assets/icons/cross.svg';
 import { ReactComponent as TrashBin } from '../../assets/icons/trash-bin.svg';
 import { ReactComponent as Success } from '../../assets/icons/checkmark-circle.svg';
 import { ReactComponent as Error } from '../../assets/icons/error.svg';
+
+Object.values(icons).forEach((mod) => {
+  mod().then((data) => {
+    console.log(data);
+  });
+});
 
 const keyGen = () => nanoid(12);
 

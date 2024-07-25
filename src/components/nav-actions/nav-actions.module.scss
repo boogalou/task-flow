@@ -2,7 +2,10 @@
 
 .nav-actions {
   $this: &;
-  border-bottom: 1px solid #EFEFEF;
+  border-bottom: 1px solid var(--color-hover-bg);
+  display: flex;
+  flex-direction: column;
+  gap: $gap-sm 0;
 
   @layer utility {
     &__button {
@@ -13,6 +16,34 @@
       border: none;
       border-radius: $border-rad-4;
       background-color: transparent;
+      color: var(--color-primary-font);
+
+      @include respond-to('desktop') {
+        &:hover {
+          background-color: var(--color-hover-bg);
+          border-radius: $border-rad-4;
+        }
+      }
+
+      &--pressed {
+        background-color: var(--color-selected);
+        color: var(--color-selected-font);
+
+        @include respond-to('desktop') {
+          &:hover {
+            background-color: var(--color-selected);
+            color: var(--color-selected-font);
+
+          }
+        }
+
+        #{$this}__icon {
+          svg {
+            stroke: var(--color-icon-bg);
+            fill: var(--color-selected);
+          }
+        }
+      }
     }
   }
 
@@ -21,26 +52,9 @@
       svg {
         width: $icon-size-md;
         height: $icon-size-md;
-        fill: #EFEFEF;
-        stroke: black;
-      }
-    }
-  }
-
-  @include respond-to('desktop') {
-    &__button {
-      &:hover {
-        background-color: var(--color-accent);
-        color: var(--color-hover-font);
-
-        #{$this}__icon {
-          svg {
-            fill: var(--color-accent);
-            stroke: #EFEFEF;
-          }
-        }
+        fill: var(--color-main-bg);
+        stroke: var(--color-icon-bg);
       }
     }
   }
 }
-
