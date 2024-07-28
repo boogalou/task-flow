@@ -1,28 +1,18 @@
 @import 'src/shared/styles/index';
 
 .content {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto 1fr auto auto;
   row-gap: $gap-md;
   border: 2px solid orange;
   height: 100%;
 
-  &__header {
-    display: flex;
-    flex-direction: column;
-    row-gap: $gap-sm;
+  @include respond-to('tablet') {
+    grid-template-columns: repeat(8, 1fr);
   }
 
-  &__title {}
-
-  &__subtitle {
-    font-weight: bold;
-
-    @include respond-to('tablet') {
-      display: none;
-    }
+  @include respond-to('desktop') {
+    grid-template-columns: repeat(12, 1fr);
   }
-
-
-
 }

@@ -1,6 +1,7 @@
 import { ButtonHTMLAttributes, DetailedHTMLProps, ReactNode } from 'react';
 import styles from './button.module.scss';
 import cnBind from 'classnames/bind';
+import { IconType } from '../icon/iconType.tsx';
 
 const cx = cnBind.bind(styles);
 
@@ -9,17 +10,10 @@ export interface ButtonProps
   className?: string;
   children?: ReactNode;
   onClick?: () => void;
-  icon?: ReactNode;
+  iconType?: IconType;
 }
 
-export const Button = ({
-  className,
-  children,
-  onClick,
-  disabled,
-  icon,
-  ...restProps
-}: ButtonProps) => {
+export const Button = ({ className, children, onClick, disabled, ...restProps }: ButtonProps) => {
   return (
     <button
       className={cx('button', className)}
@@ -28,7 +22,6 @@ export const Button = ({
       {...restProps}
     >
       {children}
-      {icon}
     </button>
   );
 };

@@ -28,7 +28,9 @@ export function NavTags() {
     <div className={cx('nav-tags')}>
       <div className={cx('nav-tags__action')}>
         <h3 className={cx('nav-tags__title')}>My List</h3>
-        <Button className={cx('nav-tags__button--add')} icon={<Icon iconType={'cross'} />} />
+        <Button className={cx('nav-tags__button--add')}>
+          <Icon iconType={'cross'} />
+        </Button>
       </div>
       {tags.map((it) => (
         <Button

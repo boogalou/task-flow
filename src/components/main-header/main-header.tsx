@@ -11,6 +11,14 @@ interface HeaderProps {
 }
 
 export function MainHeader({ onClick }: HeaderProps) {
+  const handleButtonQuestion = () => {
+    console.log('click on button question');
+  };
+
+  const handleButtonBell = () => {
+    console.log('click on button bell');
+  };
+
   return (
     <header className={cx('header')}>
       <Button className={cx('header__menu-button')} onClick={onClick}>
@@ -22,12 +30,16 @@ export function MainHeader({ onClick }: HeaderProps) {
       <div className={cx('header__actions')}>
         <Button
           className={cx('header__actions-button', 'header__actions-button--help')}
-          icon={<Icon iconType={'question-mark'} />}
-        />
+          onClick={handleButtonQuestion}
+        >
+          <Icon iconType={'question-mark'} />
+        </Button>
         <Button
-          className={cx('header__actions-button', 'header__actions-button--notification')}
-          icon={<Icon iconType={'bell'} />}
-        />
+          className={cx('header__actions-button', 'header__actions-button--help')}
+          onClick={handleButtonBell}
+        >
+          <Icon iconType={'bell'} />
+        </Button>
       </div>
     </header>
   );

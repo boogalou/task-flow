@@ -71,4 +71,8 @@
       fill: var(--color-icon-bg);
     }
   }
+
+  &__link {
+    text-decoration: none;
+  }
 }
