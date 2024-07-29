@@ -13,7 +13,7 @@ interface ButtonData {
   iconType: IconType;
 }
 
-const buttonData: ButtonData[] = [
+const buttonsData: ButtonData[] = [
   { id: 1, label: 'Completed', iconType: 'success' },
   { id: 2, label: 'Trash', iconType: 'trash-bin' },
 ];
@@ -27,7 +27,7 @@ export function NavActions() {
 
   return (
     <div className={cx('nav-actions')}>
-      {buttonData.map((it) => (
+      {buttonsData.map((it) => (
         <Button
           className={cx('nav-actions__button', {
             'nav-actions__button--pressed': it.id === buttonIsPressed,
