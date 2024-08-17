@@ -10,6 +10,7 @@ import { Button } from '../../shared/ui-kit/button/Button.tsx';
 import { useAppDispatch } from '../../app/redux/reduxHooks.ts';
 import { addTask } from '../task/model/taskSlice.ts';
 import { TaskData } from '../task/model/types.ts';
+import { crateTaskRequest } from '../task/model/taskThunk.ts';
 
 const cx = cnBind.bind(styles);
 
@@ -26,17 +27,7 @@ export function CreateTask() {
     },
     onSubmit: (values) => {
       console.log(JSON.stringify(values, null, 2));
-      dispatch(
-        addTask({
-          id: `${Math.floor(Math.random() * 1000)}`,
-          title: values.title,
-          description: values.description,
-          category: values.category,
-          color: values.color,
-          dueDate: new Date(`${values.date} ${values.time}`).toISOString(),
-          isCompleted: false,
-        }),
-      );
+      dispatch(crateTaskRequest(values));
       form.resetForm();
     },
   });

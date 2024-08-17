@@ -9,9 +9,9 @@ export const signupRequest = createAsyncThunk(
     try {
       const response = await authApi.signup(data);
       return response.data;
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        return thunkApi.rejectWithValue(error.response?.data);
+    } catch (err) {
+      if (axios.isAxiosError(err)) {
+        return thunkApi.rejectWithValue(err.response?.data);
       }
     }
   },
@@ -23,9 +23,9 @@ export const signinRequest = createAsyncThunk(
     try {
       const response = await authApi.signin(data);
       return response.data;
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        return thunkApi.rejectWithValue(error.response?.data);
+    } catch (err) {
+      if (axios.isAxiosError(err)) {
+        return thunkApi.rejectWithValue(err.response?.data);
       }
     }
   },

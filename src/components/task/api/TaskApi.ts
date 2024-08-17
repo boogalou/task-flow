@@ -3,10 +3,20 @@ import { Task, TaskData } from '../model/types.ts';
 
 export class TaskApi {
   public async createTask(data: TaskData) {
-    return await apiClient.post('/tasks', data);
+    try {
+      return await apiClient.post('/tasks', data);
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   public async updateTask(taskId: number, data: Partial<Task>) {
-    return await apiClient.patch(`/tasks/${taskId}`, data);
+    try {
+      return await apiClient.patch(`/tasks/${taskId}`, data);
+    } catch (err) {
+      console.error(err);
+    }
   }
 }
+
+export const taskApi = new TaskApi();
