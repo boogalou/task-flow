@@ -38,12 +38,12 @@ export const appRouter = () =>
           element: <AuthLayout />,
           children: [
             {
-              element: <Signup />,
               path: routes.SIGNUP_PAGE,
+              element: <Signup />,
             },
             {
-              element: <Signin />,
               path: routes.SIGNIN_PAGE,
+              element: <Signin />,
             },
           ],
         },

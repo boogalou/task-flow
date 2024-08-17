@@ -20,27 +20,4 @@
       display: none;
     }
   }
-
-  &__button {
-    grid-column: 1 / -1;
-    grid-row: 4 / 5;
-    background-color: var(--color-main-bg);
-    border: 1px solid var(--color-primary-font);
-    border-radius: $border-rad-8;
-    display: flex;
-    align-items: center;
-    column-gap: $gap-md;
-    font-size: px-to-rem(18px);
-    color: var(--color-primary-font);
-    padding: $gap-md;
-    svg {
-      width: px-to-rem(18px);
-      fill: var(--color-icon-bg);
-      transform: rotate(45deg);
-    }
-
-    @include respond-to('desktop') {
-      grid-column: 4 / 10;
-    }
-  }
 }

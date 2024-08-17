@@ -3,6 +3,7 @@
 .container {
   display: grid;
   grid-template-columns: subgrid;
+  width: 100%;
 }
 
 .title {
@@ -15,6 +16,7 @@
   display: flex;
   flex-direction: column;
   row-gap: 40px;
+
 
   &__field {
     position: relative;
@@ -63,6 +65,8 @@
     &__input {
       height: 100%;
       background-color: var(--color-main-bg);
+      color: var(--color-primary-font);
+      border: 1px solid gray;
       &:focus {
         border: 1px solid cornflowerblue;
       }
@@ -72,7 +76,7 @@
       border: none;
       font-size: 16px;
       color: white;
-      background-color: var(--color-accent);
+      background-color: var(--color-button-bg);
       border-radius: 8px;
 
       &:disabled {
@@ -103,11 +107,10 @@
 
 @include respond-to('desktop') {
   .form {
-
     @layer utility {
       &__button {
         &:hover {
-          background-color: var(--color-secondary);
+          background-color: #648a73;
         }
       }
     }

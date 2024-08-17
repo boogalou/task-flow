@@ -5,13 +5,14 @@ import { useAppDispatch } from '../../app/redux/reduxHooks.ts';
 import { useForm } from './lib/useForm.ts';
 import { loginValidationSchema } from './lib/validationSchema.ts';
 import { signinRequest } from './model/auth.thunk.ts';
-import { loginFields } from './model/loginFields.ts';
+import { createInputFields } from '../../shared/lib/createInputFields.ts';
 import Input from '../../shared/ui-kit/input/input.tsx';
 import { Button } from '../../shared/ui-kit/button/Button.tsx';
 import { Link } from 'react-router-dom';
 import { routes } from '../../shared/routes/routes.ts';
 import { Icon } from '../../shared/ui-kit/icon/icon.tsx';
 import { useShowPassword } from './lib/useShowPassword.ts';
+import { loginFields } from './inputConfig.ts';
 
 const cx = cnBind.bind(styles);
 
@@ -46,7 +47,14 @@ export function Signin() {
     <div className={cx('container')}>
       <h2 className={cx('title')}>Sign In</h2>
       <form className={cx('form')} onSubmit={form.handleSubmit} noValidate={true}>
-        {loginFields(form.values, form.error, form.touched, types, toggleType).map((field) => (
+        {createInputFields(
+          form.values,
+          loginFields,
+          form.error,
+          form.touched,
+          types,
+          toggleType,
+        ).map((field) => (
           <div className={cx('form__field')} key={field.id}>
             <Input
               classNameLabel={cx('form__label')}

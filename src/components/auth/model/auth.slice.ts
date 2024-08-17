@@ -1,20 +1,19 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { signinRequest, signupRequest } from "./auth.thunk.ts";
+import { createSlice } from '@reduxjs/toolkit';
+import { signinRequest, signupRequest } from './auth.thunk.ts';
 
 export interface AuthState {
   authData: any;
   isAuth: boolean;
-  authFetchStatus: string
-  error: string | null
+  authFetchStatus: string;
+  error: string | null;
 }
-
 
 const initialState: AuthState = {
   authData: {},
   isAuth: false,
   authFetchStatus: 'idle',
   error: null,
-}
+};
 
 export const authSlice = createSlice({
   name: 'authSlice',

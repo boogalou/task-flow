@@ -7,7 +7,7 @@
 :root {
   --color-danger: #EE4E4E;
   --color-success: #B5CB99;
-
+  --color-category-default: #667BC6;
 }
 
   /*light theme*/
@@ -22,8 +22,7 @@
     --color-selected-font: #FEFEFE;
     --color-selected: #050C9C;
     --color-icon-bg: #A9A9A9;
-
-
+    --color-button-bg: #050C9C;
   }
 
   /*dark theme*/
@@ -37,7 +36,8 @@
     --color-link: #6e8e7e;
     --color-selected-font: #FEFEFE;
     --color-selected: #3FA796;
-    --color-icon-bg: #d5c4a1
+    --color-icon-bg: #d5c4a1;
+    --color-button-bg: #95c2ab;
   }
 
 

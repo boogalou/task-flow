@@ -4,7 +4,6 @@ import { LoginRequestData, RegistrationRequestData } from '../types.ts';
 
 export class AuthApi {
   public async signup(data: RegistrationRequestData): Promise<AxiosResponse<any>> {
-    console.log('AuthApi :', data);
     return await apiClient.post('/registration', data);
   }
 

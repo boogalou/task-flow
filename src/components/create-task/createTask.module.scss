@@ -1,0 +1,60 @@
+@import 'src/shared/styles/index';
+
+.create {
+  display: flex;
+  flex-direction: column;
+  row-gap: $gap-md;
+
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  row-gap: $gap-xl;
+
+  &__field {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: px-to-rem(50px);
+    column-gap: $gap-md;
+  }
+
+  &__label {
+    white-space: nowrap;
+  }
+
+
+  @layer uitlity {
+    &__input {
+      border: none;
+      outline: none;
+      border-bottom: 1px solid gray;
+      background-color: var(--color-main-bg);
+      color: var(--color-primary-font);
+
+      &:focus {
+        border-bottom: 1px solid var(--color-link);
+      }
+    }
+  }
+
+
+  &__button {
+    background-color: var(--color-link);
+    border-radius: $border-rad-8;
+    border: none;
+    color: var(--color-primary-font);
+  }
+}
+
+input[type='date'], input[type='time'], input[type='color'] {
+  border: none;
+  border-radius: 0;
+}
+
+input[type='color'] {
+  width: 50%;
+  height: 50%;
+  border-radius: $border-rad-50;
+}

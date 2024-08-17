@@ -1,7 +1,7 @@
 import styles from './task.module.scss';
 import cnBind from 'classnames/bind';
-import { Checkbox } from '../../shared/ui-kit/checkbox/checkbox.tsx';
 import { formatExpiryDate } from './lib/formatExpiryDate.ts';
+import Input from '../../shared/ui-kit/input/input.tsx';
 
 const cx = cnBind.bind(styles);
 
@@ -23,7 +23,7 @@ export function Task({ id, title, dueDate, category }: TaskProps) {
   return (
     <div className={cx('task')} onClick={handleOnClick}>
       <div className={cx('task__checkbox')}>
-        <Checkbox id={`${id}`} type="checkbox" />
+        <Input id={`${id}`} type="checkbox" />
       </div>
       <span className={cx('task__title')}>{title}</span>
       <div className={cx('task__due-date')}>{expireDate}</div>

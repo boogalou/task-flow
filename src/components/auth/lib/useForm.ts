@@ -6,7 +6,7 @@ export interface UseFormOptions<T> {
   onSubmit: (values: T) => void;
   validateOnChange?: boolean;
   validateOnBlur?: boolean;
-  validationSchema: ZodSchema<T>;
+  validationSchema?: ZodSchema<T>;
 }
 
 export function useForm<T>({
@@ -25,13 +25,13 @@ export function useForm<T>({
     const { name, value } = evt.target;
     setValues((prevState) => ({
       ...prevState,
-      [name]: value.trim(),
+      [name]: value,
     }));
 
     setIsDirty(true);
 
     if (validateOnChange) {
-      validate({ ...values, [name]: value.trim() });
+      validate({ ...values, [name]: value });
     }
   };
 
@@ -57,7 +57,7 @@ export function useForm<T>({
 
   const validate = (fieldValues: Partial<T> = values): boolean => {
     try {
-      validationSchema.parse(fieldValues);
+      validationSchema?.parse(fieldValues);
       setError({});
       return true;
     } catch (err) {
