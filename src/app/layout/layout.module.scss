@@ -5,7 +5,7 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   height: 100vh;
-  border: 2px solid crimson;
+  //border: 2px solid crimson;
 
   @include respond-to('tablet') {
     grid-template-columns: repeat(8, 1fr);

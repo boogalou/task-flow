@@ -5,7 +5,7 @@
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: auto 1fr auto auto;
   row-gap: $gap-md;
-  border: 2px solid orange;
+  //border: 2px solid orange;
   height: 100%;
 
   @include respond-to('tablet') {
