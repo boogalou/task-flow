@@ -4,12 +4,7 @@ import { AxiosResponse } from 'axios';
 
 export class TaskApi {
   public async createTask(data: TaskData): Promise<AxiosResponse<Task>> {
-    try {
-      return await apiClient.post('/tasks', data);
-    } catch (err) {
-      console.error(err);
-      throw new Error(`${err}`);
-    }
+    return await apiClient.post('/tasks', data);
   }
 
   public async updateTask(taskId: number, data: Partial<Task>): Promise<AxiosResponse<Task>> {

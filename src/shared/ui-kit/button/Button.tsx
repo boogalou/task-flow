@@ -3,6 +3,7 @@ import {
   DetailedHTMLProps,
   ForwardedRef,
   forwardRef,
+  MouseEvent,
   ReactNode,
 } from 'react';
 import styles from './button.module.scss';
@@ -15,7 +16,7 @@ export interface ButtonProps
   extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
   className?: string;
   children?: ReactNode;
-  onClick?: () => void;
+  onClick?: (evt: MouseEvent<HTMLButtonElement>) => void;
   iconType?: IconType;
 }
 

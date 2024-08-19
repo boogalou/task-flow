@@ -1,23 +1,45 @@
 @import '../../styles/index';
 
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: end;
-  justify-content: center;
-}
-
 .modal {
-  position: relative;
-  background-color: var(--color-main-bg);
-  padding: 20px;
-  border-radius: 8px 8px 0 0;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  height: calc(100% - 50px);
+  $this: &;
+
+  &__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: end;
+    justify-content: center;
+
+    opacity: 0; /* Изначально невидимо */
+    transition: opacity 0.3s ease-out;
+    pointer-events: none;
+  }
+
+  &__content {
+    position: relative;
+    background-color: var(--color-main-bg);
+    padding: 20px;
+    border-radius: 8px 8px 0 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    height: calc(100% - 50px);
+
+    transform: translateY(100%); /* Начальная позиция - вне экрана */
+    transition: transform 0.3s ease-out; /* Анимация появления */
+  }
+
+  &--active {
+    #{$this}__overlay {
+      opacity: 1; /* Активное состояние: видно */
+      pointer-events: auto;
+    }
+
+    #{$this}__content {
+      transform: translateY(0);
+    }
+  }
 }

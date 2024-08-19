@@ -5,6 +5,33 @@
   flex-direction: column;
   row-gap: $gap-md;
 
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__title {
+    font-size: px-to-rem(24px);
+  }
+
+@layer utility {
+  &__button-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    width: px-to-rem(50px);
+    height: px-to-rem(50px);
+    background-color: var(--color-main-bg);
+  }
+
+  &__icon-close {
+    width: $icon-size-sm;
+    fill: var(--color-icon-bg);
+  }
+}
+
 }
 
 .form {
@@ -54,7 +81,7 @@ input[type='date'], input[type='time'], input[type='color'] {
 }
 
 input[type='color'] {
-  width: 50%;
-  height: 50%;
+  width: px-to-rem(70px);
+  height: px-to-rem(40px);
   border-radius: $border-rad-50;
 }

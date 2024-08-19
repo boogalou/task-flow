@@ -1,6 +1,8 @@
 import styles from './modal.module.scss';
 import cnBind from 'classnames/bind';
-import { ReactNode, useState } from 'react';
+import { MouseEvent, ReactNode } from 'react';
+import { useAppDispatch, useAppSelector } from '../../../app/redux/reduxHooks.ts';
+import { closeModal, selectIsOpen } from './model/modalSlice.ts';
 
 const cx = cnBind.bind(styles);
 
@@ -9,19 +11,20 @@ interface ModalProps {
 }
 
 export function ModalLayout({ children }: ModalProps) {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const dispatch = useAppDispatch();
+  const isOpen = useAppSelector(selectIsOpen);
 
-  const openModal = () => {
-    setModalIsOpen(true);
-  };
-
-  const closeModal = () => {
-    setModalIsOpen(false);
+  const handleOverlayClick = (evt: MouseEvent<HTMLDivElement>) => {
+    if (evt.target === evt.currentTarget) {
+      dispatch(closeModal());
+    }
   };
 
   return (
-    <div className={cx('overlay')}>
-      <div className={cx('modal')}>{children}</div>
+    <div className={cx('modal', { 'modal--active': isOpen })}>
+      <div className={cx('modal__overlay')} onClick={handleOverlayClick}>
+        <div className={cx('modal__content')}>{children}</div>
+      </div>
     </div>
   );
 }

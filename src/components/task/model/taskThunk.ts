@@ -13,6 +13,7 @@ export const crateTaskRequest = createAsyncThunk(
       if (axios.isAxiosError(err)) {
         return thunkApi.rejectWithValue(err.response?.data);
       }
+      throw new Error(`${err}`);
     }
   },
 );
