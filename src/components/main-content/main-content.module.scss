@@ -1,6 +1,7 @@
 @import 'src/shared/styles/index';
 
 .content {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: auto 1fr auto auto;
@@ -16,28 +17,44 @@
     grid-template-columns: repeat(12, 1fr);
   }
 
- @layer utility {
-   &__button {
-     grid-column: 1 / -1;
-     grid-row: 4 / 5;
-     background-color: var(--color-main-bg);
-     border: 1px solid var(--color-primary-font);
-     border-radius: $border-rad-8;
-     display: flex;
-     align-items: center;
-     column-gap: $gap-md;
-     font-size: px-to-rem(18px);
-     color: var(--color-primary-font);
-     padding: $gap-md;
-     svg {
-       width: px-to-rem(18px);
-       fill: var(--color-icon-bg);
-       transform: rotate(45deg);
-     }
+  @layer utility {
+    &__button {
+      background-color: var(--color-button-bg);
+      border: none;
+      border-radius: $border-rad-50;
+      display: flex;
+      align-items: center;
+      padding: $gap-md;
+      font-size: px-to-rem(18px);
+      color: var(--color-primary-font);
+      width: px-to-rem(50px);
+      height: px-to-rem(50px);
+      position: absolute;
+      bottom: 0;
+      right: 0;
 
-     @include respond-to('desktop') {
-       grid-column: 4 / 10;
-     }
-   }
- }
+      svg {
+        width: px-to-rem(18px);
+        fill: var(--color-icon-bg);
+        transform: rotate(45deg);
+      }
+
+      @include respond-to('desktop') {
+        grid-column: 4 / 10;
+        position: static;
+        border-radius: $border-rad-8;
+        column-gap: $gap-md;
+        width: 100%;
+      }
+    }
+  }
+
+  &__button-text {
+    display: none;
+
+    @include respond-to('desktop') {
+      display: block;
+
+    }
+  }
 }

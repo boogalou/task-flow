@@ -97,5 +97,6 @@ export function useForm<T>({
     handleOnBlur,
     handleSubmit,
     resetForm,
+    setValues,
   };
 }

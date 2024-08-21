@@ -8,12 +8,14 @@ import { Button } from '../../shared/ui-kit/button/Button.tsx';
 import { useAppDispatch } from '../../app/redux/reduxHooks.ts';
 import { TaskData } from '../task/model/types.ts';
 import { crateTaskRequest } from '../task/model/taskThunk.ts';
-import { Icon } from '../../shared/ui-kit/icon/icon.tsx';
-import { closeModal } from '../../shared/ui-kit/modal/model/modalSlice.ts';
 
 const cx = cnBind.bind(styles);
 
-export function CreateTask() {
+interface CreateTaskProps {
+  closeModal: () => void;
+}
+
+export function CreateTask({ closeModal }: CreateTaskProps) {
   const dispatch = useAppDispatch();
   const form = useForm<TaskData>({
     initialValues: {
@@ -27,21 +29,15 @@ export function CreateTask() {
     onSubmit: (values) => {
       console.log(JSON.stringify(values, null, 2));
       dispatch(crateTaskRequest(values));
+      closeModal();
       form.resetForm();
     },
   });
-
-  const handleCloseButton = () => {
-    dispatch(closeModal());
-  };
 
   return (
     <div className={cx('create')}>
       <div className={cx('create__header')}>
         <span className={cx('create__title')}>Add Task</span>
-        <Button className={cx('create__button-close')} onClick={handleCloseButton}>
-          <Icon className={cx('create__icon-close')} iconType={'cross'} />
-        </Button>
       </div>
       <form className={cx('form')} onSubmit={form.handleSubmit} noValidate={true}>
         {createInputFields<TaskData>(form.values, createTaskFields, form.error, form.touched).map(

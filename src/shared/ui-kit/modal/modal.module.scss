@@ -23,6 +23,27 @@
     }
   }
 
+  &__control {
+    display: flex;
+    justify-content: end;
+  }
+
+  @layer utility {
+    &__button-close {
+      display: flex;
+      align-items: start;
+      justify-content: end;
+      border: none;
+      width: px-to-rem(25px);
+      background-color: var(--color-main-bg);
+    }
+
+    &__icon-close {
+      width: $icon-size-sm;
+      fill: var(--color-icon-bg);
+    }
+  }
+
   &__content {
     position: relative;
     background-color: var(--color-main-bg);
@@ -36,12 +57,16 @@
     transition: transform 0.3s ease-out; /* Анимация появления */
 
     @include respond-to('tablet') {
-      width: 45%;
-      height: 68%;
+      width: 60%;
+      height: auto;
       border-radius: px-to-rem(8px);
       transform: scale(0); /* Начальная позиция - вне экрана */
       transition: transform 0.3s ease-out; /* Анимация появления */
       transform-origin: center; /* Точка появления - центр экрана */
+    }
+
+    @include respond-to('desktop') {
+      width: 40%;
     }
   }
 

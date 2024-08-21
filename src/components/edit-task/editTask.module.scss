@@ -1,6 +1,6 @@
 @import 'src/shared/styles/index';
 
-.create {
+.edit {
   display: flex;
   flex-direction: column;
   row-gap: $gap-md;
@@ -33,7 +33,6 @@
     white-space: nowrap;
   }
 
-
   @layer uitlity {
     &__input {
       border: none;
@@ -48,12 +47,16 @@
     }
   }
 
-
   &__button {
     background-color: var(--color-link);
     border-radius: $border-rad-8;
     border: none;
     color: var(--color-primary-font);
+  }
+
+  &__button-group {
+    display: flex;
+    column-gap: $gap-md;
   }
 }
 

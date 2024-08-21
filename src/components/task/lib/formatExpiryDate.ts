@@ -1,8 +1,9 @@
 import { differenceInDays, format, isThisYear, isTomorrow } from 'date-fns';
 
-export function formatExpiryDate(date: Date): string {
+export function formatExpiryDate(date: string): string {
   const now = new Date();
-  const differenceInHours = (date.getTime() - now.getTime()) / 36e5;
+  const xdate = new Date(date);
+  const differenceInHours = (xdate.getTime() - now.getTime()) / 36e5;
   const differenceInDaysValue = differenceInDays(date, now);
 
   switch (true) {

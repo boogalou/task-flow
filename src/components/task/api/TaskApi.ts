@@ -3,13 +3,15 @@ import { Task, TaskData } from '../model/types.ts';
 import { AxiosResponse } from 'axios';
 
 export class TaskApi {
-  public async createTask(data: TaskData): Promise<AxiosResponse<Task>> {
-    return await apiClient.post('/tasks', data);
+  public async createTask(payload: TaskData): Promise<AxiosResponse<Task>> {
+    return await apiClient.post('/tasks', payload);
   }
 
-  public async updateTask(taskId: number, data: Partial<Task>): Promise<AxiosResponse<Task>> {
+  public async updateTask(
+    payload: Partial<TaskData & { id: number }>,
+  ): Promise<AxiosResponse<Task>> {
     try {
-      return await apiClient.patch(`/tasks/${taskId}`, data);
+      return await apiClient.patch(`/tasks/${payload.id}`, payload);
     } catch (err) {
       console.error(err);
       throw new Error(`${err}`);
