@@ -5,7 +5,7 @@ import axios from 'axios';
 
 export const crateTaskRequest = createAsyncThunk(
   'task/create',
-  async (payload: TaskData, thunkApi) => {
+  async (payload: TaskData & { isCompleted: boolean }, thunkApi) => {
     try {
       const response = await taskApi.createTask(payload);
       return response.data;
@@ -20,7 +20,7 @@ export const crateTaskRequest = createAsyncThunk(
 
 export const updateTaskRequest = createAsyncThunk(
   'task/update',
-  async (payload: Partial<TaskData & { id: number }>, thunkApi) => {
+  async (payload: Partial<TaskData & { id: number; isCompleted: boolean }>, thunkApi) => {
     try {
       const response = await taskApi.updateTask(payload);
       return response.data;

@@ -1,6 +1,6 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
 import { authApi } from '../api/AuthApi.ts';
 import axios from 'axios';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import { LoginRequestData, RegistrationRequestData } from '../types.ts';
 
 export const signupRequest = createAsyncThunk(
@@ -30,3 +30,25 @@ export const signinRequest = createAsyncThunk(
     }
   },
 );
+
+export const checkAuthRequest = createAsyncThunk('auth/refresh', async (_data, thunkApi) => {
+  try {
+    const response = await authApi.checkAuth();
+    return response.data;
+  } catch (err) {
+    if (axios.isAxiosError(err)) {
+      return thunkApi.rejectWithValue(err.response?.data);
+    }
+  }
+});
+
+export const logoutRequest = createAsyncThunk('auth/logout', async (_data, thunkApi) => {
+  try {
+    const response = await authApi.checkAuth();
+    return response.data;
+  } catch (err) {
+    if (axios.isAxiosError(err)) {
+      return thunkApi.rejectWithValue(err.response?.data);
+    }
+  }
+});

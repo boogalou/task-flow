@@ -1,7 +1,6 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { reduxLogger } from "./reduxLogger.ts";
-import { rootReducer } from "./rootReducer.ts";
-
+import { configureStore } from '@reduxjs/toolkit';
+import { reduxLogger } from './reduxLogger.ts';
+import { rootReducer } from './rootReducer.ts';
 
 export const store = configureStore({
   reducer: rootReducer,
@@ -9,8 +8,7 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       thunk: true,
-    })
-      .concat(reduxLogger)
+    }).concat(reduxLogger),
 });
 
 export type AppDispatch = typeof store.dispatch;

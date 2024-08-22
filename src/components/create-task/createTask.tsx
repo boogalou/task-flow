@@ -28,7 +28,12 @@ export function CreateTask({ closeModal }: CreateTaskProps) {
     },
     onSubmit: (values) => {
       console.log(JSON.stringify(values, null, 2));
-      dispatch(crateTaskRequest(values));
+      dispatch(
+        crateTaskRequest({
+          ...values,
+          isCompleted: false,
+        }),
+      );
       closeModal();
       form.resetForm();
     },

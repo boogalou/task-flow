@@ -10,7 +10,7 @@ export interface InputField<T> {
   toggleType?: () => void;
 }
 
-function createInputFields<T>(
+export function createInputFields<T>(
   _inputData: T,
   fields: InputField<T>[],
   errors: Partial<T>,
@@ -33,8 +33,6 @@ function createInputFields<T>(
         : undefined,
   }));
 }
-
-export { createInputFields };
 
 // export const createInputFields = <T extends object>(
 //   data: T,

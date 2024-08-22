@@ -9,6 +9,7 @@ import { Signin } from '../components/auth/signin.tsx';
 import { Today } from '../components/today/today.tsx';
 import { Week } from '../components/week/week.tsx';
 import { AllTasks } from '../components/tassks-all/allTasks.tsx';
+import { AuthenticatedGuard, UnauthenticatedGuard } from './authenticatedGuard.tsx';
 
 export const appRouter = () =>
   createBrowserRouter([
@@ -18,7 +19,11 @@ export const appRouter = () =>
       children: [
         {
           path: routes.MAIN_PAGE,
-          element: <MainPage />,
+          element: (
+            <AuthenticatedGuard>
+              <MainPage />
+            </AuthenticatedGuard>
+          ),
           children: [
             {
               path: routes.TODAY_PAGE,
@@ -39,11 +44,19 @@ export const appRouter = () =>
           children: [
             {
               path: routes.SIGNUP_PAGE,
-              element: <Signup />,
+              element: (
+                <UnauthenticatedGuard>
+                  <Signup />
+                </UnauthenticatedGuard>
+              ),
             },
             {
               path: routes.SIGNIN_PAGE,
-              element: <Signin />,
+              element: (
+                <UnauthenticatedGuard>
+                  <Signin />
+                </UnauthenticatedGuard>
+              ),
             },
           ],
         },

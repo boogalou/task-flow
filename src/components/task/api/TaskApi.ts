@@ -8,9 +8,10 @@ export class TaskApi {
   }
 
   public async updateTask(
-    payload: Partial<TaskData & { id: number }>,
+    payload: Partial<TaskData & { id: number; isCompleted: boolean }>,
   ): Promise<AxiosResponse<Task>> {
     try {
+      console.log(payload);
       return await apiClient.patch(`/tasks/${payload.id}`, payload);
     } catch (err) {
       console.error(err);

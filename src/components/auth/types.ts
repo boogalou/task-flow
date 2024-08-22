@@ -17,3 +17,11 @@ export interface RegistrationRequestData {
 export interface LoginRequestData {
   user: LoginData;
 }
+
+export interface AuthDataResponse {
+  userId: number;
+  email: string;
+  username: string;
+  userPic: string | null;
+  accessToken: string;
+}
