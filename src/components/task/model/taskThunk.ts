@@ -32,3 +32,31 @@ export const updateTaskRequest = createAsyncThunk(
     }
   },
 );
+
+export const getTasks = createAsyncThunk('task/getAll', async (_payload: void, thunkApi) => {
+  try {
+    const response = await taskApi.getTasks();
+    return response.data;
+  } catch (err) {
+    if (axios.isAxiosError(err)) {
+      return thunkApi.rejectWithValue(err.response?.data);
+    }
+    throw new Error(`${err}`);
+  }
+});
+
+export const deleteTask = createAsyncThunk('task/delete', async (payload: number, thunkApi) => {
+  try {
+    const response = await taskApi.deleteTask(payload);
+    if (response.status === 204) {
+      return { payload };
+    } else {
+      return undefined;
+    }
+  } catch (err) {
+    if (axios.isAxiosError(err)) {
+      return thunkApi.rejectWithValue(err.response?.data);
+    }
+    throw new Error(`${err}`);
+  }
+});

@@ -10,31 +10,15 @@ export class TaskApi {
   public async updateTask(
     payload: Partial<TaskData & { id: number; isCompleted: boolean }>,
   ): Promise<AxiosResponse<Task>> {
-    try {
-      console.log(payload);
-      return await apiClient.patch(`/tasks/${payload.id}`, payload);
-    } catch (err) {
-      console.error(err);
-      throw new Error(`${err}`);
-    }
+    return await apiClient.patch(`/tasks/${payload.id}`, payload);
   }
 
   public async getTasks(): Promise<AxiosResponse<Task[]>> {
-    try {
-      return await apiClient.get('/tasks');
-    } catch (err) {
-      console.error(err);
-      throw new Error(`${err}`);
-    }
+    return await apiClient.get('/tasks');
   }
 
-  public async deleteTasks(taskId: number): Promise<AxiosResponse> {
-    try {
-      return await apiClient.delete(`/tasks/${taskId}`);
-    } catch (err) {
-      console.error(err);
-      throw new Error(`${err}`);
-    }
+  public async deleteTask(taskId: number): Promise<AxiosResponse> {
+    return await apiClient.delete(`/tasks/${taskId}`);
   }
 }
 
