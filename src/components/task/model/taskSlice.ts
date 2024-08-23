@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { crateTaskRequest, deleteTask, getTasks, updateTaskRequest } from './taskThunk.ts';
 import { ErrorResponse, Task } from '../../../shared/types/types.ts';
+import { addDays, format, isWithinInterval } from 'date-fns';
 
-interface TaskState {
+export interface TaskState {
   tasks: Task[];
   lastRemovedTask: Task | null;
   taskFetchStatus: string;
@@ -19,16 +20,39 @@ const initialState: TaskState = {
 export const taskSlice = createSlice({
   name: 'taskSlice',
   initialState,
-
   selectors: {
     selectTasks: (state) => state.tasks,
+    selectError: (state) => state.error,
   },
 
   reducers: {
-    restoreTask(state, action: PayloadAction<Task>) {
-      state.tasks.push(action.payload);
-      state.taskFetchStatus = 'idle';
-      state.error!.message = 'Failed to delete task. Task restored.';
+    taskFiltering(state, { payload }: PayloadAction<string>) {
+      const dateNow = format(new Date(), 'yyyy-MM-dd');
+      console.log(payload);
+      switch (payload) {
+        case 'today':
+          state.tasks = state.tasks.filter(
+            (task) =>
+              format(new Date(task.dueDate), 'yyyy-MM-dd') === format(dateNow, 'yyyy-MM-dd'),
+          );
+          break;
+
+        case 'week':
+          state.tasks = state.tasks.filter((task) =>
+            isWithinInterval(new Date(task.dueDate), {
+              start: dateNow,
+              end: addDays(dateNow, 7),
+            }),
+          );
+          break;
+
+        case 'completed':
+          state.tasks = state.tasks.filter((task) => task.isCompleted);
+          break;
+
+        default:
+          return state;
+      }
     },
   },
 
@@ -98,7 +122,8 @@ export const taskSlice = createSlice({
   },
 });
 
-export const { selectTasks } = taskSlice.selectors;
+export const { selectTasks, selectError } = taskSlice.selectors;
+export const { taskFiltering } = taskSlice.actions;
 
 export const selectTaskById = (state: TaskState, taskId: number) => {
   if (taskId) {

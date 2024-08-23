@@ -15,12 +15,12 @@ export function TasksList() {
   const tasks = useAppSelector(selectTasks);
   const { isOpen, openModal, closeModal } = useModal();
   const [taskId, setTaskId] = useState<number | null>(null);
-  const task = useAppSelector((state) => selectTaskById(state.taskSlice, taskId!))!;
   const handleOnClickTask = (id: number) => {
     if (id) {
       setTaskId(id);
     }
   };
+  const task = useAppSelector((state) => selectTaskById(state.taskSlice, taskId!))!;
 
   useEffect(() => {
     if (taskId !== null) {

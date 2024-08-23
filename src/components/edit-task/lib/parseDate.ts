@@ -1,9 +1,6 @@
-import { format, parseISO } from 'date-fns';
-
 export function parseDate(inputDate: string) {
-  const date = parseISO(inputDate);
-  const dateString = format(date, 'yyyy-MM-dd');
-  const timeString = format(date, 'HH:mm');
+  const dateString = inputDate.slice(0, 10);
+  const timeString = inputDate.slice(11, 16);
 
   return { dateString, timeString };
 }
