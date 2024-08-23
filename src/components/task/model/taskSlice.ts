@@ -1,13 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { crateTaskRequest, deleteTask, getTasks, updateTaskRequest } from './taskThunk.ts';
 import { ErrorResponse, Task } from '../../../shared/types/types.ts';
-import { addDays, format, isWithinInterval } from 'date-fns';
 
 export interface TaskState {
   tasks: Task[];
   lastRemovedTask: Task | null;
   taskFetchStatus: string;
   error: ErrorResponse | null;
+  filter: string;
 }
 
 const initialState: TaskState = {
@@ -15,6 +15,7 @@ const initialState: TaskState = {
   lastRemovedTask: null,
   taskFetchStatus: 'idle',
   error: null,
+  filter: '',
 };
 
 export const taskSlice = createSlice({
@@ -23,36 +24,12 @@ export const taskSlice = createSlice({
   selectors: {
     selectTasks: (state) => state.tasks,
     selectError: (state) => state.error,
+    selectFilter: (state) => state.filter,
   },
 
   reducers: {
-    taskFiltering(state, { payload }: PayloadAction<string>) {
-      const dateNow = format(new Date(), 'yyyy-MM-dd');
-      console.log(payload);
-      switch (payload) {
-        case 'today':
-          state.tasks = state.tasks.filter(
-            (task) =>
-              format(new Date(task.dueDate), 'yyyy-MM-dd') === format(dateNow, 'yyyy-MM-dd'),
-          );
-          break;
-
-        case 'week':
-          state.tasks = state.tasks.filter((task) =>
-            isWithinInterval(new Date(task.dueDate), {
-              start: dateNow,
-              end: addDays(dateNow, 7),
-            }),
-          );
-          break;
-
-        case 'completed':
-          state.tasks = state.tasks.filter((task) => task.isCompleted);
-          break;
-
-        default:
-          return state;
-      }
+    setFilter(state, { payload }: PayloadAction<string>) {
+      state.filter = payload;
     },
   },
 
@@ -122,9 +99,8 @@ export const taskSlice = createSlice({
   },
 });
 
-export const { selectTasks, selectError } = taskSlice.selectors;
-export const { taskFiltering } = taskSlice.actions;
-
+export const { selectTasks, selectError, selectFilter } = taskSlice.selectors;
+export const { setFilter } = taskSlice.actions;
 export const selectTaskById = (state: TaskState, taskId: number) => {
   if (taskId) {
     return state.tasks.find((task) => task.id === taskId);

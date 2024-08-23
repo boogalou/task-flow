@@ -5,7 +5,7 @@ import { Button } from '../../shared/ui-kit/button/Button.tsx';
 import { Icon } from '../../shared/ui-kit/icon/icon.tsx';
 import { useState } from 'react';
 import { useAppDispatch } from '../../app/redux/reduxHooks.ts';
-import { taskFiltering } from '../task/model/taskSlice.ts';
+import { setFilter } from '../task/model/taskSlice.ts';
 
 const cx = cnBind.bind(styles);
 
@@ -27,7 +27,7 @@ export function NavActions() {
 
   const handleOnClick = (id: number, action: string) => {
     setButtonIsPressed(id);
-    dispatch(taskFiltering(action));
+    dispatch(setFilter(action));
   };
 
   return (

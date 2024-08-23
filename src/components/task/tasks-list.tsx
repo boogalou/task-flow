@@ -7,12 +7,14 @@ import { EditTask } from '../edit-task/editTask.tsx';
 import { useModal } from '../../shared/ui-kit/modal/useModal.ts';
 import { useEffect, useState } from 'react';
 import { useAppSelector } from '../../app/redux/reduxHooks.ts';
-import { selectTaskById, selectTasks } from './model/taskSlice.ts';
+import { selectFilter, selectTaskById, selectTasks } from './model/taskSlice.ts';
+import { useFilteredTasks } from './lib/useFilteredTasks.ts';
 
 const cx = cnBind.bind(styles);
 
 export function TasksList() {
   const tasks = useAppSelector(selectTasks);
+  const filter = useAppSelector(selectFilter);
   const { isOpen, openModal, closeModal } = useModal();
   const [taskId, setTaskId] = useState<number | null>(null);
   const handleOnClickTask = (id: number) => {
@@ -21,6 +23,7 @@ export function TasksList() {
     }
   };
   const task = useAppSelector((state) => selectTaskById(state.taskSlice, taskId!))!;
+  const filteredTask = useFilteredTasks(tasks, filter);
 
   useEffect(() => {
     if (taskId !== null) {
@@ -34,8 +37,8 @@ export function TasksList() {
     }
   }, [isOpen]);
 
-  const filteredByCompleted = tasks.filter((task) => task.isCompleted);
-  const filteredByUncompleted = tasks.filter((task) => !task.isCompleted);
+  const filteredByCompleted = filteredTask.filter((task) => task.isCompleted);
+  const filteredByUncompleted = filteredTask.filter((task) => !task.isCompleted);
   const sortedTasks = [...filteredByUncompleted, ...filteredByCompleted];
 
   return (
