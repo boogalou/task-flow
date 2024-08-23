@@ -1,5 +1,5 @@
 import { InputField } from '../../shared/lib/createInputFields.ts';
-import { TaskData } from '../task/model/types.ts';
+import { TaskData } from '../../shared/types/types.ts';
 
 export const createTaskFields: InputField<TaskData>[] = [
   {
@@ -29,7 +29,6 @@ export const createTaskFields: InputField<TaskData>[] = [
     type: 'color',
     placeholder: '',
     label: 'Set Color',
-    value: '#667BC6',
   },
   {
     id: 'datepicker',
