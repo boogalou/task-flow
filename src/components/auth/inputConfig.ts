@@ -1,5 +1,5 @@
 import { InputField } from '../../shared/lib/createInputFields.ts';
-import { LoginData, RegistrationData } from './types.ts';
+import { LoginData, RegistrationData } from '../../shared/types/types.ts';
 
 export const registrationFields: InputField<RegistrationData>[] = [
   {

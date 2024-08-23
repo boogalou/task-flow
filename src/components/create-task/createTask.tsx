@@ -6,8 +6,8 @@ import { createTaskFields } from './inputConfig.ts';
 import Input from '../../shared/ui-kit/input/input.tsx';
 import { Button } from '../../shared/ui-kit/button/Button.tsx';
 import { useAppDispatch } from '../../app/redux/reduxHooks.ts';
-import { TaskData } from '../task/model/types.ts';
 import { crateTaskRequest } from '../task/model/taskThunk.ts';
+import { TaskData } from '../../shared/types/types.ts';
 
 const cx = cnBind.bind(styles);
 

@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Task } from './types.ts';
 import { crateTaskRequest, deleteTask, getTasks, updateTaskRequest } from './taskThunk.ts';
+import { ErrorResponse, Task } from '../../../shared/types/types.ts';
 
 interface TaskState {
   tasks: Task[];
   lastRemovedTask: Task | null;
   taskFetchStatus: string;
-  error: string | null;
+  error: ErrorResponse | null;
 }
 
 const initialState: TaskState = {
@@ -28,7 +28,7 @@ export const taskSlice = createSlice({
     restoreTask(state, action: PayloadAction<Task>) {
       state.tasks.push(action.payload);
       state.taskFetchStatus = 'idle';
-      state.error = 'Failed to delete task. Task restored.';
+      state.error!.message = 'Failed to delete task. Task restored.';
     },
   },
 
@@ -45,9 +45,9 @@ export const taskSlice = createSlice({
       })
       .addCase(crateTaskRequest.rejected, (state, action) => {
         state.taskFetchStatus = 'failed';
-        state.error = action.payload as string;
+        state.error = action.payload as ErrorResponse;
       })
-      .addCase(updateTaskRequest.rejected, (state) => {
+      .addCase(updateTaskRequest.pending, (state) => {
         state.taskFetchStatus = 'loading';
         state.error = null;
       })
@@ -60,7 +60,7 @@ export const taskSlice = createSlice({
       })
       .addCase(updateTaskRequest.rejected, (state, action) => {
         state.taskFetchStatus = 'failed';
-        state.error = action.payload as string;
+        state.error = action.payload as ErrorResponse;
       })
       .addCase(getTasks.pending, (state) => {
         state.taskFetchStatus = 'loading';
@@ -73,7 +73,7 @@ export const taskSlice = createSlice({
       })
       .addCase(getTasks.rejected, (state, action) => {
         state.taskFetchStatus = 'failed';
-        state.error = action.payload as string;
+        state.error = action.payload as ErrorResponse;
       })
       .addCase(deleteTask.pending, (state, action) => {
         state.taskFetchStatus = 'loading';
@@ -93,7 +93,7 @@ export const taskSlice = createSlice({
           state.tasks.push(state.lastRemovedTask);
           state.lastRemovedTask = null;
         }
-        state.error = action.payload as string;
+        state.error = action.payload as ErrorResponse;
       });
   },
 });

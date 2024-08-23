@@ -2,7 +2,7 @@ import styles from './auth.module.scss';
 import cnBind from 'classnames/bind';
 import Input from '../../shared/ui-kit/input/input.tsx';
 import { Button } from '../../shared/ui-kit/button/Button.tsx';
-import { RegistrationData } from './types.ts';
+import { RegistrationData } from '../../shared/types/types.ts';
 import { useAppDispatch } from '../../app/redux/reduxHooks.ts';
 import { signupRequest } from './model/auth.thunk.ts';
 import { useForm } from './lib/useForm.ts';

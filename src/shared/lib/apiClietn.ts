@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { AuthDataResponse } from '../../components/auth/types.ts';
+import { AuthDataResponse } from '../types/types.ts';
 
 const API_URL = `${import.meta.env.VITE_API_URL}`;
 

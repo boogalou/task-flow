@@ -5,11 +5,11 @@ import { useForm } from '../auth/lib/useForm.ts';
 import { updateTaskRequest } from '../task/model/taskThunk.ts';
 import { parseDate } from './lib/parseDate.ts';
 import { createInputFields } from '../../shared/lib/createInputFields.ts';
-import { Task, TaskData } from '../task/model/types.ts';
 import Input from '../../shared/ui-kit/input/input.tsx';
 import { Button } from '../../shared/ui-kit/button/Button.tsx';
 import { editTaskFields } from './inputConfig.ts';
 import { useEffect } from 'react';
+import { Task, TaskData } from '../../shared/types/types.ts';
 
 const cx = cnBind.bind(styles);
 

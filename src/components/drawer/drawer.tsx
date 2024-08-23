@@ -36,11 +36,9 @@ export function Drawer({ children, header, drawerIsOpen, onCloseDrawer }: Drawer
     <div className={cx('drawer', { 'drawer--open': drawerIsOpen })} ref={drawerRef}>
       <header>{header}</header>
       {children}
-      <Button
-        className={cx('drawer__close-button')}
-        onClick={onCloseDrawer}
-        icon={<Icon iconType={'arrow-left'} />}
-      />
+      <Button className={cx('drawer__close-button')} onClick={onCloseDrawer}>
+        <Icon iconType="arrow-left" />
+      </Button>
     </div>
   );
 }

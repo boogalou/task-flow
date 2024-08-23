@@ -1,7 +1,7 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import { TaskData } from './types.ts';
-import { taskApi } from '../api/TaskApi.ts';
 import axios from 'axios';
+import { taskApi } from '../api/TaskApi.ts';
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import { TaskData } from '../../../shared/types/types.ts';
 
 export const crateTaskRequest = createAsyncThunk(
   'task/create',

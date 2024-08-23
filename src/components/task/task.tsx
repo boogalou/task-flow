@@ -14,11 +14,20 @@ interface TaskProps {
   dueDate: string;
   color: string;
   category: string;
+  isCompleted: boolean;
   handleOnClickTask: (id: number) => void;
   openModal: () => void;
 }
 
-export function Task({ id, title, dueDate, color, category, handleOnClickTask }: TaskProps) {
+export function Task({
+  id,
+  title,
+  dueDate,
+  color,
+  category,
+  isCompleted,
+  handleOnClickTask,
+}: TaskProps) {
   const dispatch = useAppDispatch();
   const expireDate = formatExpiryDate(dueDate);
 
@@ -29,7 +38,6 @@ export function Task({ id, title, dueDate, color, category, handleOnClickTask }:
         isCompleted: evt.target.checked,
       }),
     );
-    console.log(`Checkbox ${evt.target.id} is ${evt.target.checked ? 'checked' : 'unchecked'}`);
   };
 
   const handleOnClick = () => {
@@ -45,7 +53,12 @@ export function Task({ id, title, dueDate, color, category, handleOnClickTask }:
     <>
       <div className={cx('task')} onClick={handleOnClick}>
         <div className={cx('task__checkbox')} onClick={handleClickOnCheckbox}>
-          <Checkbox id={`${id}`} type="checkbox" onChange={handleOnChangeCheckBox} />
+          <Checkbox
+            id={`${id}`}
+            type="checkbox"
+            onChange={handleOnChangeCheckBox}
+            checked={isCompleted}
+          />
         </div>
         <span className={cx('task__title')}>{title}</span>
         <div className={cx('task__due-date')}>{expireDate}</div>

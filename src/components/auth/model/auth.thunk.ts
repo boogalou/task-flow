@@ -1,13 +1,15 @@
 import { authApi } from '../api/AuthApi.ts';
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { LoginRequestData, RegistrationRequestData } from '../types.ts';
+import { LoginRequestData, RegistrationRequestData } from '../../../shared/types/types.ts';
+import { getTasks } from '../../task/model/taskThunk.ts';
 
 export const signupRequest = createAsyncThunk(
   'auth/signup',
   async (data: RegistrationRequestData, thunkApi) => {
     try {
       const response = await authApi.signup(data);
+      await thunkApi.dispatch(getTasks());
       return response.data;
     } catch (err) {
       if (axios.isAxiosError(err)) {
@@ -31,16 +33,20 @@ export const signinRequest = createAsyncThunk(
   },
 );
 
-export const checkAuthRequest = createAsyncThunk('auth/refresh', async (_data, thunkApi) => {
-  try {
-    const response = await authApi.checkAuth();
-    return response.data;
-  } catch (err) {
-    if (axios.isAxiosError(err)) {
-      return thunkApi.rejectWithValue(err.response?.data);
+export const checkAuthRequest = createAsyncThunk(
+  'auth/refresh',
+  async (_payload: void, thunkApi) => {
+    try {
+      const response = await authApi.checkAuth();
+      await thunkApi.dispatch(getTasks());
+      return response.data;
+    } catch (err) {
+      if (axios.isAxiosError(err)) {
+        return thunkApi.rejectWithValue(err.response?.data);
+      }
     }
-  }
-});
+  },
+);
 
 export const logoutRequest = createAsyncThunk('auth/logout', async (_data, thunkApi) => {
   try {

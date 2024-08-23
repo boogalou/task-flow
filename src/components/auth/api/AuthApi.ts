@@ -1,6 +1,10 @@
 import { apiClient } from '../../../shared/lib/apiClietn.ts';
 import axios, { AxiosResponse } from 'axios';
-import { AuthDataResponse, LoginRequestData, RegistrationRequestData } from '../types.ts';
+import {
+  AuthDataResponse,
+  LoginRequestData,
+  RegistrationRequestData,
+} from '../../../shared/types/types.ts';
 
 export class AuthApi {
   public async signup(data: RegistrationRequestData): Promise<AxiosResponse<AuthDataResponse>> {

@@ -1,6 +1,6 @@
 import { apiClient } from '../../../shared/lib/apiClietn.ts';
-import { Task, TaskData } from '../model/types.ts';
 import { AxiosResponse } from 'axios';
+import { Task, TaskData } from '../../../shared/types/types.ts';
 
 export class TaskApi {
   public async createTask(payload: TaskData): Promise<AxiosResponse<Task>> {

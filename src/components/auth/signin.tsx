@@ -1,6 +1,6 @@
 import styles from './auth.module.scss';
 import cnBind from 'classnames/bind';
-import { LoginData } from './types.ts';
+import { LoginData } from '../../shared/types/types.ts';
 import { useAppDispatch } from '../../app/redux/reduxHooks.ts';
 import { useForm } from './lib/useForm.ts';
 import { loginValidationSchema } from './lib/validationSchema.ts';
