@@ -37,14 +37,10 @@ export function TasksList() {
     }
   }, [isOpen]);
 
-  const filteredByCompleted = filteredTask.filter((task) => task.isCompleted);
-  const filteredByUncompleted = filteredTask.filter((task) => !task.isCompleted);
-  const sortedTasks = [...filteredByUncompleted, ...filteredByCompleted];
-
   return (
     <>
       <div className={cx('tasks-list')}>
-        {sortedTasks.map((it) => (
+        {filteredTask.map((it) => (
           <Task key={it.id} {...it} handleOnClickTask={handleOnClickTask} openModal={openModal} />
         ))}
       </div>

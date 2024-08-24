@@ -9,12 +9,12 @@ import { setFilter } from '../task/model/taskSlice.ts';
 
 const cx = cnBind.bind(styles);
 
-interface ButtonData {
+type ButtonData = {
   id: number;
   label: string;
   action: string;
   iconType: IconType;
-}
+};
 
 const buttonsData: ButtonData[] = [
   { id: 1, label: 'Completed', iconType: 'success', action: 'completed' },

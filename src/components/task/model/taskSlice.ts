@@ -4,6 +4,7 @@ import { ErrorResponse, Task } from '../../../shared/types/types.ts';
 
 export interface TaskState {
   tasks: Task[];
+  categories: string[];
   lastRemovedTask: Task | null;
   taskFetchStatus: string;
   error: ErrorResponse | null;
@@ -12,6 +13,7 @@ export interface TaskState {
 
 const initialState: TaskState = {
   tasks: [],
+  categories: [],
   lastRemovedTask: null,
   taskFetchStatus: 'idle',
   error: null,
@@ -23,6 +25,7 @@ export const taskSlice = createSlice({
   initialState,
   selectors: {
     selectTasks: (state) => state.tasks,
+    selectCategories: (state) => state.categories,
     selectError: (state) => state.error,
     selectFilter: (state) => state.filter,
   },
@@ -52,11 +55,12 @@ export const taskSlice = createSlice({
         state.taskFetchStatus = 'loading';
         state.error = null;
       })
-      .addCase(updateTaskRequest.fulfilled, (state, action: PayloadAction<Task>) => {
+      .addCase(updateTaskRequest.fulfilled, (state, { payload }: PayloadAction<Task>) => {
         state.taskFetchStatus = 'succeeded';
         state.tasks = state.tasks.map((task) =>
-          task.id === action.payload.id ? { ...task, ...action.payload } : task,
+          task.id === payload.id ? { ...task, ...payload } : task,
         );
+        state.categories = [...new Set(...state.categories, payload.category)];
         state.error = null;
       })
       .addCase(updateTaskRequest.rejected, (state, action) => {
@@ -67,9 +71,10 @@ export const taskSlice = createSlice({
         state.taskFetchStatus = 'loading';
         state.error = null;
       })
-      .addCase(getTasks.fulfilled, (state, action: PayloadAction<Task[]>) => {
+      .addCase(getTasks.fulfilled, (state, { payload }: PayloadAction<Task[]>) => {
         state.taskFetchStatus = 'succeeded';
-        state.tasks = action.payload;
+        state.tasks = payload;
+        state.categories = [...new Set(payload.map((it) => it.category))];
         state.error = null;
       })
       .addCase(getTasks.rejected, (state, action) => {
@@ -99,7 +104,7 @@ export const taskSlice = createSlice({
   },
 });
 
-export const { selectTasks, selectError, selectFilter } = taskSlice.selectors;
+export const { selectTasks, selectError, selectFilter, selectCategories } = taskSlice.selectors;
 export const { setFilter } = taskSlice.actions;
 export const selectTaskById = (state: TaskState, taskId: number) => {
   if (taskId) {

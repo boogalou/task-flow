@@ -41,7 +41,6 @@ export function Task({
   };
 
   const handleOnClick = () => {
-    console.log(id);
     handleOnClickTask(id);
   };
 

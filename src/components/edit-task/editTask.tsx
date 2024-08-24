@@ -22,7 +22,6 @@ export function EditTask({ task, closeModal }: EditTaskProps) {
   const dispatch = useAppDispatch();
 
   const date = parseDate(task.dueDate);
-  console.log('date: ', date.dateString, 'time: ', date.timeString);
 
   const editTask: TaskData = {
     title: task.title,

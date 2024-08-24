@@ -3,6 +3,8 @@ import cnBind from 'classnames/bind';
 import { Button } from '../../shared/ui-kit/button/Button.tsx';
 import { Icon } from '../../shared/ui-kit/icon/icon.tsx';
 import { useState } from 'react';
+import { useAppSelector } from '../../app/redux/reduxHooks.ts';
+import { selectCategories } from '../task/model/taskSlice.ts';
 
 const cx = cnBind.bind(styles);
 
@@ -11,19 +13,17 @@ type ButtonsData = {
   label: string;
 };
 
-const tags: ButtonsData[] = [
-  { id: 1, label: 'Personal' },
-  { id: 2, label: 'Work' },
-  { id: 3, label: 'Education' },
-];
-
 export function NavTags() {
+  const categories = useAppSelector(selectCategories);
   const [buttonIsPressed, setButtonIsPressed] = useState<null | number>(null);
-
   const handleOnClick = (id: number) => {
     setButtonIsPressed(id);
   };
-
+  const categoriesButton: ButtonsData[] = categories.map((it, index) => ({
+    id: index + 1,
+    label: it,
+  }));
+  console.log('categoriesButton: ', categoriesButton);
   return (
     <div className={cx('nav-tags')}>
       <div className={cx('nav-tags__action')}>
@@ -32,7 +32,7 @@ export function NavTags() {
           <Icon iconType={'cross'} />
         </Button>
       </div>
-      {tags.map((it) => (
+      {categoriesButton.map((it) => (
         <Button
           className={cx('nav-tags__button', {
             'nav-tags__button--pressed': it.id === buttonIsPressed,
