@@ -19,4 +19,4 @@ export async function appInit() {
   );
 }
 
-await appInit();
+appInit();

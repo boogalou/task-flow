@@ -9,7 +9,7 @@ import Input from '../../shared/ui-kit/input/input.tsx';
 import { Button } from '../../shared/ui-kit/button/Button.tsx';
 import { editTaskFields } from './inputConfig.ts';
 import { useEffect } from 'react';
-import { Task, TaskData } from '../../shared/types/types.ts';
+import { Task, TaskForm } from '../../shared/types/types.ts';
 
 const cx = cnBind.bind(styles);
 
@@ -23,7 +23,7 @@ export function EditTask({ task, closeModal }: EditTaskProps) {
 
   const date = parseDate(task.dueDate);
 
-  const editTask: TaskData = {
+  const editTask: TaskForm = {
     title: task.title,
     description: task.description,
     category: task.category,
@@ -32,7 +32,7 @@ export function EditTask({ task, closeModal }: EditTaskProps) {
     time: date.timeString,
   };
 
-  const form = useForm({
+  const form = useForm<TaskForm>({
     initialValues: {
       title: task.title || '',
       description: task.description || '',
@@ -46,7 +46,11 @@ export function EditTask({ task, closeModal }: EditTaskProps) {
       dispatch(
         updateTaskRequest({
           id: task.id,
-          ...values,
+          title: values.title,
+          description: values.description,
+          category: values.category,
+          color: values.color,
+          dueDate: `${values.date}T${values.time}:00.000Z`,
         }),
       );
       closeModal();
@@ -67,7 +71,7 @@ export function EditTask({ task, closeModal }: EditTaskProps) {
         <span className={cx('edit__title')}>Edit Task</span>
       </div>
       <form className={cx('form')} onSubmit={form.handleSubmit} noValidate={true}>
-        {createInputFields<TaskData>(form.values, editTaskFields, form.error, form.touched).map(
+        {createInputFields<TaskForm>(form.values, editTaskFields, form.error, form.touched).map(
           (field) => (
             <div className={cx('form__field')} key={field.id}>
               <Input

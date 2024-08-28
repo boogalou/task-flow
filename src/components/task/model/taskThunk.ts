@@ -1,11 +1,11 @@
 import axios from 'axios';
 import { taskApi } from '../api/TaskApi.ts';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { TaskData } from '../../../shared/types/types.ts';
+import { Task, CreateTaskRequest } from '../../../shared/types/types.ts';
 
 export const crateTaskRequest = createAsyncThunk(
   'task/create',
-  async (payload: TaskData & { isCompleted: boolean }, thunkApi) => {
+  async (payload: CreateTaskRequest & { isCompleted: boolean }, thunkApi) => {
     try {
       const response = await taskApi.createTask(payload);
       return response.data;
@@ -20,7 +20,7 @@ export const crateTaskRequest = createAsyncThunk(
 
 export const updateTaskRequest = createAsyncThunk(
   'task/update',
-  async (payload: Partial<TaskData & { id: number; isCompleted: boolean }>, thunkApi) => {
+  async (payload: Partial<Task & { id: number; isCompleted: boolean }>, thunkApi) => {
     try {
       const response = await taskApi.updateTask(payload);
       return response.data;

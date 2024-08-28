@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { crateTaskRequest, deleteTask, getTasks, updateTaskRequest } from './taskThunk.ts';
 import { ErrorResponse, Task } from '../../../shared/types/types.ts';
+import { getUniqueCategories } from '../lib/getUniqueCategories.ts';
 
 export interface TaskState {
   tasks: Task[];
@@ -60,7 +61,7 @@ export const taskSlice = createSlice({
         state.tasks = state.tasks.map((task) =>
           task.id === payload.id ? { ...task, ...payload } : task,
         );
-        state.categories = [...new Set(...state.categories, payload.category)];
+        state.categories = getUniqueCategories(state.tasks);
         state.error = null;
       })
       .addCase(updateTaskRequest.rejected, (state, action) => {
@@ -91,6 +92,7 @@ export const taskSlice = createSlice({
       .addCase(deleteTask.fulfilled, (state) => {
         state.taskFetchStatus = 'succeeded';
         state.lastRemovedTask = null;
+        state.categories = getUniqueCategories(state.tasks);
         state.error = null;
       })
       .addCase(deleteTask.rejected, (state, action) => {

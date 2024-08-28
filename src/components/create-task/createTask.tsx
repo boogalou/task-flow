@@ -7,7 +7,7 @@ import Input from '../../shared/ui-kit/input/input.tsx';
 import { Button } from '../../shared/ui-kit/button/Button.tsx';
 import { useAppDispatch } from '../../app/redux/reduxHooks.ts';
 import { crateTaskRequest } from '../task/model/taskThunk.ts';
-import { TaskData } from '../../shared/types/types.ts';
+import { TaskForm } from '../../shared/types/types.ts';
 
 const cx = cnBind.bind(styles);
 
@@ -17,7 +17,7 @@ interface CreateTaskProps {
 
 export function CreateTask({ closeModal }: CreateTaskProps) {
   const dispatch = useAppDispatch();
-  const form = useForm<TaskData>({
+  const form = useForm<TaskForm>({
     initialValues: {
       title: '',
       description: '',
@@ -30,7 +30,11 @@ export function CreateTask({ closeModal }: CreateTaskProps) {
       console.log(JSON.stringify(values, null, 2));
       dispatch(
         crateTaskRequest({
-          ...values,
+          title: values.title,
+          description: values.description,
+          category: values.category,
+          color: values.color,
+          dueDate: `${values.date}T${values.time}:00.000Z`,
           isCompleted: false,
         }),
       );
@@ -45,7 +49,7 @@ export function CreateTask({ closeModal }: CreateTaskProps) {
         <span className={cx('create__title')}>Add Task</span>
       </div>
       <form className={cx('form')} onSubmit={form.handleSubmit} noValidate={true}>
-        {createInputFields<TaskData>(form.values, createTaskFields, form.error, form.touched).map(
+        {createInputFields<TaskForm>(form.values, createTaskFields, form.error, form.touched).map(
           (field) => (
             <div className={cx('form__field')} key={field.id}>
               <Input

@@ -1,14 +1,14 @@
 import { apiClient } from '../../../shared/lib/apiClietn.ts';
 import { AxiosResponse } from 'axios';
-import { Task, TaskData } from '../../../shared/types/types.ts';
+import { Task, CreateTaskRequest } from '../../../shared/types/types.ts';
 
 export class TaskApi {
-  public async createTask(payload: TaskData): Promise<AxiosResponse<Task>> {
+  public async createTask(payload: CreateTaskRequest): Promise<AxiosResponse<Task>> {
     return await apiClient.post('/tasks', payload);
   }
 
   public async updateTask(
-    payload: Partial<TaskData & { id: number; isCompleted: boolean }>,
+    payload: Partial<Task & { id: number; isCompleted: boolean }>,
   ): Promise<AxiosResponse<Task>> {
     return await apiClient.patch(`/tasks/${payload.id}`, payload);
   }

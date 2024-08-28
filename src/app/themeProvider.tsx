@@ -1,6 +1,5 @@
 import { ReactNode } from 'react';
-import { useTheme } from "../shared/lib/useTheme.ts";
-
+import { useTheme } from '../shared/lib/useTheme.ts';
 
 export interface ThemeProviderProps {
   children: ReactNode;

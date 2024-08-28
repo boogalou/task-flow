@@ -1,4 +1,4 @@
-@import 'src/shared/styles/normalize.scss';
+@import '../shared/styles/normalize.scss';
 
 @layer reset, component, utility;
 

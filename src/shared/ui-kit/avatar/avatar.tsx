@@ -11,7 +11,7 @@ export interface AvatarProps {
   isOnline?: boolean;
 }
 
-export function Avatar({ avatarUrl, id, name = '', isOnline }: AvatarProps) {
+export function Avatar({ avatarUrl }: AvatarProps) {
   return (
     <div className={cx('avatar')}>
       {avatarUrl ? (
