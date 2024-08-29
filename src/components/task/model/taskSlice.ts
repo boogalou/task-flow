@@ -1,7 +1,9 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { crateTaskRequest, deleteTask, getTasks, updateTaskRequest } from './taskThunk.ts';
+import { asyncThunkCreator, buildCreateSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createTaskRequest, deleteTask, updateTaskRequest } from './taskThunk.ts';
 import { ErrorResponse, Task } from '../../../shared/types/types.ts';
 import { getUniqueCategories } from '../lib/getUniqueCategories.ts';
+import { taskApi } from '../api/TaskApi.ts';
+import axios from 'axios';
 
 export interface TaskState {
   tasks: Task[];
@@ -21,6 +23,10 @@ const initialState: TaskState = {
   filter: '',
 };
 
+const createSlice = buildCreateSlice({
+  creators: { asyncThunk: asyncThunkCreator },
+});
+
 export const taskSlice = createSlice({
   name: 'taskSlice',
   initialState,
@@ -31,24 +37,56 @@ export const taskSlice = createSlice({
     selectFilter: (state) => state.filter,
   },
 
-  reducers: {
-    setFilter(state, { payload }: PayloadAction<string>) {
+  reducers: (create) => ({
+    setFilter: create.reducer((state, { payload }: PayloadAction<string>) => {
       state.filter = payload;
-    },
-  },
+    }),
+
+    fetchTasks: create.asyncThunk(
+      async (_payload: void, thunkApi) => {
+        try {
+          const response = await taskApi.getTasks();
+          return response.data;
+        } catch (err) {
+          if (axios.isAxiosError(err)) {
+            return thunkApi.rejectWithValue(err.response?.data);
+          }
+          throw new Error(`${err}`);
+        }
+      },
+      {
+        pending: (state) => {
+          state.taskFetchStatus = 'loading';
+          state.error = null;
+        },
+
+        fulfilled: (state, { payload }) => {
+          state.taskFetchStatus = 'succeeded';
+          state.tasks = payload;
+          state.categories = getUniqueCategories(payload);
+          state.error = null;
+        },
+
+        rejected: (state, action) => {
+          state.taskFetchStatus = 'failed';
+          state.error = action.payload as ErrorResponse;
+        },
+      },
+    ),
+  }),
 
   extraReducers: (builder) => {
     builder
-      .addCase(crateTaskRequest.pending, (state) => {
+      .addCase(createTaskRequest.pending, (state) => {
         state.taskFetchStatus = 'loading';
         state.error = null;
       })
-      .addCase(crateTaskRequest.fulfilled, (state, { payload }) => {
+      .addCase(createTaskRequest.fulfilled, (state, { payload }) => {
         state.taskFetchStatus = 'succeeded';
         state.tasks.push(payload);
         state.error = null;
       })
-      .addCase(crateTaskRequest.rejected, (state, action) => {
+      .addCase(createTaskRequest.rejected, (state, action) => {
         state.taskFetchStatus = 'failed';
         state.error = action.payload as ErrorResponse;
       })
@@ -68,20 +106,7 @@ export const taskSlice = createSlice({
         state.taskFetchStatus = 'failed';
         state.error = action.payload as ErrorResponse;
       })
-      .addCase(getTasks.pending, (state) => {
-        state.taskFetchStatus = 'loading';
-        state.error = null;
-      })
-      .addCase(getTasks.fulfilled, (state, { payload }: PayloadAction<Task[]>) => {
-        state.taskFetchStatus = 'succeeded';
-        state.tasks = payload;
-        state.categories = [...new Set(payload.map((it) => it.category))];
-        state.error = null;
-      })
-      .addCase(getTasks.rejected, (state, action) => {
-        state.taskFetchStatus = 'failed';
-        state.error = action.payload as ErrorResponse;
-      })
+
       .addCase(deleteTask.pending, (state, action) => {
         state.taskFetchStatus = 'loading';
         state.error = null;
@@ -107,7 +132,7 @@ export const taskSlice = createSlice({
 });
 
 export const { selectTasks, selectError, selectFilter, selectCategories } = taskSlice.selectors;
-export const { setFilter } = taskSlice.actions;
+export const { setFilter, fetchTasks } = taskSlice.actions;
 export const selectTaskById = (state: TaskState, taskId: number) => {
   if (taskId) {
     return state.tasks.find((task) => task.id === taskId);

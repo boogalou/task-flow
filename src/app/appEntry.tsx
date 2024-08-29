@@ -6,6 +6,7 @@ import { appRouter } from './appRouter';
 import { store } from './redux/store.ts';
 import { ThemeProvider } from './themeProvider.tsx';
 import { AuthProvider } from './AuthProvider.tsx';
+import { setupInterceptors } from '../shared/lib/axiosSettings.ts';
 
 export async function appInit() {
   ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
@@ -20,3 +21,5 @@ export async function appInit() {
 }
 
 appInit();
+
+setupInterceptors(store);

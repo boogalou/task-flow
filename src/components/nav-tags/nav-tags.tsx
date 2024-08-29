@@ -23,7 +23,7 @@ export function NavTags() {
     id: index + 1,
     label: it,
   }));
-  console.log('categoriesButton: ', categoriesButton);
+
   return (
     <div className={cx('nav-tags')}>
       <div className={cx('nav-tags__action')}>

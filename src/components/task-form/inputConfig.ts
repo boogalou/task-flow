@@ -1,7 +1,7 @@
 import { InputField } from '../../shared/lib/createInputFields.ts';
-import { TaskForm } from '../../shared/types/types.ts';
+import { TaskFormData } from '../../shared/types/types.ts';
 
-export const createTaskFields: InputField<TaskForm>[] = [
+export const createTaskFields: InputField<TaskFormData>[] = [
   {
     id: 'title',
     name: 'title',

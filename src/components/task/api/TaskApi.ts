@@ -1,4 +1,4 @@
-import { apiClient } from '../../../shared/lib/apiClietn.ts';
+import { apiClient } from '../../../shared/lib/axiosSettings.ts';
 import { AxiosResponse } from 'axios';
 import { Task, CreateTaskRequest } from '../../../shared/types/types.ts';
 

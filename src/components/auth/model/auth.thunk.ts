@@ -3,6 +3,7 @@ import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { LoginRequestData, RegistrationRequestData } from '../../../shared/types/types.ts';
 import { getTasks } from '../../task/model/taskThunk.ts';
+import { fetchTasks } from '../../task/model/taskSlice.ts';
 
 export const signupRequest = createAsyncThunk(
   'auth/signup',
@@ -38,7 +39,7 @@ export const checkAuthRequest = createAsyncThunk(
   async (_payload: void, thunkApi) => {
     try {
       const response = await authApi.checkAuth();
-      await thunkApi.dispatch(getTasks());
+      await thunkApi.dispatch(fetchTasks());
       return response.data;
     } catch (err) {
       if (axios.isAxiosError(err)) {

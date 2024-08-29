@@ -3,7 +3,7 @@ import { taskApi } from '../api/TaskApi.ts';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { Task, CreateTaskRequest } from '../../../shared/types/types.ts';
 
-export const crateTaskRequest = createAsyncThunk(
+export const createTaskRequest = createAsyncThunk(
   'task/create',
   async (payload: CreateTaskRequest & { isCompleted: boolean }, thunkApi) => {
     try {

@@ -3,12 +3,12 @@ import cnBind from 'classnames/bind';
 import { Task } from './task.tsx';
 import { Portal } from '../../shared/ui-kit/portal/portal.tsx';
 import { ModalLayout } from '../../shared/ui-kit/modal/modal.tsx';
-import { EditTask } from '../edit-task/editTask.tsx';
 import { useModal } from '../../shared/ui-kit/modal/useModal.ts';
 import { useEffect, useState } from 'react';
 import { useAppSelector } from '../../app/redux/reduxHooks.ts';
 import { selectFilter, selectTaskById, selectTasks } from './model/taskSlice.ts';
 import { useFilteredTasks } from './lib/useFilteredTasks.ts';
+import { TaskForm } from '../task-form/taskForm.tsx';
 
 const cx = cnBind.bind(styles);
 
@@ -46,7 +46,7 @@ export function TasksList() {
       </div>
       <Portal>
         <ModalLayout isOpen={isOpen} closeModal={closeModal}>
-          {taskId !== null && <EditTask task={task} closeModal={closeModal} />}
+          {taskId !== null && <TaskForm task={task} closeModal={closeModal} />}
         </ModalLayout>
       </Portal>
     </>

@@ -26,7 +26,7 @@ export type AuthDataResponse = {
   accessToken: string;
 };
 
-export type TaskForm = {
+export type TaskFormData = {
   title: string;
   description: string;
   category: string;

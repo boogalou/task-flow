@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { checkAuthRequest, signinRequest, signupRequest } from './auth.thunk.ts';
 import { AuthDataResponse, ErrorResponse } from '../../../shared/types/types.ts';
 
@@ -24,7 +24,13 @@ export const authSlice = createSlice({
     selectAuthFetchStatus: (state) => state.authFetchStatus,
     selectIsAuth: (state) => state.isAuth,
   },
-  reducers: {},
+  reducers: {
+    setToken(state, { payload }: PayloadAction<string>) {
+      if (state.authData?.accessToken) {
+        state.authData.accessToken = payload;
+      }
+    },
+  },
 
   extraReducers: (builder) => {
     builder
@@ -74,3 +80,4 @@ export const authSlice = createSlice({
 });
 
 export const { selectAuthData, selectAuthFetchStatus, selectIsAuth } = authSlice.selectors;
+export const { setToken } = authSlice.actions;

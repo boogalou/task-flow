@@ -2,7 +2,7 @@ import styles from './main-content.module.scss';
 import cnBind from 'classnames/bind';
 import { Button } from '../../shared/ui-kit/button/Button.tsx';
 import { Icon } from '../../shared/ui-kit/icon/icon.tsx';
-import { CreateTask } from '../create-task/createTask.tsx';
+import { TaskForm } from '../task-form/taskForm.tsx';
 import { Portal } from '../../shared/ui-kit/portal/portal.tsx';
 import { ModalLayout } from '../../shared/ui-kit/modal/modal.tsx';
 import { useModal } from '../../shared/ui-kit/modal/useModal.ts';
@@ -30,7 +30,7 @@ export function MainContent() {
       </Button>
       <Portal>
         <ModalLayout isOpen={isOpen} closeModal={closeModal}>
-          <CreateTask closeModal={closeModal} />
+          <TaskForm closeModal={closeModal} />
         </ModalLayout>
       </Portal>
     </div>
