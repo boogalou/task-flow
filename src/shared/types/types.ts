@@ -60,3 +60,9 @@ export type ErrorResponse = {
   timestamp: string;
   path: string;
 };
+
+export type FilterCriteria = {
+  date?: string;
+  category?: string | null;
+  isCompleted?: string | null;
+};

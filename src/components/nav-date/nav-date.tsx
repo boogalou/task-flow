@@ -3,9 +3,9 @@ import cnBind from 'classnames/bind';
 import { Icon } from '../../shared/ui-kit/icon/icon.tsx';
 import { Button } from '../../shared/ui-kit/button/Button.tsx';
 import { IconType } from '../../shared/ui-kit/icon/iconType.tsx';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppDispatch } from '../../app/redux/reduxHooks.ts';
-import { setFilter } from '../task/model/taskSlice.ts';
+import { setCriteriaFilter } from '../task/model/taskSlice.ts';
 
 const cx = cnBind.bind(styles);
 
@@ -26,11 +26,15 @@ const countTasks = 42;
 
 export function NavDate() {
   const dispatch = useAppDispatch();
-  const [buttonIsPressed, setButtonIsPressed] = useState(1);
+  const [buttonIsPressed, setButtonIsPressed] = useState(3);
   const handleOnClick = (id: number, action: string) => {
     setButtonIsPressed(id);
-    dispatch(setFilter(action));
+    dispatch(setCriteriaFilter({ date: action }));
   };
+
+  useEffect(() => {
+    dispatch(setCriteriaFilter({ date: 'all' }));
+  }, []);
 
   return (
     <div className={cx('nav-date')}>

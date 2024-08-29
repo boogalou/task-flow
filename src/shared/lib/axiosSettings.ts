@@ -9,7 +9,7 @@ export const apiClient = axios.create({
   withCredentials: true,
 });
 
-export function setupInterceptors(store) {
+export function setupInterceptors(store: any) {
   apiClient.interceptors.request.use((config) => {
     const token = store.getState().authSlice?.authData?.accessToken;
     if (token) {

@@ -1,6 +1,6 @@
 import { asyncThunkCreator, buildCreateSlice, PayloadAction } from '@reduxjs/toolkit';
 import { createTaskRequest, deleteTask, updateTaskRequest } from './taskThunk.ts';
-import { ErrorResponse, Task } from '../../../shared/types/types.ts';
+import { ErrorResponse, FilterCriteria, Task } from '../../../shared/types/types.ts';
 import { getUniqueCategories } from '../lib/getUniqueCategories.ts';
 import { taskApi } from '../api/TaskApi.ts';
 import axios from 'axios';
@@ -11,7 +11,7 @@ export interface TaskState {
   lastRemovedTask: Task | null;
   taskFetchStatus: string;
   error: ErrorResponse | null;
-  filter: string;
+  filters: FilterCriteria;
 }
 
 const initialState: TaskState = {
@@ -20,7 +20,11 @@ const initialState: TaskState = {
   lastRemovedTask: null,
   taskFetchStatus: 'idle',
   error: null,
-  filter: '',
+  filters: {
+    date: 'all',
+    category: null,
+    isCompleted: null,
+  },
 };
 
 const createSlice = buildCreateSlice({
@@ -34,12 +38,12 @@ export const taskSlice = createSlice({
     selectTasks: (state) => state.tasks,
     selectCategories: (state) => state.categories,
     selectError: (state) => state.error,
-    selectFilter: (state) => state.filter,
+    selectFilter: (state) => state.filters,
   },
 
   reducers: (create) => ({
-    setFilter: create.reducer((state, { payload }: PayloadAction<string>) => {
-      state.filter = payload;
+    setCriteriaFilter: create.reducer((state, { payload }: PayloadAction<FilterCriteria>) => {
+      state.filters = { ...state.filters, ...payload };
     }),
 
     fetchTasks: create.asyncThunk(
@@ -132,7 +136,7 @@ export const taskSlice = createSlice({
 });
 
 export const { selectTasks, selectError, selectFilter, selectCategories } = taskSlice.selectors;
-export const { setFilter, fetchTasks } = taskSlice.actions;
+export const { setCriteriaFilter, fetchTasks } = taskSlice.actions;
 export const selectTaskById = (state: TaskState, taskId: number) => {
   if (taskId) {
     return state.tasks.find((task) => task.id === taskId);
