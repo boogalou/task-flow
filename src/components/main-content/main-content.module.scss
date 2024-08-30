@@ -4,17 +4,25 @@
   position: relative;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: auto 1fr auto auto;
+  grid-template-rows: auto 1fr;
   row-gap: $gap-md;
-  //border: 2px solid orange;
-  height: 100%;
+  padding: 0 $gap-md $gap-md $gap-md;
+  height: calc(100vh - 70px);
+  grid-column: 1 / -1;
 
   @include respond-to('tablet') {
     grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: auto 1fr auto;
+    height: calc(100vh - 80px);
+    grid-column: 3 / -1;
   }
 
   @include respond-to('desktop') {
     grid-template-columns: repeat(12, 1fr);
+  }
+
+  &__title {
+    text-transform: capitalize;
   }
 
   &__header {
@@ -27,7 +35,6 @@
       grid-column: 4 / 10;
     }
   }
-
 
   &__subtitle {
     font-weight: bold;
@@ -49,8 +56,8 @@
       width: px-to-rem(50px);
       height: px-to-rem(50px);
       position: absolute;
-      bottom: 0;
-      right: 0;
+      bottom: px-to-rem(16px);
+      right: px-to-rem(16px);
 
       svg {
         width: px-to-rem(18px);

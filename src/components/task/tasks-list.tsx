@@ -7,14 +7,14 @@ import { useModal } from '../../shared/ui-kit/modal/useModal.ts';
 import { useEffect, useState } from 'react';
 import { useAppSelector } from '../../app/redux/reduxHooks.ts';
 import { selectFilter, selectTaskById, selectTasks } from './model/taskSlice.ts';
-import { useFilteredTasks } from './lib/useFilteredTasks.ts';
+import { useFilterTasks } from './lib/useFilterTasks.ts';
 import { TaskForm } from '../task-form/taskForm.tsx';
 
 const cx = cnBind.bind(styles);
 
 export function TasksList() {
   const tasks = useAppSelector(selectTasks);
-  const filter = useAppSelector(selectFilter);
+  const filters = useAppSelector(selectFilter);
   const { isOpen, openModal, closeModal } = useModal();
   const [taskId, setTaskId] = useState<number | null>(null);
   const handleOnClickTask = (id: number) => {
@@ -23,7 +23,7 @@ export function TasksList() {
     }
   };
   const task = useAppSelector((state) => selectTaskById(state.taskSlice, taskId!))!;
-  const filteredTask = useFilteredTasks(tasks, filter);
+  const filteredTask = useFilterTasks(tasks, filters);
 
   useEffect(() => {
     if (taskId !== null) {

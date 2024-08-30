@@ -7,11 +7,14 @@ import { Portal } from '../../shared/ui-kit/portal/portal.tsx';
 import { ModalLayout } from '../../shared/ui-kit/modal/modal.tsx';
 import { useModal } from '../../shared/ui-kit/modal/useModal.ts';
 import { TasksList } from '../task/tasks-list.tsx';
+import { useAppSelector } from '../../app/redux/reduxHooks.ts';
+import { selectFilter } from '../task/model/taskSlice.ts';
 
 const cx = cnBind.bind(styles);
 
 export function MainContent() {
   const { isOpen, openModal, closeModal } = useModal();
+  const filters = useAppSelector(selectFilter);
 
   const handleOpenModal = () => {
     openModal();
@@ -20,7 +23,7 @@ export function MainContent() {
   return (
     <div className={cx('content')}>
       <header className={cx('content__header')}>
-        <h2 className={cx('content__title')}>Today</h2>
+        <h2 className={cx('content__title')}>{filters.date}</h2>
         <div className={cx('content__subtitle')}>Aug 13, Today 7</div>
       </header>
       <TasksList />

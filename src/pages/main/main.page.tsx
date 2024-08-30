@@ -37,9 +37,7 @@ export function MainPage() {
     <div className={cx('main')}>
       <MainHeader onClick={handleOnClickMenu} />
       <Sidebar drawerIsOpen={drawerIsOpen} onCloseDrawer={onCloseDrawer} />
-      <main className={cx('main__content')}>
-        <MainContent />
-      </main>
+      <MainContent />
     </div>
   );
 }
