@@ -7,8 +7,7 @@
   row-gap: $gap-md;
   height: 100%;
   overflow-y: auto;
-
-  @include  respond-to('tablet') {
+  @include respond-to('tablet') {
     grid-column: 1 / -1;
   }
 

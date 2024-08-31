@@ -6,7 +6,7 @@ const cx = cnBind.bind(styles);
 export interface AvatarProps {
   id?: number;
   className?: string;
-  avatarUrl?: string;
+  avatarUrl?: string | null;
   name?: string;
   isOnline?: boolean;
 }

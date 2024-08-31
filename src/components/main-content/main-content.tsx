@@ -37,7 +37,9 @@ export function MainContent() {
     <div className={cx('content')}>
       <header className={cx('content__header')}>
         <h2 className={cx('content__title')}>{filters.date}</h2>
-        <div className={cx('content__subtitle')}>{subtitleDate}</div>
+        {filters.date === 'all' ? null : (
+          <div className={cx('content__subtitle')}>{subtitleDate}</div>
+        )}
       </header>
       <TasksList />
       <Button className={cx('content__button', 'content__button-add')} onClick={handleOpenModal}>
