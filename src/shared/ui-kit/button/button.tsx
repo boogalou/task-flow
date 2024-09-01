@@ -8,32 +8,42 @@ import {
 } from 'react';
 import styles from './button.module.scss';
 import cnBind from 'classnames/bind';
-import { IconType } from '../icon/iconType.tsx';
 
 const cx = cnBind.bind(styles);
 
+type ButtonSize = 'small' | 'medium' | 'large';
+type ButtonVariant =
+  | 'primary'
+  | 'secondary'
+  | 'success'
+  | 'info'
+  | 'warning'
+  | 'danger'
+  | 'outline'
+  | 'disabled';
+
 export interface ButtonProps
   extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
+  variant: ButtonVariant;
+  size?: ButtonSize;
   className?: string;
   children?: ReactNode;
   onClick?: (evt: MouseEvent<HTMLButtonElement>) => void;
-  iconType?: IconType;
 }
 
 export const Button = forwardRef(
   (
-    { className, children, onClick, disabled, value, ...restProps }: ButtonProps,
+    { variant, size, className, children, onClick, disabled, ...restProps }: ButtonProps,
     ref: ForwardedRef<HTMLButtonElement>,
   ) => {
     return (
       <button
-        className={cx('button', className)}
+        className={cx('button', `button--${variant}`, `button--${size}`, className)}
         onClick={onClick}
         disabled={disabled}
         ref={ref}
         {...restProps}
       >
-        {value ? value : null}
         {children}
       </button>
     );

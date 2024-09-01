@@ -1,7 +1,7 @@
 import styles from './modal.module.scss';
 import cnBind from 'classnames/bind';
 import { MouseEvent, ReactNode } from 'react';
-import { Button } from '../button/Button.tsx';
+import { Button } from '../button/button.tsx';
 import { Icon } from '../icon/icon.tsx';
 
 const cx = cnBind.bind(styles);

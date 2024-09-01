@@ -4,12 +4,13 @@ import { useForm } from '../auth/lib/useForm.ts';
 import { createInputFields } from '../../shared/lib/createInputFields.ts';
 import { createTaskFields } from './inputConfig.ts';
 import Input from '../../shared/ui-kit/input/input.tsx';
-import { Button } from '../../shared/ui-kit/button/Button.tsx';
+import { Button } from '../../shared/ui-kit/button/button.tsx';
 import { useAppDispatch } from '../../app/redux/reduxHooks.ts';
 import { updateTaskRequest, createTaskRequest } from '../task/model/taskThunk.ts';
 import { Task, TaskFormData } from '../../shared/types/types.ts';
 import { parseDate } from './lib/parseDate.ts';
 import { useEffect } from 'react';
+import { Icon } from '../../shared/ui-kit/icon/icon.tsx';
 
 const cx = cnBind.bind(styles);
 
@@ -105,7 +106,11 @@ export function TaskForm({ task, closeModal }: TaskFormProps) {
             />
           </div>
         ))}
-        <Button className={cx('form__button')} type="submit">
+        <Button className={cx('form__button', 'form__button--delete')} type="submit">
+          <Icon iconType={'trash-bin'} />
+          Delete Task
+        </Button>
+        <Button className={cx('form__button', 'form__button--save')} type="submit">
           Save
         </Button>
       </form>

@@ -1,7 +1,7 @@
 import styles from './main-content.module.scss';
 import cnBind from 'classnames/bind';
 import { addDays, format } from 'date-fns';
-import { Button } from '../../shared/ui-kit/button/Button.tsx';
+import { Button } from '../../shared/ui-kit/button/button.tsx';
 import { Icon } from '../../shared/ui-kit/icon/icon.tsx';
 import { TaskForm } from '../task-form/taskForm.tsx';
 import { Portal } from '../../shared/ui-kit/portal/portal.tsx';
@@ -42,7 +42,11 @@ export function MainContent() {
         )}
       </header>
       <TasksList />
-      <Button className={cx('content__button', 'content__button-add')} onClick={handleOpenModal}>
+      <Button
+        className={cx('content__button', 'content__button-add')}
+        variant="primary"
+        onClick={handleOpenModal}
+      >
         <Icon iconType="cross" />
         <span className={cx('content__button-text')}>Add Task</span>
       </Button>

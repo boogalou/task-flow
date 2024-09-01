@@ -1,7 +1,7 @@
 import styles from './nav-actions.module.scss';
 import cnBind from 'classnames/bind';
 import { IconType } from '../../shared/ui-kit/icon/iconType.tsx';
-import { Button } from '../../shared/ui-kit/button/Button.tsx';
+import { Button } from '../../shared/ui-kit/button/button.tsx';
 import { Icon } from '../../shared/ui-kit/icon/icon.tsx';
 import { useState } from 'react';
 import { useAppDispatch } from '../../app/redux/reduxHooks.ts';

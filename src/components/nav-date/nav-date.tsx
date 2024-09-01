@@ -1,7 +1,7 @@
 import styles from './nav-date.module.scss';
 import cnBind from 'classnames/bind';
 import { Icon } from '../../shared/ui-kit/icon/icon.tsx';
-import { Button } from '../../shared/ui-kit/button/Button.tsx';
+import { Button } from '../../shared/ui-kit/button/button.tsx';
 import { IconType } from '../../shared/ui-kit/icon/iconType.tsx';
 import { useEffect, useState } from 'react';
 import { useAppDispatch } from '../../app/redux/reduxHooks.ts';

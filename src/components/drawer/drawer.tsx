@@ -1,7 +1,7 @@
 import styles from './drawer.module.scss';
 import cnBind from 'classnames/bind';
 import { ReactNode, useEffect, useRef } from 'react';
-import { Button } from '../../shared/ui-kit/button/Button.tsx';
+import { Button } from '../../shared/ui-kit/button/button.tsx';
 import { Icon } from '../../shared/ui-kit/icon/icon.tsx';
 
 const cx = cnBind.bind(styles);

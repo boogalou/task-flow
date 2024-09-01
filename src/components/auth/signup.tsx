@@ -1,7 +1,7 @@
 import styles from './auth.module.scss';
 import cnBind from 'classnames/bind';
 import Input from '../../shared/ui-kit/input/input.tsx';
-import { Button } from '../../shared/ui-kit/button/Button.tsx';
+import { Button } from '../../shared/ui-kit/button/button.tsx';
 import { RegistrationData } from '../../shared/types/types.ts';
 import { useAppDispatch } from '../../app/redux/reduxHooks.ts';
 import { signupRequest } from './model/auth.thunk.ts';
@@ -88,8 +88,8 @@ export function Signup() {
             )}
           </div>
         ))}
-        <Button className={cx('form__button')} type="submit">
-          Submit
+        <Button className={cx('form__button')} variant="primary" type="submit">
+          Registration
         </Button>
       </form>
       <div className={cx('link')}>

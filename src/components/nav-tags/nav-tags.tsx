@@ -1,6 +1,6 @@
 import styles from './nav-tags.module.scss';
 import cnBind from 'classnames/bind';
-import { Button } from '../../shared/ui-kit/button/Button.tsx';
+import { Button } from '../../shared/ui-kit/button/button.tsx';
 import { Icon } from '../../shared/ui-kit/icon/icon.tsx';
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/redux/reduxHooks.ts';

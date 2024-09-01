@@ -2,7 +2,7 @@ import styles from './main-header.module.scss';
 import cnBind from 'classnames/bind';
 import { Icon } from '../../shared/ui-kit/icon/icon.tsx';
 import { Search } from '../search/search.tsx';
-import { Button } from '../../shared/ui-kit/button/Button.tsx';
+import { Button } from '../../shared/ui-kit/button/button.tsx';
 
 const cx = cnBind.bind(styles);
 

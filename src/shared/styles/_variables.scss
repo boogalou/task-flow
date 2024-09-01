@@ -4,41 +4,43 @@
   @return math.div($px, $base-font-size) * 1rem;
 }
 
-:root {
-  --color-danger: #EE4E4E;
-  --color-success: #B5CB99;
-  --color-category-default: #667BC6;
+/*light theme*/
+html[data-theme='light'] {
+  --color-main-bg: #f9f5d7;
+  --color-primary-font: #7C6F64;
+  --color-secondary-font: #fbf1c7;
+  --color-primary: #458588;
+  --color-primary-hover: #076678;
+  --color-secondary: #689D6A;
+  --color-secondary-hover: #427B58;
+  --color-info: #D3869B;
+  --color-info-hover: #B16286;
+  --color-warning: #D79921;
+  --color-warning-hover: #B57614;
+  --color-success: #98971A;
+  --color-success-hover: #79740E;
+  --color-danger: #CC241D;
+  --color-danger-hover: #9D0006;
 }
 
-  /*light theme*/
-  html[data-theme='light'] {
-    --color-primary-font: #445069;
-    --color-secondary-font: #7D7C7C;
-    --color-hover-bg: #E3E1D9;
-    --color-accent: #050C9C;
-    --color-secondary: #1D24CA;
-    --color-main-bg: #FEFEFE;
-    --color-link: #667BC6;
-    --color-selected-font: #FEFEFE;
-    --color-selected: #050C9C;
-    --color-icon-bg: #A9A9A9;
-    --color-button-bg: #050C9C;
-  }
-
-  /*dark theme*/
-  html[data-theme='dark'] {
-    --color-primary-font: #ebdbb2;
-    --color-secondary-font: #d5c4a1;
-    --color-hover-bg: #3c3836;
-    --color-accent: #282828;
-    --color-secondary: #3c3836;
-    --color-main-bg: #282828;
-    --color-link: #6e8e7e;
-    --color-selected-font: #FEFEFE;
-    --color-selected: #3FA796;
-    --color-icon-bg: #d5c4a1;
-    --color-button-bg: #95c2ab;
-  }
+/*dark theme*/
+html[data-theme='dark'] {
+  --color-main-bg: #282828;
+  --color-primary-font: #A89984;
+  --color-secondary-font: #fbf1c7;
+  --color-primary: #8EC07C;
+  --color-primary-hover: #689D6A;
+  --color-secondary: #83A598;
+  --color-secondary-hover: #458588;
+  --color-info: #D3869B;
+  --color-info-hover: #B16286;
+  --color-warning: #FABD2F;
+  --color-warning-hover: #D79921;
+  --color-success: #B8BB26;
+  --color-success-hover: #98971A;
+  --color-danger: #FB4934;
+  --color-danger-hover: #CC241D;
+}
 
 
 /*icon-sizes*/

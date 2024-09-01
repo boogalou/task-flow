@@ -7,7 +7,7 @@ import { loginValidationSchema } from './lib/validationSchema.ts';
 import { signinRequest } from './model/auth.thunk.ts';
 import { createInputFields } from '../../shared/lib/createInputFields.ts';
 import Input from '../../shared/ui-kit/input/input.tsx';
-import { Button } from '../../shared/ui-kit/button/Button.tsx';
+import { Button } from '../../shared/ui-kit/button/button.tsx';
 import { Link } from 'react-router-dom';
 import { routes } from '../../shared/routes/routes.ts';
 import { Icon } from '../../shared/ui-kit/icon/icon.tsx';
@@ -82,8 +82,8 @@ export function Signin() {
             )}
           </div>
         ))}
-        <Button className={cx('form__button')} type="submit" disabled={false}>
-          Submit
+        <Button className={cx('form__button')} variant={'primary'} type="submit" disabled={false}>
+          Login
         </Button>
       </form>
       <div className={cx('link')}>
