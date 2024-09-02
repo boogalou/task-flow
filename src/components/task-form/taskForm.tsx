@@ -6,7 +6,7 @@ import { createTaskFields } from './inputConfig.ts';
 import Input from '../../shared/ui-kit/input/input.tsx';
 import { Button } from '../../shared/ui-kit/button/button.tsx';
 import { useAppDispatch } from '../../app/redux/reduxHooks.ts';
-import { updateTaskRequest, createTaskRequest } from '../task/model/taskThunk.ts';
+import { updateTaskRequest, createTaskRequest, deleteTask } from '../task/model/taskThunk.ts';
 import { Task, TaskFormData } from '../../shared/types/types.ts';
 import { parseDate } from './lib/parseDate.ts';
 import { useEffect } from 'react';
@@ -24,24 +24,29 @@ export function TaskForm({ task, closeModal }: TaskFormProps) {
 
   const isEditMode = Boolean(task);
 
-  const initialValues =
-    isEditMode && task
-      ? {
-          title: task?.title || '',
-          description: task?.description || '',
-          category: task?.category || '',
-          color: task?.color || '',
-          date: parseDate(task.dueDate).dateString || '',
-          time: parseDate(task.dueDate).timeString || '',
-        }
-      : {
-          title: '',
-          description: '',
-          category: '',
-          color: '',
-          date: '',
-          time: '',
-        };
+  const initialValues = task
+    ? {
+        title: task?.title || '',
+        description: task?.description || '',
+        category: task?.category || '',
+        color: task?.color || '',
+        date: parseDate(task.dueDate).dateString || '',
+        time: parseDate(task.dueDate).timeString || '',
+      }
+    : {
+        title: '',
+        description: '',
+        category: '',
+        color: '',
+        date: '',
+        time: '',
+      };
+
+  const handleDeleteButton = () => {
+    if (task?.id) {
+      dispatch(deleteTask(task.id));
+    }
+  };
 
   const form = useForm<TaskFormData>({
     initialValues,
@@ -79,6 +84,8 @@ export function TaskForm({ task, closeModal }: TaskFormProps) {
     form.setValues(initialValues);
   }, [task]);
 
+  console.log('isEditMode: ', isEditMode);
+
   return (
     <div className={cx('create')}>
       <div className={cx('create__header')}>
@@ -106,23 +113,26 @@ export function TaskForm({ task, closeModal }: TaskFormProps) {
             />
           </div>
         ))}
-        {isEditMode && (
+        <div className={cx('form__button-group', { 'form__button-group--edit': isEditMode })}>
+          {isEditMode && (
+            <Button
+              className={cx('form__button', 'form__button--delete')}
+              variant="outline"
+              type="button"
+              onClick={handleDeleteButton}
+            >
+              <Icon iconType={'trash-bin'} />
+              Delete
+            </Button>
+          )}
           <Button
-            className={cx('form__button', 'form__button--delete')}
-            variant="outline"
+            className={cx('form__button', 'form__button--save')}
+            variant="primary"
             type="submit"
           >
-            <Icon iconType={'trash-bin'} />
-            Delete Task
+            Save
           </Button>
-        )}
-        <Button
-          className={cx('form__button', 'form__button--save')}
-          variant="primary"
-          type="submit"
-        >
-          Save
-        </Button>
+        </div>
       </form>
     </div>
   );

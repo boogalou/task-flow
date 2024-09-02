@@ -46,35 +46,46 @@
         border-bottom: 1px solid var(--color-link);
       }
     }
-  }
 
-  &__button {
-    height: px-to-rem(40px);
-    &--delete {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      column-gap: 8px;
-      border-color: var(--color-danger);
-      color: var(--color-danger);
+    &__button {
+      height: px-to-rem(40px);
 
-      svg {
-        height: px-to-rem(20px);
-        stroke: var(--color-danger);
-        fill: transparent;
-      }
+      &--delete {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        column-gap: 8px;
+        border-color: var(--color-danger);
+        color: var(--color-danger);
 
-      @include respond-to('desktop') {
-        &:hover {
-          background-color: var(--color-danger);
-          color: var(--color-secondary-font);
+        svg {
+          height: px-to-rem(20px);
+          stroke: var(--color-danger);
+          fill: transparent;
+        }
 
-          svg {
-            stroke: var(--color-secondary-icon);
-            fill: transparent;
+        @include respond-to('desktop') {
+          &:hover {
+            background-color: var(--color-danger);
+            color: var(--color-secondary-font);
+
+            svg {
+              stroke: var(--color-secondary-icon);
+              fill: transparent;
+            }
           }
         }
       }
+    }
+  }
+
+  &__button-group {
+    display: grid;
+    grid-template-columns: 1fr;
+
+    &--edit {
+      grid-template-columns: 1fr 1fr;
+      column-gap: $gap-md;
     }
   }
 

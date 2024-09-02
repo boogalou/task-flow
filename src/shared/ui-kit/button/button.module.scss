@@ -3,8 +3,10 @@
 
 @mixin button-variant($color, $hover-color) {
   background-color: $color;
-  &:hover {
-    background-color: $hover-color;
+  @include respond-to('desktop') {
+    &:hover {
+      background-color: $hover-color;
+    }
   }
 }
 
@@ -49,9 +51,11 @@
       color: var(--color-primary);
       border: 1px solid var(--color-primary);
 
-      &:hover {
-        background-color: var(--color-primary);
-        color: white;
+      @include respond-to('desktop') {
+        &:hover {
+          background-color: var(--color-primary);
+          color: white;
+        }
       }
     }
   }
