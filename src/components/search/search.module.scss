@@ -7,17 +7,17 @@
   @layer utility {
     &__input {
       height: px-to-rem(40px);
-      border: 2px solid var(--color-icon-bg);
       border-radius: px-to-rem(16px);
       padding: 0 px-to-rem(50px);
-      background-color: var(--color-accent);
-      color: var(--color-icon-bg);
+      background-color: var(--color-search-bg);
+      border: none;
+      color: var(--color-secondary-font);
       opacity: 0;
       width: 0;
       transition: width 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940), opacity 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940);
 
       &:focus {
-        border: 1px solid var(--color-selected);
+        border: 1px solid var(--color-secondary);
       }
 
       &::placeholder {
@@ -35,11 +35,9 @@
       top: 52%;
       left: px-to-rem(15px);
       transform: translateY(-50%);
-
-
-        stroke: var(--color-icon-bg);
-        width: $icon-size-md;
-        height: $icon-size-md;
+      stroke: var(--color-secondary-icon);
+      width: $icon-size-md;
+      height: $icon-size-md;
 
     }
   }

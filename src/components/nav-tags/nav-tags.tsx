@@ -35,17 +35,17 @@ export function NavTags() {
 
   return (
     <div className={cx('nav-tags')}>
-      <div className={cx('nav-tags__action')}>
-        <h3 className={cx('nav-tags__title')}>My List</h3>
-        <Button className={cx('nav-tags__button--add')}>
-          <Icon iconType={'cross'} />
-        </Button>
-      </div>
+      <Button className={cx('nav-tags__button--add')}>
+        <span>My List</span>
+        <Icon iconType={'cross'} />
+      </Button>
+
       {categoriesButton.map((it) => (
         <Button
           className={cx('nav-tags__button', {
             'nav-tags__button--pressed': it.id === activeButton,
           })}
+          variant="primary"
           onClick={() => handleOnClick(it.id, it.label)}
           key={it.id}
         >
@@ -55,3 +55,5 @@ export function NavTags() {
     </div>
   );
 }
+
+//TODO: refactoring

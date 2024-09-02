@@ -1,8 +1,13 @@
 @import 'src/shared/styles/index';
 
-@mixin common-button {
-  background-color: transparent;
-  border: none;
+@mixin button-pressed-styles {
+  background-color: var(--color-primary);
+  color: var(--color-secondary-font);
+}
+
+@mixin button-hover-styles {
+  background-color: var(--color-secondary-bg);
+  border-radius: $border-rad-4;
 }
 
 .nav-tags {
@@ -21,28 +26,19 @@
 
   @layer utility {
     &__button {
-      @include common-button;
       display: flex;
       align-items: center;
-      padding-left: px-to-rem(24px);
-      border-radius: $border-rad-4;
+      border-radius:  0 $border-rad-4 $border-rad-4 0;
+      padding: $gap-sm $gap-md $gap-sm $gap-lg;
+      background-color: var(--color-main-bg);
       color: var(--color-primary-font);
 
-      @include respond-to('desktop') {
-        &:hover {
-          background-color: var(--color-hover-bg);
-          border-radius: $border-rad-4;
-        }
-      }
-
       &--pressed {
-        background-color: var(--color-selected);
-        color: var(--color-selected-font);
+        @include button-pressed-styles;
 
         @include respond-to('desktop') {
           &:hover {
-            background-color: var(--color-selected);
-            color: var(--color-selected-font);
+            @include button-hover-styles;
           }
         }
 
@@ -53,17 +49,33 @@
           }
         }
       }
+
+      @include respond-to('desktop') {
+        &:hover {
+          @include button-hover-styles;
+        }
+
+        &--pressed:hover {
+          @include button-pressed-styles;
+        }
+      }
     }
 
     &__button--add {
-      @include common-button;
+      display: flex;
+      justify-content: space-between;
+      background-color: var(--color-main-bg);
+      color: var(--color-primary-font);
       font-weight: bold;
-      width: px-to-rem(14px);
 
       svg {
+        fill: var(--color-primmary-icon);
+        stroke: var(--color-primmary-icon);
         transform: rotate(45deg);
         width: px-to-rem(14px);
       }
     }
   }
+
+
 }

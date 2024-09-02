@@ -106,11 +106,21 @@ export function TaskForm({ task, closeModal }: TaskFormProps) {
             />
           </div>
         ))}
-        <Button className={cx('form__button', 'form__button--delete')} type="submit">
-          <Icon iconType={'trash-bin'} />
-          Delete Task
-        </Button>
-        <Button className={cx('form__button', 'form__button--save')} type="submit">
+        {isEditMode && (
+          <Button
+            className={cx('form__button', 'form__button--delete')}
+            variant="outline"
+            type="submit"
+          >
+            <Icon iconType={'trash-bin'} />
+            Delete Task
+          </Button>
+        )}
+        <Button
+          className={cx('form__button', 'form__button--save')}
+          variant="primary"
+          type="submit"
+        >
           Save
         </Button>
       </form>

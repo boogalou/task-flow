@@ -43,6 +43,7 @@ export function NavDate() {
           className={cx('nav-date__button', {
             'nav-date__button--pressed': it.id === buttonIsPressed,
           })}
+          variant="primary"
           onClick={() => handleOnClick(it.id, it.action)}
           key={it.id}
         >
@@ -56,3 +57,4 @@ export function NavDate() {
     </div>
   );
 }
+//TODO: refactoring

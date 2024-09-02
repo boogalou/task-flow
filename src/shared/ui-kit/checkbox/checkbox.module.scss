@@ -7,8 +7,8 @@
   appearance: none;
 
   &:checked + .checkbox {
-    background-color: var(--color-selected);
-    border: 2px solid var(--color-selected);
+    background-color: var(--color-primary);
+    border: 2px solid var(--color-primary);
 
     svg path {
       stroke-dasharray: 500;
@@ -38,7 +38,7 @@
 
   &::before {
     content: '';
-    background-color: var(--color-selected);
+    background-color: var(--color-primary);
     position: absolute;
     border-radius: $border-rad-50;
     transform: scale(0);

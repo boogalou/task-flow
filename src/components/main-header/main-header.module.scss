@@ -5,7 +5,7 @@
   grid-template-columns: subgrid;
   grid-template-rows: subgrid;
   grid-column: 1 / -1;
-  background-color: var(--color-accent);
+  background-color: var(--color-header-bg);
   height: px-to-rem(40px);
   align-items: center;
   padding: 0 $gap-md;
@@ -13,27 +13,28 @@
   &__menu {
     grid-column: 1;
 
-    &-button {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: px-to-rem(24px);
-      height: px-to-rem(24px);
-      border: none;
-      background: transparent;
+    @layer utility {
+      &-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: px-to-rem(24px);
+        height: px-to-rem(24px);
+        border: none;
+        background: transparent;
 
-    }
+      }
 
-    &-icon {
-      svg {
-        width: $icon-size-md;
-        height: $icon-size-md;
+      &-icon {
+        svg {
+          width: $icon-size-md;
+          height: $icon-size-md;
+          stroke: var(--color-secondary-icon);
 
-        g {
-          stroke: var(--color-icon-bg);
         }
       }
     }
+
   }
 
   &__search {
@@ -52,21 +53,24 @@
       &-button {
         border: none;
         background: none;
+        padding: 0;
         width: $icon-size-lg;
         height: $icon-size-lg;
 
         path {
-          stroke: var(--color-icon-bg);
+          stroke: var(--color-secondary-icon);
         }
       }
     }
   }
 
-  @include respond-to('tablet') {
+}
+
+@include respond-to('tablet') {
+  .header {
     grid-column: 3 / -1;
 
-
-    &__menu {
+    &__menu-button {
       display: none;
     }
 
@@ -79,8 +83,10 @@
       grid-column: -1;
     }
   }
+}
 
-  @include respond-to('desktop') {
+@include respond-to('desktop') {
+  .header {
     &__search {
       grid-column: 1 / 6;
     }

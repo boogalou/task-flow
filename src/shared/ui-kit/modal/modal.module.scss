@@ -31,16 +31,21 @@
   @layer utility {
     &__button-close {
       display: flex;
-      align-items: start;
-      justify-content: end;
+      align-items: center;
+      justify-content: center;
       border: none;
-      width: px-to-rem(25px);
-      background-color: var(--color-main-bg);
+      background-color: var(--color-secondary-bg);
+      border-radius: $border-rad-50;
+      width: px-to-rem(35px);
+      height: px-to-rem(35px);
+      padding: 0;
     }
 
     &__icon-close {
-      width: $icon-size-sm;
-      fill: var(--color-icon-bg);
+      svg {
+        width: $icon-size-sm;
+        fill: var(--color-secondary-icon);
+      }
     }
   }
 

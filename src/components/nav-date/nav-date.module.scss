@@ -1,29 +1,17 @@
 @import "src/shared/styles/index";
 
 @mixin button-pressed-styles {
-  background-color: var(--color-selected);
-  color: var(--color-selected-font);
-
-  .nav-date__button-label, .nav-date__counter {
-    color: var(--color-selected-font);
-  }
+  background-color: var(--color-primary);
+  color: var(--color-secondary-font);
 
   .nav-date__icon {
-    fill: var(--color-icon-bg);
+    fill: var(--color-secondary-icon);
   }
 }
 
 @mixin button-hover-styles {
-  background-color: var(--color-hover-bg);
+  background-color: var(--color-secondary-bg);
   border-radius: $border-rad-4;
-
-  .nav-date__button-label, .nav-date__counter {
-    color: var(--color-primary-font);
-  }
-
-  .nav-date__icon {
-    fill: var(--color-icon-bg);
-  }
 }
 
 .nav-date {
@@ -38,7 +26,8 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 $gap-md 0 $gap-lg;
+      border-radius:  0 $border-rad-4 $border-rad-4 0;
+      padding: $gap-sm $gap-md $gap-sm $gap-lg;
       background: transparent;
       border: none;
       color: var(--color-primary-font);
@@ -68,7 +57,7 @@
 
     &__icon {
       width: $icon-size-sm;
-      fill: var(--color-icon-bg);
+      fill: var(--color-primmary-icon);
     }
   }
 

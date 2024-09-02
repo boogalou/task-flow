@@ -1,5 +1,15 @@
 @import 'src/shared/styles/index';
 
+@mixin button-pressed-styles {
+  background-color: var(--color-primary);
+  color: var(--color-secondary-font);
+}
+
+@mixin button-hover-styles {
+  background-color: var(--color-secondary-bg);
+  border-radius: $border-rad-4;
+}
+
 .nav-actions {
   $this: &;
   border-bottom: 1px solid var(--color-hover-bg);
@@ -11,37 +21,31 @@
     &__button {
       display: flex;
       align-items: center;
-      padding: 0 $gap-sm 0 $gap-lg;
+      padding: $gap-sm $gap-sm $gap-sm $gap-lg;
       column-gap: px-to-rem(8px);
-      border: none;
-      border-radius: $border-rad-4;
+      border-radius:  0 $border-rad-4 $border-rad-4 0;
       background-color: transparent;
       color: var(--color-primary-font);
 
-      @include respond-to('desktop') {
-        &:hover {
-          background-color: var(--color-hover-bg);
-          border-radius: $border-rad-4;
-        }
-      }
-
       &--pressed {
-        background-color: var(--color-selected);
-        color: var(--color-selected-font);
-
-        @include respond-to('desktop') {
-          &:hover {
-            background-color: var(--color-selected);
-            color: var(--color-selected-font);
-
-          }
-        }
+        @include button-pressed-styles;
 
         #{$this}__icon {
           svg {
-            stroke: var(--color-icon-bg);
-            fill: var(--color-selected);
+            stroke: var(--color-secondary-icon);
+            fill: var(--color-primary);
           }
+        }
+      }
+
+      @include respond-to('desktop') {
+        &:hover {
+          @include button-hover-styles;
+
+        }
+
+        &--pressed:hover {
+          @include button-pressed-styles;
         }
       }
     }
@@ -53,7 +57,7 @@
         width: $icon-size-md;
         height: $icon-size-md;
         fill: var(--color-main-bg);
-        stroke: var(--color-icon-bg);
+        stroke: var(--color-primmary-icon);
       }
     }
   }

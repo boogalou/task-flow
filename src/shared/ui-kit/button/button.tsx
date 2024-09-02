@@ -24,7 +24,7 @@ type ButtonVariant =
 
 export interface ButtonProps
   extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
-  variant: ButtonVariant;
+  variant?: ButtonVariant;
   size?: ButtonSize;
   className?: string;
   children?: ReactNode;
