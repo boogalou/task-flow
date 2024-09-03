@@ -84,8 +84,6 @@ export function TaskForm({ task, closeModal }: TaskFormProps) {
     form.setValues(initialValues);
   }, [task]);
 
-  console.log('isEditMode: ', isEditMode);
-
   return (
     <div className={cx('create')}>
       <div className={cx('create__header')}>

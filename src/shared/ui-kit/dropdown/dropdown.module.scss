@@ -6,7 +6,6 @@
   padding: 0;
   background-color: var(--color-secondary-bg);
   border-radius: $border-rad-8;
-  z-index: 1000;
   opacity: 0;
   transform: translateY(-10px);
   visibility: hidden;
@@ -16,6 +15,7 @@
     opacity: 1;
     transform: translateY(0);
     visibility: visible;
+    z-index: 1000;
   }
 
   &__item {

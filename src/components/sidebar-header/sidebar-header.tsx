@@ -1,5 +1,6 @@
 import styles from './sidebar-header.module.scss';
 import cnBind from 'classnames/bind';
+import { MouseEvent } from 'react';
 import { Avatar } from '../../shared/ui-kit/avatar/avatar.tsx';
 import { useAppSelector } from '../../app/redux/reduxHooks.ts';
 import { selectAuthData } from '../auth/model/auth.slice.ts';
@@ -17,10 +18,13 @@ const dropdownItems: DropdownItemData[] = [
 
 export function SidebarHeader() {
   const user = useAppSelector(selectAuthData);
-  const [dropdownIsOpen, setDropdownIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLUListElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const [dropdownIsOpen, setDropdownIsOpen] = useState(false);
+  console.log(dropdownRef.current);
 
-  const toggleDropdown = () => {
+  const toggleDropdown = (evt: MouseEvent<HTMLButtonElement>) => {
+    evt.stopPropagation();
     setDropdownIsOpen((prevState) => !prevState);
   };
 
@@ -29,7 +33,10 @@ export function SidebarHeader() {
     setDropdownIsOpen(false);
   };
 
-  const handleOutsideClick = () => {
+  const handleOutsideClick = (evt: Event) => {
+    if (buttonRef.current && buttonRef.current.contains(evt.target as Node)) {
+      return;
+    }
     setDropdownIsOpen(false);
   };
 
@@ -37,7 +44,7 @@ export function SidebarHeader() {
 
   return (
     <header className={cx('sidebar-header')}>
-      <Button className={cx('sidebar-header__button')} onClick={toggleDropdown}>
+      <Button className={cx('sidebar-header__button')} onClick={toggleDropdown} ref={buttonRef}>
         <Avatar avatarUrl={user?.userPic} name={user?.username} />
         <div>{user?.username}</div>
       </Button>
