@@ -1,0 +1,39 @@
+@import 'src/shared/styles/index';
+
+.dropdown{
+  position: absolute;
+  list-style: none;
+  padding: 0;
+  background-color: var(--color-secondary-bg);
+  border-radius: $border-rad-8;
+  z-index: 1000;
+  opacity: 0;
+  transform: translateY(-10px);
+  visibility: hidden;
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+
+  &--open {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    column-gap: $gap-sm;
+    padding: $gap-sm;
+    cursor: pointer;
+    @include respond-to('desktop') {
+      &:hover {
+        background-color: var(--color-main-bg);
+      }
+    }
+
+    svg {
+      stroke: var(--color-primmary-icon);
+    }
+  }
+
+
+}

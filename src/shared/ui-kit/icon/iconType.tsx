@@ -1,6 +1,3 @@
-const icons = import.meta.glob('./src/shared/assets/icons/*', {
-  import: 'default',
-});
 import { nanoid } from '@reduxjs/toolkit';
 import { ReactComponent as AuthSplash } from '../../assets/icons/auth_screen.svg';
 import { ReactComponent as Eye } from '../../assets/icons/eye.svg';
@@ -18,12 +15,8 @@ import { ReactComponent as Cross } from '../../assets/icons/cross.svg';
 import { ReactComponent as TrashBin } from '../../assets/icons/trash-bin.svg';
 import { ReactComponent as Success } from '../../assets/icons/checkmark-circle.svg';
 import { ReactComponent as Error } from '../../assets/icons/error.svg';
-
-Object.values(icons).forEach((mod) => {
-  mod().then((data) => {
-    console.log(data);
-  });
-});
+import { ReactComponent as Settings } from '../../assets/icons/gear.svg';
+import { ReactComponent as Logout } from '../../assets/icons/logout.svg';
 
 const keyGen = () => nanoid(12);
 
@@ -43,7 +36,9 @@ export type IconType =
   | 'cross'
   | 'trash-bin'
   | 'success'
-  | 'error';
+  | 'error'
+  | 'settings'
+  | 'logout';
 
 export const iconTypes = new Map([
   ['auth-splash', <AuthSplash key={keyGen()} />],
@@ -62,4 +57,6 @@ export const iconTypes = new Map([
   ['trash-bin', <TrashBin key={keyGen()} />],
   ['success', <Success key={keyGen()} />],
   ['error', <Error key={keyGen()} />],
+  ['settings', <Settings key={keyGen()} />],
+  ['logout', <Logout key={keyGen()} />],
 ]);
