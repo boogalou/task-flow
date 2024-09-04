@@ -9,7 +9,6 @@ import {
   setTheme,
   toggleSettings,
 } from './model/settings.slice.ts';
-import { CustomInput } from '../../shared/ui-kit/checkbox/customInput.tsx';
 import { ChangeEvent, useState } from 'react';
 import { nanoid } from '@reduxjs/toolkit';
 import { Icon } from '../../shared/ui-kit/icon/icon.tsx';

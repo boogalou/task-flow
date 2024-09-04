@@ -7,8 +7,8 @@ type SettingsState = {
 };
 
 const initialState: SettingsState = {
-  theme: 'system',
-  language: 'eng',
+  theme: (localStorage.getItem('app-theme') as 'system' | 'light' | 'dark') || 'system',
+  language: (localStorage.getItem('app-language') as 'eng' | 'rus') || 'eng',
   settingsIsActive: false,
 };
 
@@ -25,10 +25,12 @@ export const settingsSlice = createSlice({
   reducers: {
     setTheme(state, { payload }: PayloadAction<'system' | 'light' | 'dark'>) {
       state.theme = payload;
+      localStorage.setItem('app-theme', payload);
     },
 
     setLanguage(state, { payload }: PayloadAction<'eng' | 'rus'>) {
       state.language = payload;
+      localStorage.setItem('app-language', payload);
     },
 
     toggleSettings(state) {
