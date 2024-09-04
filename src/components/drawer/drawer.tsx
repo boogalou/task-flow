@@ -33,12 +33,15 @@ export function Drawer({ children, header, drawerIsOpen, onCloseDrawer }: Drawer
   }, []);
 
   return (
-    <div className={cx('drawer', { 'drawer--open': drawerIsOpen })} ref={drawerRef}>
-      <header>{header}</header>
-      {children}
-      <Button className={cx('drawer__close-button')} onClick={onCloseDrawer}>
-        <Icon iconType="arrow-left" />
-      </Button>
-    </div>
+    <>
+      {drawerIsOpen && <div className={cx('drawer-overlay')} onClick={onCloseDrawer} />}
+      <div className={cx('drawer', { 'drawer--open': drawerIsOpen })} ref={drawerRef}>
+        <header>{header}</header>
+        {children}
+        <Button className={cx('drawer__close-button')} onClick={onCloseDrawer}>
+          <Icon iconType="arrow-left" />
+        </Button>
+      </div>
+    </>
   );
 }

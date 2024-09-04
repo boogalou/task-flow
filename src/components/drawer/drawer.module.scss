@@ -1,5 +1,15 @@
 @import 'src/shared/styles/index';
 
+.drawer-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
 .drawer {
   $this: &;
   display: flex;
@@ -15,25 +25,36 @@
   transform: translateX(-100%);
   transition: transform 0.3s ease;
 
-  &--open {
-    transform: translate(0);
-    box-shadow: 19px 0 25px -20px rgba(0,0,0,0.63);
-
-    #{$this}__close-button {
-      display: block;
+  @layer utility {
+    &__close-button {
+      display: none;
     }
   }
 
-  &__close-button {
-    position: absolute;
-    top: 50%;
-    right: px-to-rem(-40px);
-    width: px-to-rem(25px);
-    height: px-to-rem(40px);
-    border-radius: px-to-rem(8px);
-    background-color: rgba(128, 128, 128, 0.3);
-    border: none;
-    display: none;
+  &--open {
+    transform: translate(0);
+    box-shadow: 19px 0 25px -20px rgba(0, 0, 0, 0.63);
+
+    @layer utility {
+      #{$this}__close-button {
+        display: flex;
+        padding: 0;
+        align-items: center;
+        position: absolute;
+        top: 50%;
+        right: px-to-rem(-35px);
+        width: px-to-rem(25px);
+        height: px-to-rem(40px);
+        border-radius: px-to-rem(8px);
+        background-color: rgba(128, 128, 128, 0.3);
+        border: none;
+        z-index: 1000;
+      }
+
+      svg {
+        fill: var(--color-secondary-icon);
+      }
+    }
   }
 }
 
