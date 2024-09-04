@@ -2,12 +2,14 @@ import styles from './sidebar-header.module.scss';
 import cnBind from 'classnames/bind';
 import { MouseEvent } from 'react';
 import { Avatar } from '../../shared/ui-kit/avatar/avatar.tsx';
-import { useAppSelector } from '../../app/redux/reduxHooks.ts';
+import { useAppDispatch, useAppSelector } from '../../app/redux/reduxHooks.ts';
 import { selectAuthData } from '../auth/model/auth.slice.ts';
 import { Dropdown, DropdownItemData } from '../../shared/ui-kit/dropdown/dropdown.tsx';
 import { Button } from '../../shared/ui-kit/button/button.tsx';
 import { useRef, useState } from 'react';
 import { useOnClickOutside } from 'usehooks-ts';
+import { toggleSettings } from '../settings/model/settings.slice.ts';
+import { logoutRequest } from '../auth/model/auth.thunk.ts';
 
 const cx = cnBind.bind(styles);
 
@@ -17,6 +19,7 @@ const dropdownItems: DropdownItemData[] = [
 ];
 
 export function SidebarHeader() {
+  const dispatch = useAppDispatch();
   const user = useAppSelector(selectAuthData);
   const dropdownRef = useRef<HTMLUListElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -29,8 +32,15 @@ export function SidebarHeader() {
   };
 
   const handleSelectDropdownItem = (label: string) => {
-    console.log(label);
-    setDropdownIsOpen(false);
+    if (label === 'Settings') {
+      dispatch(toggleSettings());
+      setDropdownIsOpen(false);
+    }
+
+    if (label.toLowerCase() === 'logout') {
+      dispatch(logoutRequest());
+      setDropdownIsOpen(false);
+    }
   };
 
   const handleOutsideClick = (evt: Event) => {

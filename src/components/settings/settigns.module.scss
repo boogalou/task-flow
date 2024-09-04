@@ -1,0 +1,49 @@
+@import 'src/shared/styles/index';
+
+.settings {
+  display: flex;
+  flex-direction: column;
+  row-gap: $gap-lg;
+  padding: 0 $gap-md 0 $gap-md;
+  grid-column: 1 / -1;
+
+  @include respond-to('tablet') {
+    grid-column: 4 / 8;
+    padding: 0
+  }
+
+  @include respond-to('desktop') {
+    grid-column: 6 / 10;
+  }
+
+@layer utility {
+  &__button-close {
+    width: px-to-rem(35px);
+    height: px-to-rem(35px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+  }
+}
+
+  &__content, &__theme, &__language {
+    display: flex;
+    flex-direction: column;
+    row-gap: $gap-xs;
+  }
+
+  &__content {
+    row-gap: $gap-lg;
+  }
+
+  &__subtitle {
+    font-weight: bold;
+  }
+
+  &__radio-group {
+    display: flex;
+    column-gap: $gap-sm;
+    align-items: center;
+  }
+}
