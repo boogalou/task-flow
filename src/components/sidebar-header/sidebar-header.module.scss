@@ -10,11 +10,19 @@
   padding-left: px-to-rem(24px);
   position: relative;
 
-  &__button {
-    background-color: var(--color-main-bg);
-    display: flex;
-    align-items: center;
-    padding: 0;
+  @layer utility {
+    &__button {
+      background-color: var(--color-main-bg);
+      display: flex;
+      align-items: center;
+      padding: 0;
+      color: var(--color-primary-font);
+      column-gap: $gap-xs;
+
+      div {
+        font-size: px-to-rem(14px);
+      }
+    }
   }
 
   &__dropdown {
