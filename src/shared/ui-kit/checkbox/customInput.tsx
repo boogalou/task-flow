@@ -1,4 +1,4 @@
-import styles from './checkbox.module.scss';
+import styles from './customInput.module.scss';
 import cnBind from 'classnames/bind';
 import { InputHTMLAttributes } from 'react';
 
@@ -8,7 +8,7 @@ interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
 }
 
-export function Checkbox({ id, type, label, checked, ...restProps }: CheckboxProps) {
+export function CustomInput({ id, type, label, checked, ...restProps }: CheckboxProps) {
   const isCheckbox = type === 'checkbox';
   console.log(checked);
   return (

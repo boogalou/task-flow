@@ -9,10 +9,11 @@ import {
   setTheme,
   toggleSettings,
 } from './model/settings.slice.ts';
-import { Checkbox } from '../../shared/ui-kit/checkbox/checkbox.tsx';
+import { CustomInput } from '../../shared/ui-kit/checkbox/customInput.tsx';
 import { ChangeEvent, useState } from 'react';
 import { nanoid } from '@reduxjs/toolkit';
 import { Icon } from '../../shared/ui-kit/icon/icon.tsx';
+import { RadioGroup } from '../../shared/ui-kit/radio-group/radioGroup.tsx';
 
 const cx = cnBind.bind(styles);
 
@@ -59,37 +60,23 @@ export function Settings() {
       <div className={cx('settings__content')}>
         <div className={cx('settings__theme')}>
           <span className={cx('settings__subtitle')}>Theme:</span>
-          <div className={cx('settings__radio-group')}>
-            {themeData.map((it) => (
-              <Checkbox
-                id={it.id}
-                label={it.label}
-                type="radio"
-                name="theme"
-                value={it.value}
-                checked={selectedTheme === it.value}
-                onChange={handleThemeChange}
-                key={it.id}
-              />
-            ))}
-          </div>
+          <RadioGroup
+            className={cx('settings__radio-group')}
+            data={themeData}
+            selectedValue={selectedTheme}
+            name="theme"
+            onChange={handleThemeChange}
+          />
         </div>
         <div className={cx('settings__language')}>
           <span className={cx('settings__subtitle')}>Language:</span>
-          <div className={cx('settings__radio-group')}>
-            {langData.map((it) => (
-              <Checkbox
-                id={it.id}
-                label={it.label}
-                type="radio"
-                name="language"
-                value={it.value}
-                checked={selectedLang === it.value}
-                onChange={handleLangChange}
-                key={it.id}
-              />
-            ))}
-          </div>
+          <RadioGroup
+            className={cx('settings__radio-group')}
+            data={langData}
+            selectedValue={selectedLang}
+            name="language"
+            onChange={handleLangChange}
+          />
         </div>
       </div>
     </div>

@@ -2,7 +2,7 @@ import styles from './task.module.scss';
 import cnBind from 'classnames/bind';
 import { ChangeEvent, MouseEvent } from 'react';
 import { formatExpiryDate } from './lib/formatExpiryDate.ts';
-import { Checkbox } from '../../shared/ui-kit/checkbox/checkbox.tsx';
+import { CustomInput } from '../../shared/ui-kit/checkbox/customInput.tsx';
 import { useAppDispatch } from '../../app/redux/reduxHooks.ts';
 import { updateTaskRequest } from './model/taskThunk.ts';
 
@@ -52,7 +52,7 @@ export function Task({
     <>
       <div className={cx('task')} onClick={handleOnClick}>
         <div className={cx('task__checkbox')} onClick={handleClickOnCheckbox}>
-          <Checkbox
+          <CustomInput
             id={`${id}`}
             type="checkbox"
             onChange={handleOnChangeCheckBox}
