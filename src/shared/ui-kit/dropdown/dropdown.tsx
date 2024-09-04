@@ -28,8 +28,6 @@ const Dropdown = forwardRef(
       selectItem(label);
     };
 
-    console.log(isOpen);
-
     return (
       <ul className={cx('dropdown', { 'dropdown--open': isOpen }, className)} ref={ref}>
         {items.map((it) => (

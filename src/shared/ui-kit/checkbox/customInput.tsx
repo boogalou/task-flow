@@ -10,7 +10,6 @@ interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
 
 export function CustomInput({ id, type, label, checked, ...restProps }: CheckboxProps) {
   const isCheckbox = type === 'checkbox';
-  console.log(checked);
   return (
     <>
       <input

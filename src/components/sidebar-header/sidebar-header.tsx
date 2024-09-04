@@ -24,7 +24,6 @@ export function SidebarHeader() {
   const dropdownRef = useRef<HTMLUListElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [dropdownIsOpen, setDropdownIsOpen] = useState(false);
-  console.log(dropdownRef.current);
 
   const toggleDropdown = (evt: MouseEvent<HTMLButtonElement>) => {
     evt.stopPropagation();

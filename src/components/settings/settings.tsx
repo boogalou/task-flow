@@ -52,9 +52,11 @@ export function Settings() {
 
   return (
     <div className={cx('settings')}>
-      <Button className={cx('settings_button-close')} onClick={handleCloseButtonClick}>
-        <Icon iconType={'cross'} />
-      </Button>
+      <div className={cx('wrapper')}>
+        <Button className={cx('settings__button-close')} onClick={handleCloseButtonClick}>
+          <Icon iconType={'cross'} />
+        </Button>
+      </div>
       <h3 className={cx('settings__title')}>Settings</h3>
       <div className={cx('settings__content')}>
         <div className={cx('settings__theme')}>
