@@ -5,16 +5,19 @@ const LIGHT = 'light';
 
 export function useTheme(themePreference: 'system' | 'light' | 'dark') {
   const preferTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? DARK : LIGHT;
-
   const [theme, setTheme] = useState(themePreference === 'system' ? preferTheme : themePreference);
 
   useLayoutEffect(() => {
+    let mediaQuery: MediaQueryList;
+    let handleChange: () => void;
+
     if (themePreference === 'system') {
-      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-      const handleChange = () => {
+      mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+      handleChange = () => {
         setTheme(mediaQuery.matches ? DARK : LIGHT);
       };
 
+      handleChange();
       mediaQuery.addEventListener('change', handleChange);
 
       return () => {
