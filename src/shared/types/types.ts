@@ -1,3 +1,5 @@
+import { IconType } from '../ui-kit/icon/iconType.tsx';
+
 export type RegistrationData = {
   username: string;
   email: string;
@@ -65,4 +67,12 @@ export type FilterCriteria = {
   date?: string;
   category?: string | null;
   isCompleted?: string | null;
+};
+
+export type ButtonsData = {
+  id: number;
+  label: string;
+  action: string;
+  count: number;
+  iconType: IconType;
 };

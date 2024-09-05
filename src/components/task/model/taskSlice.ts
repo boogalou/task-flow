@@ -4,6 +4,7 @@ import { ErrorResponse, FilterCriteria, Task } from '../../../shared/types/types
 import { getUniqueCategories } from '../lib/getUniqueCategories.ts';
 import { taskApi } from '../api/TaskApi.ts';
 import axios from 'axios';
+import { addDays, endOfDay, isToday, isWithinInterval, startOfDay } from 'date-fns';
 
 export interface TaskState {
   tasks: Task[];
@@ -39,6 +40,38 @@ export const taskSlice = createSlice({
     selectCategories: (state) => state.categories,
     selectError: (state) => state.error,
     selectFilter: (state) => state.filters,
+    selectTasksCount: (state) => {
+      const today = new Date();
+      const tomorrow = addDays(today, 1);
+      const weekEnd = endOfDay(addDays(tomorrow, 7));
+      const tasksCount = {
+        today: 0,
+        week: 0,
+        all: 0,
+        completed: 0,
+        trash: 0,
+      };
+
+      state.tasks.forEach((task) => {
+        const taskDueDate = new Date(task.dueDate);
+
+        if (isToday(taskDueDate)) {
+          tasksCount.today += 1;
+        }
+
+        if (isWithinInterval(taskDueDate, { start: startOfDay(tomorrow), end: weekEnd })) {
+          tasksCount.week += 1;
+        }
+
+        if (task.isCompleted) {
+          tasksCount.completed += 1;
+        }
+
+        tasksCount.all += 1;
+      });
+
+      return tasksCount;
+    },
   },
 
   reducers: (create) => ({
@@ -135,7 +168,8 @@ export const taskSlice = createSlice({
   },
 });
 
-export const { selectTasks, selectError, selectFilter, selectCategories } = taskSlice.selectors;
+export const { selectTasks, selectError, selectFilter, selectCategories, selectTasksCount } =
+  taskSlice.selectors;
 export const { setCriteriaFilter, fetchTasks } = taskSlice.actions;
 export const selectTaskById = (state: TaskState, taskId: number) => {
   if (taskId) {

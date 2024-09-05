@@ -25,11 +25,12 @@ export function MainContent() {
 
   useEffect(() => {
     if (filters.date === 'today') {
-      setSubtitleDate(format(new Date(), 'MMM dd'));
+      setSubtitleDate(format(new Date(), 'EEE, MMM. dd'));
     } else if (filters.date === 'week') {
-      const startDate = new Date();
-      const endDate = addDays(startDate, 6);
-      setSubtitleDate(`${format(startDate, 'MMM dd')} - ${format(endDate, 'MMM dd')}`);
+      const today = new Date();
+      const tomorrow = addDays(today, 1);
+      const endDate = addDays(tomorrow, 6);
+      setSubtitleDate(`${format(tomorrow, 'EEE, MMM dd')} - ${format(endDate, 'EEE, MMM dd')}`);
     }
   }, [filters]);
 

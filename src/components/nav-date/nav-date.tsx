@@ -2,30 +2,16 @@ import styles from './nav-date.module.scss';
 import cnBind from 'classnames/bind';
 import { Icon } from '../../shared/ui-kit/icon/icon.tsx';
 import { Button } from '../../shared/ui-kit/button/button.tsx';
-import { IconType } from '../../shared/ui-kit/icon/iconType.tsx';
 import { useEffect, useState } from 'react';
-import { useAppDispatch } from '../../app/redux/reduxHooks.ts';
-import { setCriteriaFilter } from '../task/model/taskSlice.ts';
+import { useAppDispatch, useAppSelector } from '../../app/redux/reduxHooks.ts';
+import { selectTasksCount, setCriteriaFilter } from '../task/model/taskSlice.ts';
+import { ButtonsData } from '../../shared/types/types.ts';
 
 const cx = cnBind.bind(styles);
 
-interface ButtonsData {
-  id: number;
-  label: string;
-  action: string;
-  iconType: IconType;
-}
-
-const buttonsData: ButtonsData[] = [
-  { id: 1, label: 'Today', iconType: 'calendar-one', action: 'today' },
-  { id: 2, label: 'Next 7 Days', iconType: 'calendar-seven', action: 'week' },
-  { id: 3, label: 'All', iconType: 'calendar-all', action: 'all' },
-];
-
-const countTasks = 42;
-
 export function NavDate() {
   const dispatch = useAppDispatch();
+  const countTasks = useAppSelector(selectTasksCount);
   const [buttonIsPressed, setButtonIsPressed] = useState(3);
   const handleOnClick = (id: number, action: string) => {
     setButtonIsPressed(id);
@@ -35,6 +21,18 @@ export function NavDate() {
   useEffect(() => {
     dispatch(setCriteriaFilter({ date: 'all' }));
   }, []);
+
+  const buttonsData: ButtonsData[] = [
+    { id: 1, label: 'Today', iconType: 'calendar-one', action: 'today', count: countTasks.today },
+    {
+      id: 2,
+      label: 'Next 7 Days',
+      iconType: 'calendar-seven',
+      action: 'week',
+      count: countTasks.week,
+    },
+    { id: 3, label: 'All', iconType: 'calendar-all', action: 'all', count: countTasks.all },
+  ];
 
   return (
     <div className={cx('nav-date')}>
@@ -51,10 +49,11 @@ export function NavDate() {
             <Icon className={cx('nav-date__icon')} iconType={it.iconType} />
             <span className={cx('nav-date__button-label')}>{it.label}</span>
           </div>
-          <span className={cx('nav-date__counter')}>{countTasks}</span>
+          <span className={cx('nav-date__counter')}>{it.count > 0 ? it.count : null}</span>
         </Button>
       ))}
     </div>
   );
 }
+
 //TODO: refactoring

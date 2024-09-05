@@ -11,8 +11,7 @@ import cnBind from 'classnames/bind';
 
 const cx = cnBind.bind(styles);
 
-type ButtonSize = 'small' | 'medium' | 'large';
-type ButtonVariant =
+export type ButtonVariant =
   | 'primary'
   | 'secondary'
   | 'success'
@@ -25,7 +24,6 @@ type ButtonVariant =
 export interface ButtonProps
   extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
   variant?: ButtonVariant;
-  size?: ButtonSize;
   className?: string;
   children?: ReactNode;
   onClick?: (evt: MouseEvent<HTMLButtonElement>) => void;
@@ -33,12 +31,12 @@ export interface ButtonProps
 
 export const Button = forwardRef(
   (
-    { variant, size, className, children, onClick, disabled, ...restProps }: ButtonProps,
+    { variant, className, children, onClick, disabled, ...restProps }: ButtonProps,
     ref: ForwardedRef<HTMLButtonElement>,
   ) => {
     return (
       <button
-        className={cx('button', `button--${variant}`, `button--${size}`, className)}
+        className={cx('button', `button--${variant}`, className)}
         onClick={onClick}
         disabled={disabled}
         ref={ref}

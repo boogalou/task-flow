@@ -7,13 +7,14 @@ export function useFilterTasks(tasks: Task[], criteria: FilterCriteria) {
     return tasks.filter((task) => {
       let dateMatch = false;
       const today = new Date();
+      const tomorrow = addDays(today, 1);
 
       if (criteria.date === 'today') {
         dateMatch = isToday(new Date(task.dueDate));
       } else if (criteria.date === 'week') {
         dateMatch = isWithinInterval(new Date(task.dueDate), {
-          start: startOfDay(today),
-          end: endOfDay(addDays(today, 7)),
+          start: startOfDay(tomorrow),
+          end: endOfDay(addDays(tomorrow, 7)),
         });
       } else if (criteria.date === 'all') {
         dateMatch = true;
