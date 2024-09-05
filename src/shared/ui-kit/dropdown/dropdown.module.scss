@@ -3,9 +3,10 @@
 .dropdown{
   position: absolute;
   list-style: none;
-  padding: 0;
+  padding: $gap-xs;
   background-color: var(--color-secondary-bg);
   border-radius: $border-rad-8;
+  border: 1px solid var(--color-main-bg);
   opacity: 0;
   transform: translateY(-10px);
   visibility: hidden;
@@ -24,6 +25,8 @@
     column-gap: $gap-sm;
     padding: $gap-sm;
     cursor: pointer;
+    border-radius: $border-rad-4;
+    background-color: var(--color-secondary-bg);
     @include respond-to('desktop') {
       &:hover {
         background-color: var(--color-main-bg);

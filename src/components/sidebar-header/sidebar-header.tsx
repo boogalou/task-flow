@@ -58,9 +58,9 @@ export function SidebarHeader() {
         <div>{user?.username}</div>
       </Button>
       <Dropdown
+        className={cx('sidebar-header__dropdown')}
         ref={dropdownRef}
         isOpen={dropdownIsOpen}
-        className={cx('sidebar-header__dropdown')}
         items={dropdownItems}
         selectItem={handleSelectDropdownItem}
       />

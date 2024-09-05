@@ -21,9 +21,9 @@
     &__button {
       display: flex;
       align-items: center;
-      padding: $gap-sm $gap-sm $gap-sm $gap-lg;
-      column-gap: px-to-rem(8px);
+      justify-content: space-between;
       border-radius:  0 $border-rad-4 $border-rad-4 0;
+      padding: $gap-sm $gap-md $gap-sm $gap-lg;
       background-color: transparent;
       color: var(--color-primary-font);
 
@@ -49,6 +49,12 @@
         }
       }
     }
+  }
+
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    column-gap: px-to-rem(8px);
   }
 
   @layer utility {

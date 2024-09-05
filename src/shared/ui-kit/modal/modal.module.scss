@@ -62,7 +62,7 @@
     transition: transform 0.3s ease-out; /* Анимация появления */
 
     @include respond-to('tablet') {
-      width: 60%;
+      width: px-to-rem(500px);
       height: auto;
       border-radius: px-to-rem(8px);
       transform: scale(0); /* Начальная позиция - вне экрана */
@@ -71,7 +71,7 @@
     }
 
     @include respond-to('desktop') {
-      width: 40%;
+      width: px-to-rem(500px);
     }
   }
 

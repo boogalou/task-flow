@@ -40,9 +40,11 @@ export function NavActions() {
           onClick={() => handleOnClick(it.id, it.action)}
           key={it.id}
         >
-          {<Icon className={cx('nav-actions__icon')} iconType={it.iconType} />}
-          {it.label}
-          <span className={cx('nav-date__counter')}>{it.count > 0 ? it.count : null}</span>
+          <div className={cx('nav-actions__wrapper')}>
+            <Icon className={cx('nav-actions__icon')} iconType={it.iconType} />
+            <span className={cx('nav-actions__button-label')}>{it.label}</span>
+          </div>
+          <span className={cx('nav-actions__counter')}>{it.count > 0 ? it.count : null}</span>
         </Button>
       ))}
     </div>

@@ -4,6 +4,7 @@
   grid-column: 1 / -1;
   display: flex;
   flex-direction: column;
+  padding: $gap-xs 0 $gap-xs 0;
   row-gap: $gap-md;
   height: 100%;
   overflow-y: auto;
@@ -26,6 +27,14 @@
   padding: $gap-sm;
   background-color: var(--color-secondary-bg);
   border-radius: $border-rad-8;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  @include respond-to('desktop') {
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+  }
 
   &__checkbox {
     grid-column: 1 / 2;
@@ -38,8 +47,11 @@
   }
 
   &__due-date {
+    color: var(--color-success);
+    font-size: px-to-rem(14px);
     grid-column: 2 / 3;
     grid-row: 2 / 3;
+
   }
 
   &__category {
