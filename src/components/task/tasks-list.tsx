@@ -5,7 +5,7 @@ import { Portal } from '../../shared/ui-kit/portal/portal.tsx';
 import { ModalLayout } from '../../shared/ui-kit/modal/modal.tsx';
 import { useModal } from '../../shared/ui-kit/modal/useModal.ts';
 import { useEffect, useState } from 'react';
-import { useAppSelector } from '../../app/redux/reduxHooks.ts';
+import { useAppSelector } from '../../app/store/reduxHooks.ts';
 import { selectFilter, selectTaskById, selectTasks } from './model/taskSlice.ts';
 import { useFilterTasks } from './lib/useFilterTasks.ts';
 import { TaskForm } from '../task-form/taskForm.tsx';

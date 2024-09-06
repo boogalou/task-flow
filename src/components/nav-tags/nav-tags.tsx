@@ -3,8 +3,9 @@ import cnBind from 'classnames/bind';
 import { Button } from '../../shared/ui-kit/button/button.tsx';
 import { Icon } from '../../shared/ui-kit/icon/icon.tsx';
 import { useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../app/redux/reduxHooks.ts';
+import { useAppDispatch, useAppSelector } from '../../app/store/reduxHooks.ts';
 import { selectCategories, setCriteriaFilter } from '../task/model/taskSlice.ts';
+import { useTranslation } from 'react-i18next';
 
 const cx = cnBind.bind(styles);
 
@@ -14,6 +15,7 @@ type ButtonsData = {
 };
 
 export function NavTags() {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const categories = useAppSelector(selectCategories);
   const [activeButton, setActiveButton] = useState<null | number>(null);
@@ -36,7 +38,7 @@ export function NavTags() {
   return (
     <div className={cx('nav-tags')}>
       <Button className={cx('nav-tags__button--add')}>
-        <span>My List</span>
+        <span>{t('sidebar.myList')}</span>
         <Icon iconType={'cross'} />
       </Button>
 

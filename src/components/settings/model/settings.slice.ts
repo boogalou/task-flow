@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { i18n } from '../../../app/i18n.ts';
 
 type SettingsState = {
   theme: 'system' | 'light' | 'dark';
@@ -31,6 +32,7 @@ export const settingsSlice = createSlice({
     setLanguage(state, { payload }: PayloadAction<'eng' | 'rus'>) {
       state.language = payload;
       localStorage.setItem('app-language', payload);
+      i18n.changeLanguage(payload === 'eng' ? 'en' : 'ru');
     },
 
     toggleSettings(state) {

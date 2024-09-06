@@ -1,7 +1,7 @@
 import { ReactElement, useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from './redux/reduxHooks.ts';
-import { selectAuthFetchStatus } from '../components/auth/model/auth.slice.ts';
-import { checkAuthRequest } from '../components/auth/model/auth.thunk.ts';
+import { useAppDispatch, useAppSelector } from '../store/reduxHooks.ts';
+import { selectAuthFetchStatus } from '../../components/auth/model/auth.slice.ts';
+import { checkAuthRequest } from '../../components/auth/model/auth.thunk.ts';
 
 export interface AuthProviderProps {
   children: ReactElement;

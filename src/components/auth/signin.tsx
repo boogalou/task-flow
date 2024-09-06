@@ -1,7 +1,7 @@
 import styles from './auth.module.scss';
 import cnBind from 'classnames/bind';
 import { LoginData } from '../../shared/types/types.ts';
-import { useAppDispatch } from '../../app/redux/reduxHooks.ts';
+import { useAppDispatch } from '../../app/store/reduxHooks.ts';
 import { useForm } from './lib/useForm.ts';
 import { loginValidationSchema } from './lib/validationSchema.ts';
 import { signinRequest } from './model/auth.thunk.ts';
@@ -13,10 +13,12 @@ import { routes } from '../../shared/routes/routes.ts';
 import { Icon } from '../../shared/ui-kit/icon/icon.tsx';
 import { useShowPassword } from './lib/useShowPassword.ts';
 import { loginFields } from './inputConfig.ts';
+import { useTranslation } from 'react-i18next';
 
 const cx = cnBind.bind(styles);
 
 export function Signin() {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { types, toggleType } = useShowPassword({
     email: 'email',
@@ -45,7 +47,7 @@ export function Signin() {
 
   return (
     <div className={cx('container')}>
-      <h2 className={cx('title')}>Sign In</h2>
+      <h2 className={cx('title')}>{t('authPage.signIn')}</h2>
       <form className={cx('form')} onSubmit={form.handleSubmit} noValidate={true}>
         {createInputFields(
           form.values,
@@ -83,12 +85,12 @@ export function Signin() {
           </div>
         ))}
         <Button className={cx('form__button')} variant={'primary'} type="submit" disabled={false}>
-          Login
+          {t('authPage.loginButton')}&nbsp;
         </Button>
       </form>
       <div className={cx('link')}>
-        Don&apos;t have an account&nbsp;
-        <Link to={routes.SIGNUP_PAGE}>Signup</Link>
+        {t('authPage.noAccount')}
+        <Link to={routes.SIGNUP_PAGE}>{t('authPage.registrationLink')}</Link>
       </div>
     </div>
   );

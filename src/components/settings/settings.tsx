@@ -1,7 +1,7 @@
 import styles from './settigns.module.scss';
 import cnBind from 'classnames/bind';
 import { Button } from '../../shared/ui-kit/button/button.tsx';
-import { useAppDispatch, useAppSelector } from '../../app/redux/reduxHooks.ts';
+import { useAppDispatch, useAppSelector } from '../../app/store/reduxHooks.ts';
 import {
   selectLanguage,
   selectTheme,
@@ -13,6 +13,7 @@ import { ChangeEvent, useState } from 'react';
 import { nanoid } from '@reduxjs/toolkit';
 import { Icon } from '../../shared/ui-kit/icon/icon.tsx';
 import { RadioGroup } from '../../shared/ui-kit/radio-group/radioGroup.tsx';
+import { useTranslation } from 'react-i18next';
 
 const cx = cnBind.bind(styles);
 
@@ -28,6 +29,7 @@ const langData = [
 ];
 
 export function Settings() {
+  const { t, i18n } = useTranslation();
   const dispatch = useAppDispatch();
   const currentTheme = useAppSelector(selectTheme);
   const currentLang = useAppSelector(selectLanguage);
@@ -44,6 +46,7 @@ export function Settings() {
     const newLang = evt.target.value as 'rus' | 'eng';
     setSelectedLang(newLang);
     dispatch(setLanguage(newLang));
+    i18n.changeLanguage(newLang === 'eng' ? 'en' : 'ru');
   };
 
   const handleCloseButtonClick = () => {
@@ -57,23 +60,26 @@ export function Settings() {
           <Icon iconType={'cross'} />
         </Button>
       </div>
-      <h3 className={cx('settings__title')}>Settings</h3>
+      <h3 className={cx('settings__title')}>{t('settings.title')}</h3>
       <div className={cx('settings__content')}>
         <div className={cx('settings__theme')}>
-          <span className={cx('settings__subtitle')}>Theme:</span>
+          <span className={cx('settings__subtitle')}>{t('settings.theme')}</span>
           <RadioGroup
             className={cx('settings__radio-group')}
-            data={themeData}
+            data={themeData.map((item) => ({ ...item, label: t(`settings.themes.${item.value}`) }))}
             selectedValue={selectedTheme}
             name="theme"
             onChange={handleThemeChange}
           />
         </div>
         <div className={cx('settings__language')}>
-          <span className={cx('settings__subtitle')}>Language:</span>
+          <span className={cx('settings__subtitle')}>{t('settings.language')}</span>
           <RadioGroup
             className={cx('settings__radio-group')}
-            data={langData}
+            data={langData.map((item) => ({
+              ...item,
+              label: t(`settings.languages.${item.value}`),
+            }))}
             selectedValue={selectedLang}
             name="language"
             onChange={handleLangChange}

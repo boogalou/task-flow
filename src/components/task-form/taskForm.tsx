@@ -5,12 +5,13 @@ import { createInputFields } from '../../shared/lib/createInputFields.ts';
 import { createTaskFields } from './inputConfig.ts';
 import Input from '../../shared/ui-kit/input/input.tsx';
 import { Button } from '../../shared/ui-kit/button/button.tsx';
-import { useAppDispatch } from '../../app/redux/reduxHooks.ts';
+import { useAppDispatch } from '../../app/store/reduxHooks.ts';
 import { updateTaskRequest, createTaskRequest, deleteTask } from '../task/model/taskThunk.ts';
 import { Task, TaskFormData } from '../../shared/types/types.ts';
 import { parseDate } from './lib/parseDate.ts';
 import { useEffect } from 'react';
 import { Icon } from '../../shared/ui-kit/icon/icon.tsx';
+import { useTranslation } from 'react-i18next';
 
 const cx = cnBind.bind(styles);
 
@@ -20,9 +21,10 @@ interface TaskFormProps {
 }
 
 export function TaskForm({ task, closeModal }: TaskFormProps) {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
-
   const isEditMode = Boolean(task);
+  const action = isEditMode ? t('taskForm.editAction') : t('taskForm.addAction');
 
   const initialValues = task
     ? {
@@ -87,7 +89,7 @@ export function TaskForm({ task, closeModal }: TaskFormProps) {
   return (
     <div className={cx('create')}>
       <div className={cx('create__header')}>
-        <span className={cx('create__title')}>{isEditMode ? 'Edit Task' : 'Add Task'}</span>
+        <span className={cx('create__title')}>{t('taskForm.formTitle', { action })}</span>
       </div>
       <form className={cx('form')} onSubmit={form.handleSubmit} noValidate={true}>
         {createInputFields<TaskFormData>(
@@ -107,7 +109,7 @@ export function TaskForm({ task, closeModal }: TaskFormProps) {
               name={field.name}
               type={field.type}
               placeholder={field.placeholder}
-              label={field.label}
+              label={t(field.label)}
             />
           </div>
         ))}
@@ -120,7 +122,7 @@ export function TaskForm({ task, closeModal }: TaskFormProps) {
               onClick={handleDeleteButton}
             >
               <Icon iconType={'trash-bin'} />
-              Delete
+              {t('taskForm.deleteButton')}
             </Button>
           )}
           <Button
@@ -128,7 +130,7 @@ export function TaskForm({ task, closeModal }: TaskFormProps) {
             variant="primary"
             type="submit"
           >
-            Save
+            {t('taskForm.saveButton')}
           </Button>
         </div>
       </form>

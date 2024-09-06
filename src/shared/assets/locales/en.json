@@ -1,0 +1,62 @@
+{
+  "sidebar": {
+    "today": "Today",
+    "next7Days": "Next 7 Days",
+    "all": "All",
+    "myList": "My List",
+    "completed": "Completed",
+    "trash": "Trash"
+  },
+  "settings": {
+    "title": "Settings",
+    "theme": "Theme:",
+    "language": "Language:",
+    "closeButton": "Close",
+    "themes": {
+      "system": "System",
+      "light": "Light",
+      "dark": "Dark"
+    },
+    "languages": {
+      "eng": "English",
+      "rus": "Russian"
+    }
+  },
+  "mainMenu": {
+    "settings": "Settings",
+    "logout": "Logout"
+  },
+  "taskForm": {
+    "formTitle": "{{action}} Task",
+    "addAction": "Add",
+    "editAction": "Edit",
+    "taskTitle": "Title",
+    "taskDescription": "Description",
+    "addCategory": "Add Category",
+    "setColor": "Set Color",
+    "setDate": "Set Date",
+    "setTime": "Set Time",
+    "deleteButton": "Delete",
+    "saveButton": "Save"
+  },
+  "mainContent": {
+    "addTaskButton": "Add Task",
+    "today": "Today",
+    "week": "Week",
+    "all": "All"
+  },
+  "authPage": {
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "username": "Username",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "registrationButton": "Registration",
+    "loginButton": "Login",
+    "registrationLink": "Sign Up",
+    "loginLink": "Login",
+    "isRegister": "Already have an account?",
+    "noAccount": "Don't have an account?"
+  }
+}

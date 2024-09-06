@@ -10,12 +10,13 @@ export type DropdownItemData = {
   id: number;
   label: string;
   iconType?: IconType;
+  action: string;
 };
 
 interface DropdownProps {
   className: string;
   items: DropdownItemData[];
-  selectItem: (label: string) => void;
+  selectItem: (action: string) => void;
   isOpen: boolean;
 }
 
@@ -34,7 +35,7 @@ const Dropdown = forwardRef(
           <li
             className={cx('dropdown__item')}
             key={it.id}
-            onClick={(evt) => handleOnClick(evt, it.label)}
+            onClick={(evt) => handleOnClick(evt, it.action)}
           >
             {it.iconType && <Icon iconType={it.iconType} />}
             <span className={cx('dropdown__label')}>{it.label}</span>

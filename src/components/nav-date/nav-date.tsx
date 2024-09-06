@@ -1,15 +1,17 @@
 import styles from './nav-date.module.scss';
 import cnBind from 'classnames/bind';
+import { useTranslation } from 'react-i18next';
 import { Icon } from '../../shared/ui-kit/icon/icon.tsx';
 import { Button } from '../../shared/ui-kit/button/button.tsx';
 import { useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../app/redux/reduxHooks.ts';
+import { useAppDispatch, useAppSelector } from '../../app/store/reduxHooks.ts';
 import { selectTasksCount, setCriteriaFilter } from '../task/model/taskSlice.ts';
 import { ButtonsData } from '../../shared/types/types.ts';
 
 const cx = cnBind.bind(styles);
 
 export function NavDate() {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const countTasks = useAppSelector(selectTasksCount);
   const [buttonIsPressed, setButtonIsPressed] = useState(3);
@@ -23,15 +25,27 @@ export function NavDate() {
   }, []);
 
   const buttonsData: ButtonsData[] = [
-    { id: 1, label: 'Today', iconType: 'calendar-one', action: 'today', count: countTasks.today },
+    {
+      id: 1,
+      label: t('sidebar.today'),
+      iconType: 'calendar-one',
+      action: 'today',
+      count: countTasks.today,
+    },
     {
       id: 2,
-      label: 'Next 7 Days',
+      label: t('sidebar.next7Days'),
       iconType: 'calendar-seven',
       action: 'week',
       count: countTasks.week,
     },
-    { id: 3, label: 'All', iconType: 'calendar-all', action: 'all', count: countTasks.all },
+    {
+      id: 3,
+      label: t('sidebar.all'),
+      iconType: 'calendar-all',
+      action: 'all',
+      count: countTasks.all,
+    },
   ];
 
   return (

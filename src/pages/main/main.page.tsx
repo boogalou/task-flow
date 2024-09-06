@@ -5,7 +5,7 @@ import { Sidebar } from '../../components/sidebar/sidebar.tsx';
 import { useEffect, useState } from 'react';
 import { MainContent } from '../../components/main-content/main-content.tsx';
 import { Settings } from '../../components/settings/settings.tsx';
-import { useAppSelector } from '../../app/redux/reduxHooks.ts';
+import { useAppSelector } from '../../app/store/reduxHooks.ts';
 import { selectSettingsIsActive } from '../../components/settings/model/settings.slice.ts';
 
 const cx = cnBind.bind(styles);

@@ -1,0 +1,62 @@
+{
+  "sidebar": {
+    "today": "Сегодня",
+    "next7Days": "Следующие 7 дней",
+    "all": "Все",
+    "myList": "Мой список",
+    "completed": "Завершенные",
+    "trash": "Корзина"
+  },
+  "settings": {
+    "title": "Настройки",
+    "theme": "Тема:",
+    "language": "Язык:",
+    "closeButton": "Закрыть",
+    "themes": {
+      "system": "Системная",
+      "light": "Светлая",
+      "dark": "Тёмная"
+    },
+    "languages": {
+      "eng": "Английский",
+      "rus": "Русский"
+    }
+  },
+  "mainMenu": {
+    "settings": "Настройки",
+    "logout": "Выйти"
+  },
+  "taskForm": {
+    "formTitle": "{{action}} задачу",
+    "addAction": "Добавить",
+    "editAction": "Редактировать",
+    "taskTitle": "Заголовк",
+    "taskDescription": "Описание",
+    "addCategory": "Добавить категорию",
+    "setColor": "Установить цвет",
+    "setDate": "Установить дату",
+    "setTime": "Установить время",
+    "deleteButton": "Удалить",
+    "saveButton": "Сохранить"
+  },
+  "mainContent": {
+    "addTaskButton": "Добавить задачу",
+    "today": "Сегодня",
+    "week": "Неделя",
+    "all": "Все"
+  },
+  "authPage": {
+    "signIn": "Войти",
+    "signUp": "Регистрация",
+    "username": "Username",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "registrationButton": "Зарегистрировать",
+    "loginButton": "Войти",
+    "registrationLink": "Зарегистрировать",
+    "loginLink": "Войти",
+    "isRegister": "Уже есть аккаунт?",
+    "noAccount": "Нет аккаунта?"
+  }
+}

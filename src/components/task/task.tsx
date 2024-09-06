@@ -3,7 +3,7 @@ import cnBind from 'classnames/bind';
 import { ChangeEvent, MouseEvent } from 'react';
 import { formatExpiryDate } from './lib/formatExpiryDate.ts';
 import { CustomInput } from '../../shared/ui-kit/checkbox/customInput.tsx';
-import { useAppDispatch } from '../../app/redux/reduxHooks.ts';
+import { useAppDispatch } from '../../app/store/reduxHooks.ts';
 import { updateTaskRequest } from './model/taskThunk.ts';
 
 const cx = cnBind.bind(styles);

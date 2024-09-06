@@ -1,24 +1,25 @@
 import styles from './sidebar-header.module.scss';
 import cnBind from 'classnames/bind';
-import { MouseEvent } from 'react';
+import { MouseEvent, useRef, useState } from 'react';
 import { Avatar } from '../../shared/ui-kit/avatar/avatar.tsx';
-import { useAppDispatch, useAppSelector } from '../../app/redux/reduxHooks.ts';
+import { useAppDispatch, useAppSelector } from '../../app/store/reduxHooks.ts';
 import { selectAuthData } from '../auth/model/auth.slice.ts';
 import { Dropdown, DropdownItemData } from '../../shared/ui-kit/dropdown/dropdown.tsx';
 import { Button } from '../../shared/ui-kit/button/button.tsx';
-import { useRef, useState } from 'react';
 import { useOnClickOutside } from 'usehooks-ts';
 import { toggleSettings } from '../settings/model/settings.slice.ts';
 import { logoutRequest } from '../auth/model/auth.thunk.ts';
+import { useTranslation } from 'react-i18next';
 
 const cx = cnBind.bind(styles);
 
 const dropdownItems: DropdownItemData[] = [
-  { id: 1, label: 'Settings', iconType: 'settings' },
-  { id: 2, label: 'Logout', iconType: 'logout' },
+  { id: 1, label: 'mainMenu.settings', iconType: 'settings', action: 'settings' },
+  { id: 2, label: 'mainMenu.logout', iconType: 'logout', action: 'logout' },
 ];
 
 export function SidebarHeader() {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectAuthData);
   const dropdownRef = useRef<HTMLUListElement>(null);
@@ -30,13 +31,13 @@ export function SidebarHeader() {
     setDropdownIsOpen((prevState) => !prevState);
   };
 
-  const handleSelectDropdownItem = (label: string) => {
-    if (label === 'Settings') {
+  const handleSelectDropdownItem = (action: string) => {
+    if (action === 'settings') {
       dispatch(toggleSettings());
       setDropdownIsOpen(false);
     }
 
-    if (label.toLowerCase() === 'logout') {
+    if (action === 'logout') {
       dispatch(logoutRequest());
       setDropdownIsOpen(false);
     }
@@ -61,7 +62,7 @@ export function SidebarHeader() {
         className={cx('sidebar-header__dropdown')}
         ref={dropdownRef}
         isOpen={dropdownIsOpen}
-        items={dropdownItems}
+        items={dropdownItems.map((it) => ({ ...it, label: t(it.label) }))}
         selectItem={handleSelectDropdownItem}
       />
     </header>
