@@ -7,19 +7,31 @@ export interface AuthProviderProps {
   children: ReactElement;
 }
 
-export function AuthProvider({ children }: AuthProviderProps) {
+function AuthProvider({ children }: AuthProviderProps) {
   const fetchStatus = useAppSelector(selectAuthFetchStatus);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    let isMounted = true;
+
     (async () => {
-      dispatch(checkAuthRequest());
+      if (isMounted) {
+        dispatch(checkAuthRequest());
+      }
     })();
-  }, []);
+
+    return () => {
+      isMounted = false;
+    };
+  }, [dispatch]);
 
   if (fetchStatus === 'loading') {
-    return <div>Loding</div>;
+    return <div>Loading...</div>;
   }
 
   return children;
 }
+
+export const withAuthProvider = (component: () => JSX.Element) => () => (
+  <AuthProvider>{component()}</AuthProvider>
+);

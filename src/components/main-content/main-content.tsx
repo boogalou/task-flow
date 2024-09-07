@@ -29,7 +29,7 @@ export function MainContent() {
 
   useEffect(() => {
     if (filters.date === 'today') {
-      setSubtitleDate(format(new Date(), 'EEE, MMM. dd', { locale: currentLocale }));
+      setSubtitleDate(format(new Date(), 'EEE, MMM dd', { locale: currentLocale }));
     } else if (filters.date === 'week') {
       const today = new Date();
       const tomorrow = addDays(today, 1);

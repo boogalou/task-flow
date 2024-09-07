@@ -13,3 +13,7 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
 
   return children;
 }
+
+export const withThemeProvider = (component: () => JSX.Element) => () => (
+  <ThemeProvider>{component()}</ThemeProvider>
+);

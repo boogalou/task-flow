@@ -85,11 +85,11 @@ export function Signin() {
           </div>
         ))}
         <Button className={cx('form__button')} variant={'primary'} type="submit" disabled={false}>
-          {t('authPage.loginButton')}&nbsp;
+          {t('authPage.loginButton')}
         </Button>
       </form>
       <div className={cx('link')}>
-        {t('authPage.noAccount')}
+        {t('authPage.noAccount')}&nbsp;
         <Link to={routes.SIGNUP_PAGE}>{t('authPage.registrationLink')}</Link>
       </div>
     </div>
