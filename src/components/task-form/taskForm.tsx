@@ -47,13 +47,13 @@ export function TaskForm({ task, closeModal }: TaskFormProps) {
   const handleDeleteButton = () => {
     if (task?.id) {
       dispatch(deleteTask(task.id));
+      closeModal();
     }
   };
 
   const form = useForm<TaskFormData>({
     initialValues,
     onSubmit: (values) => {
-      console.log(JSON.stringify(values, null, 2));
       if (isEditMode) {
         dispatch(
           updateTaskRequest({
