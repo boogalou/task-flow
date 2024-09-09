@@ -1,11 +1,22 @@
 @import 'src/shared/styles/index';
 
-
-@mixin button-variant($color, $hover-color) {
-  background-color: $color;
-  @include respond-to('desktop') {
-    &:hover {
-      background-color: $hover-color;
+@mixin button-styles($color, $hover-color: null, $outline: false) {
+  @if $outline == true {
+    background-color: transparent;
+    color: $color;
+    border: 1px solid $color;
+    @include respond-to('desktop') {
+      &:hover {
+        background-color: $color;
+        color: white;
+      }
+    }
+  } @else {
+    background-color: $color;
+    @include respond-to('desktop') {
+      &:hover {
+        background-color: if($hover-color != null, $hover-color, darken($color, 10%));
+      }
     }
   }
 }
@@ -23,40 +34,31 @@
     transition: background-color 0.3s ease;
 
     &--primary {
-      @include button-variant(var(--color-primary), var(--color-primary-hover));
+      @include button-styles(var(--color-primary), var(--color-primary-hover));
     }
 
     &--secondary {
-      @include button-variant(var(--color-secondary), var(--color-secondary-hover));
+      @include button-styles(var(--color-secondary), var(--color-secondary-hover));
     }
 
     &--success {
-      @include button-variant(var(--color-success), var(--color-success-hover));
+      @include button-styles(var(--color-success), var(--color-success-hover));
     }
 
     &--info {
-      @include button-variant(var(--color-info), var(--color-info-hover));
+      @include button-styles(var(--color-info), var(--color-info-hover));
     }
 
     &--danger {
-      @include button-variant(var(--color-danger), var(--color-danger-hover));
+      @include button-styles(var(--color-danger), var(--color-danger-hover));
     }
 
     &--warning {
-      @include button-variant(var(--color-warning), var(--color-warning-hover));
+      @include button-styles(var(--color-warning), var(--color-warning-hover));
     }
 
     &--outline {
-      background-color: transparent;
-      color: var(--color-primary);
-      border: 1px solid var(--color-primary);
-
-      @include respond-to('desktop') {
-        &:hover {
-          background-color: var(--color-primary);
-          color: white;
-        }
-      }
+      @include button-styles(var(--color-primary), null, true);
     }
   }
 }
