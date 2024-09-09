@@ -14,7 +14,7 @@ export function useFilterTasks(tasks: Task[], criteria: FilterCriteria) {
       } else if (criteria.date === 'week') {
         dateMatch = isWithinInterval(new Date(task.dueDate), {
           start: startOfDay(tomorrow),
-          end: endOfDay(addDays(tomorrow, 7)),
+          end: endOfDay(addDays(tomorrow, 6)),
         });
       } else if (criteria.date === 'all') {
         dateMatch = true;

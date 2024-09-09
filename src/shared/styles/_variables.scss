@@ -4,6 +4,10 @@
   @return math.div($px, $base-font-size) * 1rem;
 }
 
+:root {
+
+}
+
 /*light theme*/
 html[data-theme='light'] {
   --color-main-bg: #f9f5d7;
@@ -26,6 +30,7 @@ html[data-theme='light'] {
   --color-danger-hover: #9D0006;
   --color-header-bg: #076678;
   --color-search-bg: #458588;
+  --color-gray-font: gray;
 }
 
 /*dark theme*/
@@ -50,6 +55,7 @@ html[data-theme='dark'] {
   --color-danger-hover: #CC241D;
   --color-header-bg: #282828;
   --color-search-bg: #3c3836;
+  --color-gray-font: gray;
 }
 
 

@@ -11,7 +11,7 @@ export function formatExpiryDate(inputDate: string): string {
     case differenceInHours <= 24:
       return `by ${format(zonedDate, 'HH:mm', { timeZone: 'UTC' })}`;
     case isTomorrow(zonedDate):
-      return `by tomorrow ${format(zonedDate, 'HH:mm', { timeZone: 'UTC' })}`;
+      return `by ${format(zonedDate, 'HH:mm', { timeZone: 'UTC' })}`;
     case differenceInDaysValue <= 7:
       return `by ${format(zonedDate, 'EEE. HH:mm', { timeZone: 'UTC' })}`;
     case isThisYear(zonedDate):

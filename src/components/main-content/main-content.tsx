@@ -6,9 +6,9 @@ import { Button } from '../../shared/ui-kit/button/button.tsx';
 import { Icon } from '../../shared/ui-kit/icon/icon.tsx';
 import { TaskForm } from '../task-form/taskForm.tsx';
 import { Portal } from '../../shared/ui-kit/portal/portal.tsx';
-import { ModalLayout } from '../../shared/ui-kit/modal/modal.tsx';
+import { Modal } from '../../shared/ui-kit/modal/modal.tsx';
 import { useModal } from '../../shared/ui-kit/modal/useModal.ts';
-import { TasksList } from '../task/tasks-list.tsx';
+import { TaskList } from '../task/task-list.tsx';
 import { useAppSelector } from '../../app/store/reduxHooks.ts';
 import { selectFilter } from '../task/model/taskSlice.ts';
 import { useEffect, useState } from 'react';
@@ -48,7 +48,7 @@ export function MainContent() {
           <div className={cx('content__subtitle')}>{subtitleDate}</div>
         )}
       </header>
-      <TasksList />
+      <TaskList />
       <Button
         className={cx('content__button', 'content__button-add')}
         variant="primary"
@@ -58,9 +58,9 @@ export function MainContent() {
         <span className={cx('content__button-text')}>{t('mainContent.addTaskButton')}</span>
       </Button>
       <Portal>
-        <ModalLayout isOpen={isOpen} closeModal={closeModal}>
+        <Modal isOpen={isOpen} closeModal={closeModal}>
           <TaskForm closeModal={closeModal} />
-        </ModalLayout>
+        </Modal>
       </Portal>
     </div>
   );

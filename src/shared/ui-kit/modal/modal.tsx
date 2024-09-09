@@ -3,6 +3,7 @@ import cnBind from 'classnames/bind';
 import { MouseEvent, ReactNode } from 'react';
 import { Button } from '../button/button.tsx';
 import { Icon } from '../icon/icon.tsx';
+import { Portal } from '../portal/portal.tsx';
 
 const cx = cnBind.bind(styles);
 
@@ -12,7 +13,7 @@ interface ModalProps {
   closeModal: () => void;
 }
 
-export function ModalLayout({ children, isOpen, closeModal }: ModalProps) {
+export function Modal({ children, isOpen, closeModal }: ModalProps) {
   const handleOverlayClick = (evt: MouseEvent<HTMLDivElement>) => {
     if (evt.target === evt.currentTarget) {
       closeModal();
@@ -24,17 +25,19 @@ export function ModalLayout({ children, isOpen, closeModal }: ModalProps) {
   };
 
   return (
-    <div className={cx('modal', { 'modal--active': isOpen })}>
-      <div className={cx('modal__overlay')} onClick={handleOverlayClick}>
-        <div className={cx('modal__content')}>
-          <div className={cx('modal__control')}>
-            <Button className={cx('modal__button-close')} onClick={handleCloseButton}>
-              <Icon className={cx('modal__icon-close')} iconType={'cross'} />
-            </Button>
+    <Portal>
+      <div className={cx('modal', { 'modal--active': isOpen })}>
+        <div className={cx('modal__overlay')} onClick={handleOverlayClick}>
+          <div className={cx('modal__content')}>
+            <div className={cx('modal__control')}>
+              <Button className={cx('modal__button-close')} onClick={handleCloseButton}>
+                <Icon className={cx('modal__icon-close')} iconType={'cross'} />
+              </Button>
+            </div>
+            {children}
           </div>
-          {children}
         </div>
       </div>
-    </div>
+    </Portal>
   );
 }
