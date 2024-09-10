@@ -15,12 +15,14 @@ interface ModalProps {
 
 export function Modal({ children, isOpen, closeModal }: ModalProps) {
   const handleOverlayClick = (evt: MouseEvent<HTMLDivElement>) => {
+    evt.stopPropagation();
     if (evt.target === evt.currentTarget) {
       closeModal();
     }
   };
 
-  const handleCloseButton = () => {
+  const handleCloseButton = (evt: MouseEvent<HTMLButtonElement>) => {
+    evt.stopPropagation();
     closeModal();
   };
 

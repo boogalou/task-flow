@@ -68,3 +68,25 @@
     }
   }
 }
+
+.modal {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  &__header {
+    padding: $gap-md;
+    font-size: px-to-rem(18px);
+  }
+
+  &__action {
+    display: flex;
+    column-gap: $gap-sm;
+    justify-self: end;
+  }
+
+  @layer utility {
+    &__button {
+      padding: $gap-xs;
+      width: px-to-rem(80px);
+    }
+  }
+}

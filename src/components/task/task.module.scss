@@ -54,7 +54,7 @@
 
   @include respond-to('desktop') {
     &:hover {
-      transform: translateY(-3px);
+      transform: translateY(-1px);
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
   }
@@ -96,7 +96,7 @@
     transition: max-height 0.3s ease;
 
     &--visible {
-      max-height: 500px; // Установите значение в зависимости от контента
+      max-height: px-to-rem(500px);
     }
   }
 }
