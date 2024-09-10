@@ -6,11 +6,10 @@ import { createTaskFields } from './inputConfig.ts';
 import Input from '../../shared/ui-kit/input/input.tsx';
 import { Button } from '../../shared/ui-kit/button/button.tsx';
 import { useAppDispatch } from '../../app/store/reduxHooks.ts';
-import { updateTaskRequest, createTaskRequest, deleteTask } from '../task/model/taskThunk.ts';
+import { createTaskRequest, updateTaskRequest } from '../task/model/taskThunk.ts';
 import { Task, TaskFormData } from '../../shared/types/types.ts';
 import { parseDate } from './lib/parseDate.ts';
 import { useEffect } from 'react';
-import { Icon } from '../../shared/ui-kit/icon/icon.tsx';
 import { useTranslation } from 'react-i18next';
 
 const cx = cnBind.bind(styles);
@@ -43,13 +42,6 @@ export function TaskForm({ task, closeModal }: TaskFormProps) {
         date: '',
         time: '',
       };
-
-  const handleDeleteButton = () => {
-    if (task?.id) {
-      dispatch(deleteTask(task.id));
-      closeModal();
-    }
-  };
 
   const form = useForm<TaskFormData>({
     initialValues,
@@ -113,26 +105,13 @@ export function TaskForm({ task, closeModal }: TaskFormProps) {
             />
           </div>
         ))}
-        <div className={cx('form__button-group', { 'form__button-group--edit': isEditMode })}>
-          {isEditMode && (
-            <Button
-              className={cx('form__button', 'form__button--delete')}
-              variant="outline"
-              type="button"
-              onClick={handleDeleteButton}
-            >
-              <Icon iconType={'trash-bin'} />
-              {t('taskForm.deleteButton')}
-            </Button>
-          )}
-          <Button
-            className={cx('form__button', 'form__button--save')}
-            variant="primary"
-            type="submit"
-          >
-            {t('taskForm.saveButton')}
-          </Button>
-        </div>
+        <Button
+          className={cx('form__button', 'form__button--save')}
+          variant="primary"
+          type="submit"
+        >
+          {t('taskForm.saveButton')}
+        </Button>
       </form>
     </div>
   );

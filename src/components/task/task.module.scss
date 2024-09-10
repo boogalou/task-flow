@@ -74,7 +74,6 @@
     font-size: px-to-rem(14px);
     grid-column: 2 / 3;
     grid-row: 2 / 3;
-
   }
 
   &__category {
@@ -86,6 +85,19 @@
     font-size: px-to-rem(12px);
     font-weight: bold;
     color: #4F4F4F;
+  }
+
+  &__details {
+    grid-column: 1 / -1;
+    grid-row: 3 / 4;
+    background-color: var(--color-secondary-bg);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+
+    &--visible {
+      max-height: 500px; // Установите значение в зависимости от контента
+    }
   }
 }
 

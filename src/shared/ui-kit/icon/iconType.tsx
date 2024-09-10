@@ -17,6 +17,7 @@ import { ReactComponent as Success } from '../../assets/icons/checkmark-circle.s
 import { ReactComponent as Error } from '../../assets/icons/error.svg';
 import { ReactComponent as Settings } from '../../assets/icons/gear.svg';
 import { ReactComponent as Logout } from '../../assets/icons/logout.svg';
+import { ReactComponent as Edit } from '../../assets/icons/edit.svg';
 
 const keyGen = () => nanoid(12);
 
@@ -38,7 +39,8 @@ export type IconType =
   | 'success'
   | 'error'
   | 'settings'
-  | 'logout';
+  | 'logout'
+  | 'edit';
 
 export const iconTypes = new Map([
   ['auth-splash', <AuthSplash key={keyGen()} />],
@@ -59,4 +61,5 @@ export const iconTypes = new Map([
   ['error', <Error key={keyGen()} />],
   ['settings', <Settings key={keyGen()} />],
   ['logout', <Logout key={keyGen()} />],
+  ['edit', <Edit key={keyGen()} />],
 ]);

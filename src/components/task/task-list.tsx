@@ -21,14 +21,15 @@ export function TaskList() {
   const filters = useAppSelector(selectFilter);
   const { isOpen, openModal, closeModal } = useModal();
   const [taskId, setTaskId] = useState<number | null>(null);
-  const handleOnClickTask = (id: number) => {
+  const task = useAppSelector((state) => selectTaskById(state.taskSlice, taskId!))!;
+  const filteredTasks = useFilterTasks(tasks, filters);
+  const groupedTasks = groupTasksByDate(filteredTasks, currentLocale);
+
+  const handleClickOnEdit = (id: number) => {
     if (id) {
       setTaskId(id);
     }
   };
-  const task = useAppSelector((state) => selectTaskById(state.taskSlice, taskId!))!;
-  const filteredTasks = useFilterTasks(tasks, filters);
-  const groupedTasks = groupTasksByDate(filteredTasks, currentLocale);
 
   useEffect(() => {
     if (taskId !== null) {
@@ -51,12 +52,7 @@ export function TaskList() {
               <div className={cx('task-list__group-header')}>{date}</div>
             )}
             {tasksForDate.map((it) => (
-              <Task
-                key={it.id}
-                {...it}
-                handleOnClickTask={handleOnClickTask}
-                openModal={openModal}
-              />
+              <Task key={it.id} {...it} handleClickOnEdit={handleClickOnEdit} />
             ))}
           </div>
         ))}

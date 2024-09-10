@@ -1,0 +1,70 @@
+@import 'src/shared/styles/index';
+
+@mixin list-style {
+  grid-column: 1 / 2;
+  font-weight: bold;
+
+  &-text {
+    font-weight: normal;
+  }
+}
+
+.details {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto;
+  row-gap: $gap-sm;
+  width: 100%;
+  border-radius: $border-rad-4;
+  margin-top: $gap-sm;
+  list-style: none;
+  padding: $gap-xs;
+  align-items: center;
+  background-color: var(--color-main-bg);
+
+
+  &__header {
+    grid-column: 1 / 2;
+    font-weight: bold;
+  }
+
+  &__title,
+  &__description,
+  &__category,
+  &__expire,
+  &__created,
+  &__updated {
+    @include list-style;
+  }
+
+
+  &__action {
+    grid-column: 2 / 3;
+    grid-row: 7 / 8;
+    width: 100%;
+    display: flex;
+    column-gap: $gap-sm;
+
+    @layer utility {
+      &-button {
+        padding: px-to-rem(2px);
+        background-color: transparent;
+      }
+    }
+
+  }
+
+  @layer utility {
+    &__icon {
+      stroke: var(--color-primmary-icon);
+      width: px-to-rem(20px);
+      @include respond-to('desktop') {
+        &-trash {
+          &:hover {
+            stroke: var(--color-danger);
+          }
+        }
+      }
+    }
+  }
+}

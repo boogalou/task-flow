@@ -1,47 +1,35 @@
 import styles from './task.module.scss';
 import cnBind from 'classnames/bind';
-import { ChangeEvent, MouseEvent } from 'react';
+import { ChangeEvent, MouseEvent, useState } from 'react';
 import { formatExpiryDate } from './lib/formatExpiryDate.ts';
 import { CustomInput } from '../../shared/ui-kit/checkbox/customInput.tsx';
 import { useAppDispatch } from '../../app/store/reduxHooks.ts';
 import { updateTaskRequest } from './model/taskThunk.ts';
+import { TaskDetails } from '../task-details/taskDetails.tsx';
+import { Task as ITask } from '../../shared/types/types.ts';
 
 const cx = cnBind.bind(styles);
 
-interface TaskProps {
-  id: number;
-  title: string;
-  dueDate: string;
-  color: string;
-  category: string;
-  isCompleted: boolean;
-  handleOnClickTask: (id: number) => void;
-  openModal: () => void;
+interface TaskProps extends ITask {
+  handleClickOnEdit: (id: number) => void;
 }
 
-export function Task({
-  id,
-  title,
-  dueDate,
-  color,
-  category,
-  isCompleted,
-  handleOnClickTask,
-}: TaskProps) {
+export function Task(props: TaskProps) {
   const dispatch = useAppDispatch();
-  const expireDate = formatExpiryDate(dueDate);
+  const expireDate = formatExpiryDate(props.dueDate);
+  const [isDetailsVisible, setIsDetailsVisible] = useState(false);
 
   const handleOnChangeCheckBox = (evt: ChangeEvent<HTMLInputElement>) => {
     dispatch(
       updateTaskRequest({
-        id: id,
+        id: props.id,
         isCompleted: evt.target.checked,
       }),
     );
   };
 
-  const handleOnClick = () => {
-    handleOnClickTask(id);
+  const handleClickOnTask = () => {
+    setIsDetailsVisible((prevState) => !prevState);
   };
 
   const handleClickOnCheckbox = (evt: MouseEvent<HTMLDivElement>) => {
@@ -50,19 +38,22 @@ export function Task({
 
   return (
     <>
-      <div className={cx('task')} onClick={handleOnClick}>
+      <div className={cx('task')} onClick={handleClickOnTask}>
         <div className={cx('task__checkbox')} onClick={handleClickOnCheckbox}>
           <CustomInput
-            id={`${id}`}
+            id={`${props.id}`}
             type="checkbox"
             onChange={handleOnChangeCheckBox}
-            checked={isCompleted}
+            checked={props.isCompleted}
           />
         </div>
-        <span className={cx('task__title')}>{title}</span>
+        <span className={cx('task__title')}>{props.title}</span>
         <div className={cx('task__due-date')}>{expireDate}</div>
-        <div className={cx('task__category')} style={{ backgroundColor: `${color}` }}>
-          {category}
+        <div className={cx('task__category')} style={{ backgroundColor: `${props.color}` }}>
+          {props.category}
+        </div>
+        <div className={cx('task__details', { 'task__details--visible': isDetailsVisible })}>
+          <TaskDetails {...props} />
         </div>
       </div>
     </>

@@ -45,6 +45,7 @@ export type Task = {
   category: string;
   color: string;
   createdAt: string;
+  updatedAt: string;
   isCompleted: boolean;
 };
 
