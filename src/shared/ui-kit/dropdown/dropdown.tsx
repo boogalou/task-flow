@@ -7,7 +7,7 @@ import { Icon } from '../icon/icon.tsx';
 const cx = cnBind.bind(styles);
 
 export type DropdownItemData = {
-  id: number;
+  id: number | string;
   label: string;
   iconType?: IconType;
   action: string;

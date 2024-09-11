@@ -1,6 +1,6 @@
 @import 'src/shared/styles/index';
 
-.create {
+.task-form {
   display: flex;
   flex-direction: column;
   row-gap: $gap-md;
@@ -19,31 +19,21 @@
 .form {
   display: flex;
   flex-direction: column;
-  row-gap: $gap-xl;
-
-  &__field {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: px-to-rem(50px);
-    column-gap: $gap-md;
-  }
+  row-gap: $gap-md;
 
   &__label {
     white-space: nowrap;
   }
 
-
   @layer uitlity {
     &__input {
-      border: none;
       outline: none;
-      border-bottom: 1px solid gray;
-      background-color: var(--color-main-bg);
+      border: 1px solid transparent;
+      background-color: var(--color-secondary-bg);
       color: var(--color-primary-font);
 
       &:focus {
-        border-bottom: 1px solid var(--color-link);
+        border: 1px solid var(--color-info);
       }
     }
 
@@ -79,6 +69,27 @@
     }
   }
 
+  &__date-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    row-gap: $gap-md;
+    column-gap: $gap-sm;
+  }
+
+  &__label-datepicker,
+  &__label-timepicker  {
+    grid-column: 1 / -1;
+    grid-row: 1 / 2;
+  }
+
+  &__input-datepickeer,
+  &__input-timepiecker {
+    grid-column: 1 / -1;
+    grid-row: 2 / 3;
+  }
+
+
   &__button-group {
     display: grid;
     grid-template-columns: 1fr;
@@ -91,13 +102,3 @@
 
 }
 
-input[type='date'], input[type='time'], input[type='color'] {
-  border: none;
-  border-radius: 0;
-}
-
-input[type='color'] {
-  width: px-to-rem(70px);
-  height: px-to-rem(40px);
-  border-radius: $border-rad-50;
-}

@@ -30,13 +30,11 @@
     "formTitle": "{{action}} Task",
     "addAction": "Add",
     "editAction": "Edit",
-    "taskTitle": "Title",
-    "taskDescription": "Description",
-    "addCategory": "Add Category",
-    "setColor": "Set Color",
-    "setDate": "Set Date",
-    "setTime": "Set Time",
-    "deleteButton": "Delete",
+    "taskTitle": "Title:",
+    "taskDescription": "Description:",
+    "addCategory": "Add Category:",
+    "setColor": "Set Color:",
+    "setDate": "Set Date & Time:",
     "saveButton": "Save"
   },
   "mainContent": {

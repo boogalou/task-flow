@@ -2,13 +2,13 @@
 
 @layer component {
   .input {
-    height: 100%;
+    height: px-to-rem(50px);
     width: 100%;
     outline: none;
     border-radius: px-to-rem(4px);
     border: 1px solid var(--color-secondary-bg);
-    font-size: 16px;
-    padding: 0 15px;
+    font-size: px-to-rem(16px);
+    padding: 0 px-to-rem(15px);
 
     &:focus {
       border: 2px solid var(--color-primary-font);

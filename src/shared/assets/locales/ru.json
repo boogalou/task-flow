@@ -30,13 +30,11 @@
     "formTitle": "{{action}} задачу",
     "addAction": "Добавить",
     "editAction": "Редактировать",
-    "taskTitle": "Заголовк",
-    "taskDescription": "Описание",
-    "addCategory": "Добавить категорию",
-    "setColor": "Установить цвет",
-    "setDate": "Установить дату",
-    "setTime": "Установить время",
-    "deleteButton": "Удалить",
+    "taskTitle": "Заголовк:",
+    "taskDescription": "Описание:",
+    "addCategory": "Добавить категорию:",
+    "setColor": "Установить цвет:",
+    "setDate": "Установить дату и время:",
     "saveButton": "Сохранить"
   },
   "mainContent": {

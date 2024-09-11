@@ -1,0 +1,13 @@
+@import 'src/shared/styles/index';
+
+.select {
+  outline: none;
+  height: px-to-rem(50px);
+  padding: 0 $gap-sm;
+  border: transparent;
+  background-color: var(--color-secondary-bg);
+
+  &__option {
+    background-color: var(--color-secondary-bg);
+  }
+}
