@@ -11,7 +11,8 @@ import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Textarea } from '../../shared/ui-kit/textarea/textarea.tsx';
 import { selectCategories } from '../task/model/taskSlice.ts';
-import { Select } from '../../shared/ui-kit/select/select.tsx';
+import { InputSelect } from '../../shared/ui-kit/select/inputSelect.tsx';
+import { Colorpicker } from '../../shared/ui-kit/colorpicker/colorpicker.tsx';
 
 const cx = cnBind.bind(styles);
 
@@ -49,6 +50,7 @@ export function TaskForm({ task, closeModal }: TaskFormProps) {
     initialValues,
     onSubmit: (values) => {
       if (isEditMode) {
+        console.log('dispatch: ', JSON.stringify(values, null, 2));
         dispatch(
           updateTaskRequest({
             id: task?.id,
@@ -60,6 +62,7 @@ export function TaskForm({ task, closeModal }: TaskFormProps) {
           }),
         );
       } else {
+        console.log('dispatch: ', JSON.stringify(values, null, 2));
         dispatch(
           createTaskRequest({
             title: values.title,
@@ -75,6 +78,10 @@ export function TaskForm({ task, closeModal }: TaskFormProps) {
       form.resetForm();
     },
   });
+
+  const handleSetColor = (color: string) => {
+    form.setValues({ ...form.values, color: color });
+  };
 
   useEffect(() => {
     form.setValues(initialValues);
@@ -96,7 +103,6 @@ export function TaskForm({ task, closeModal }: TaskFormProps) {
           type="text"
           placeholder="Task title"
           value={form.values.title}
-          autoComplete="off"
           label={t('taskForm.taskTitle')}
         />
         <Textarea
@@ -112,9 +118,8 @@ export function TaskForm({ task, closeModal }: TaskFormProps) {
           label={t('taskForm.taskDescription')}
           maxLength={300}
           rows={3}
-          autoComplete="off"
         />
-        <Input
+        <InputSelect
           classNameLabel={cx('form__label', 'form__label-category')}
           classNameInput={cx('form__input', 'form__input-category')}
           onChange={form.handleOnChange}
@@ -124,17 +129,10 @@ export function TaskForm({ task, closeModal }: TaskFormProps) {
           type="text"
           placeholder="Add category"
           value={form.values.category}
-          autoComplete="off"
           label={t('taskForm.addCategory')}
-        />
-
-        <Select
-          className={cx('form__select')}
           options={categories}
-          type="text"
-          onChange={form.handleOnChange}
         />
-
+        <Colorpicker onClick={handleSetColor} currentColor={form.values.color} />
         <div className={cx('form__date-group')}>
           <Input
             classNameLabel={cx('form__label', 'form__label-datepicker')}

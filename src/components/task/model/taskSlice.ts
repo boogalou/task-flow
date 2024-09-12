@@ -92,6 +92,7 @@ export const taskSlice = createSlice({
       .addCase(createTaskRequest.fulfilled, (state, { payload }) => {
         state.taskFetchStatus = 'succeeded';
         state.tasks.push(payload);
+        state.categories = getUniqueCategories(state.tasks);
         state.error = null;
       })
       .addCase(createTaskRequest.rejected, (state, action) => {

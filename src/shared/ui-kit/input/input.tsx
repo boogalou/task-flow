@@ -12,7 +12,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 const Input = forwardRef(
   (
-    { id, label, classNameLabel, classNameInput, type, ...restProps }: InputProps,
+    { id, label, classNameLabel, classNameInput, ...restProps }: InputProps,
     ref: ForwardedRef<HTMLInputElement>,
   ) => {
     return (
@@ -22,9 +22,8 @@ const Input = forwardRef(
         </label>
         <input
           className={cx('input', classNameInput)}
-          id={id}
-          type={type}
           ref={ref}
+          autoComplete="off"
           {...restProps}
         />
       </>

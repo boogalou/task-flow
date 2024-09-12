@@ -21,9 +21,7 @@ export function useForm<T>({
   const [touched, setTouched] = useState<Partial<Record<keyof T, boolean>>>({});
   const [isDirty, setIsDirty] = useState<boolean>(false);
 
-  const handleOnChange = (
-    evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
-  ) => {
+  const handleOnChange = (evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = evt.target;
     setValues((prevState) => ({
       ...prevState,

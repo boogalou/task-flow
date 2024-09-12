@@ -1,0 +1,20 @@
+@import "src/shared/styles/index";
+
+.colorpicker {
+  display: flex;
+  justify-content: space-around;
+  @layer utility {
+    &__button {
+      border-radius: $border-rad-50;
+      padding: 10px;
+      width: px-to-rem(30px);
+      height: px-to-rem(30px);
+      border: 2px solid transparent;
+      transition: border 0.3s ease;
+      &--selected {
+        border-color: #a855f7;
+      }
+    }
+  }
+}
+
