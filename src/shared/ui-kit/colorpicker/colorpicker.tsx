@@ -2,7 +2,6 @@ import styles from './colorpicker.module.scss';
 import cnBind from 'classnames/bind';
 import { useState } from 'react';
 import { nanoid } from '@reduxjs/toolkit';
-import Input from '../input/input.tsx';
 
 const cx = cnBind.bind(styles);
 
@@ -36,12 +35,12 @@ export function Colorpicker({ onClick, currentColor }: ColorpickerProps) {
   return (
     <div className={cx('colorpicker')}>
       {buttonData.map((btn) => (
-        <Input
+        <button
           className={cx('colorpicker__button', {
             'colorpicker__button--selected': btn.color === selectedColor,
           })}
-          type="button"
           onClick={() => handleColorSelect(btn.color)}
+          type="button"
           key={btn.id}
           style={{ backgroundColor: `${btn.color}` }}
         />

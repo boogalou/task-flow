@@ -3,18 +3,38 @@
 .colorpicker {
   display: flex;
   justify-content: space-around;
+
   @layer utility {
     &__button {
+      position: relative;
       border-radius: $border-rad-50;
       padding: 10px;
       width: px-to-rem(30px);
       height: px-to-rem(30px);
       border: 2px solid transparent;
+      background-color: #fffacd;
       transition: border 0.3s ease;
+
       &--selected {
         border-color: #a855f7;
+        background-color: #fffacd;
+
+        &::after {
+          content: '✔';
+          position: absolute;
+          top: -3px;
+          right: -5px;
+          width: 15px;
+          height: 15px;
+          border-radius: 50%;
+          background-color: #a855f7;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 10px;
+          color: white;
+        }
       }
     }
   }
 }
-
