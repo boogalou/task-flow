@@ -30,21 +30,20 @@
 
   @layer utility {
     &__button-close {
+      width: px-to-rem(30px);
+      height: px-to-rem(30px);
       display: flex;
       align-items: center;
       justify-content: center;
-      border: none;
       background-color: var(--color-secondary-bg);
       border-radius: $border-rad-50;
-      width: px-to-rem(35px);
-      height: px-to-rem(35px);
-      padding: 0;
+      padding: $gap-sm;
     }
 
     &__icon-close {
       svg {
+        fill: var(--color-primmary-icon);
         width: $icon-size-sm;
-        fill: var(--color-secondary-icon);
       }
     }
   }

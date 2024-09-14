@@ -8,7 +8,7 @@
     &__button {
       position: relative;
       border-radius: $border-rad-50;
-      padding: 10px;
+      padding: $gap-sm;
       width: px-to-rem(30px);
       height: px-to-rem(30px);
       border: 2px solid transparent;
@@ -22,16 +22,16 @@
         &::after {
           content: '✔';
           position: absolute;
-          top: -3px;
-          right: -5px;
-          width: 15px;
-          height: 15px;
-          border-radius: 50%;
+          top: px-to-rem(-3px);
+          right: px-to-rem(-5px);
+          width: px-to-rem(15px);
+          height: px-to-rem(15px);
+          border-radius: $border-rad-50;
           background-color: #a855f7;
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 10px;
+          font-size: px-to-rem(10px);
           color: white;
         }
       }

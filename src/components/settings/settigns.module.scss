@@ -21,16 +21,15 @@
     width: px-to-rem(30px);
     height: px-to-rem(30px);
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     background-color: var(--color-secondary-bg);
     border-radius: $border-rad-50;
-    padding: 15px;
+    padding: $gap-sm;
 
     svg {
       fill: var(--color-primmary-icon);
-      width: 15px;
+      width: px-to-rem(15px);
     }
   }
 }
