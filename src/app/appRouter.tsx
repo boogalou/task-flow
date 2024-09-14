@@ -6,7 +6,7 @@ import { AuthLayout } from '../pages/auth/auth.page.tsx';
 import { Signup } from '../components/auth/signup.tsx';
 import { routes } from '../shared/routes/routes.ts';
 import { Signin } from '../components/auth/signin.tsx';
-import { AuthenticatedGuard, UnauthenticatedGuard } from './authenticatedGuard.tsx';
+import { RequireAuthGuard, RequireGuestGuard } from './requireAuthGuard.tsx';
 
 export const appRouter = () =>
   createBrowserRouter([
@@ -17,9 +17,9 @@ export const appRouter = () =>
         {
           path: routes.MAIN_PAGE,
           element: (
-            <AuthenticatedGuard>
+            <RequireAuthGuard>
               <MainPage />
-            </AuthenticatedGuard>
+            </RequireAuthGuard>
           ),
         },
         {
@@ -28,17 +28,17 @@ export const appRouter = () =>
             {
               path: routes.SIGNUP_PAGE,
               element: (
-                <UnauthenticatedGuard>
+                <RequireGuestGuard>
                   <Signup />
-                </UnauthenticatedGuard>
+                </RequireGuestGuard>
               ),
             },
             {
               path: routes.SIGNIN_PAGE,
               element: (
-                <UnauthenticatedGuard>
+                <RequireGuestGuard>
                   <Signin />
-                </UnauthenticatedGuard>
+                </RequireGuestGuard>
               ),
             },
           ],

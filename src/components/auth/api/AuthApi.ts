@@ -26,7 +26,7 @@ export class AuthApi {
   }
 
   public async logout() {
-    return await apiClient.delete('/logout');
+    return await apiClient.post('/logout');
   }
 }
 

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { checkAuthRequest, signinRequest, signupRequest } from './auth.thunk.ts';
+import { checkAuthRequest, logoutRequest, signinRequest, signupRequest } from './auth.thunk.ts';
 import { AuthDataResponse, ErrorResponse } from '../../../shared/types/types.ts';
 
 export interface AuthState {
@@ -73,6 +73,20 @@ export const authSlice = createSlice({
         state.error = null;
       })
       .addCase(checkAuthRequest.rejected, (state, action) => {
+        state.authFetchStatus = 'failed';
+        state.error = action.payload as ErrorResponse;
+      })
+      .addCase(logoutRequest.pending, (state) => {
+        state.authFetchStatus = 'loading';
+        state.error = null;
+      })
+      .addCase(logoutRequest.fulfilled, (state) => {
+        state.authFetchStatus = 'succeeded';
+        state.authData = null;
+        state.isAuth = false;
+        state.error = null;
+      })
+      .addCase(logoutRequest.rejected, (state, action) => {
         state.authFetchStatus = 'failed';
         state.error = action.payload as ErrorResponse;
       });

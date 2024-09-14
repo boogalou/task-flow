@@ -50,7 +50,7 @@ export const checkAuthRequest = createAsyncThunk(
 
 export const logoutRequest = createAsyncThunk('auth/logout', async (_data, thunkApi) => {
   try {
-    const response = await authApi.checkAuth();
+    const response = await authApi.logout();
     return response.data;
   } catch (err) {
     if (axios.isAxiosError(err)) {
