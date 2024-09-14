@@ -3,9 +3,12 @@
 @mixin list-style {
   grid-column: 1 / 2;
   font-weight: bold;
+  padding: $gap-xs 0;
+
 
   &-text {
     font-weight: normal;
+    color: var(--color-success);
   }
 }
 

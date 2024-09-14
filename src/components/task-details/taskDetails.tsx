@@ -8,6 +8,9 @@ import { deleteTask } from '../task/model/taskThunk.ts';
 import { useAppDispatch } from '../../app/store/reduxHooks.ts';
 import { Modal } from '../../shared/ui-kit/modal/modal.tsx';
 import { useModal } from '../../shared/ui-kit/modal/useModal.ts';
+import { useTranslation } from 'react-i18next';
+import { enUS, ru } from 'date-fns/locale';
+import { formatDetailsDate } from '../main-content/lib/formatDetailsDate.ts';
 
 const cx = cnBind.bind(styles);
 
@@ -17,6 +20,8 @@ interface TaskDetailsProps extends Task {
 
 export function TaskDetails(props: TaskDetailsProps) {
   const dispatch = useAppDispatch();
+  const { i18n } = useTranslation();
+  const currentLocale = i18n.language === 'ru' ? ru : enUS;
 
   const { isOpen, openModal, closeModal } = useModal();
 
@@ -62,19 +67,19 @@ export function TaskDetails(props: TaskDetailsProps) {
     },
     {
       label: 'Expire',
-      value: props.dueDate,
+      value: formatDetailsDate(props.dueDate, currentLocale, true),
       className: 'details__expire',
       textClassName: 'details__expire-text',
     },
     {
-      label: 'Created',
-      value: props.createdAt,
+      label: 'Created At',
+      value: formatDetailsDate(props.createdAt, currentLocale),
       className: 'details__created',
       textClassName: 'details__created-text',
     },
     {
-      label: 'Updated',
-      value: props.updatedAt,
+      label: 'Updated At',
+      value: formatDetailsDate(props.updatedAt, currentLocale),
       className: 'details__updated',
       textClassName: 'details__updated-text',
     },
