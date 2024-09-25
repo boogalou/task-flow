@@ -9,7 +9,7 @@ import {
   setTheme,
   toggleSettings,
 } from './model/settings.slice.ts';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent } from 'react';
 import { nanoid } from '@reduxjs/toolkit';
 import { Icon } from '../../shared/ui-kit/icon/icon.tsx';
 import { RadioGroup } from '../../shared/ui-kit/radio-group/radioGroup.tsx';
@@ -33,18 +33,14 @@ export function Settings() {
   const dispatch = useAppDispatch();
   const currentTheme = useAppSelector(selectTheme);
   const currentLang = useAppSelector(selectLanguage);
-  const [selectedTheme, setSelectedTheme] = useState(currentTheme);
-  const [selectedLang, setSelectedLang] = useState(currentLang);
 
   const handleThemeChange = (evt: ChangeEvent<HTMLInputElement>) => {
     const newTheme = evt.target.value as 'system' | 'light' | 'dark';
-    setSelectedTheme(newTheme);
     dispatch(setTheme(newTheme));
   };
 
   const handleLangChange = (evt: ChangeEvent<HTMLInputElement>) => {
     const newLang = evt.target.value as 'rus' | 'eng';
-    setSelectedLang(newLang);
     dispatch(setLanguage(newLang));
     i18n.changeLanguage(newLang === 'eng' ? 'en' : 'ru');
   };
@@ -67,7 +63,7 @@ export function Settings() {
           <RadioGroup
             className={cx('settings__radio-group')}
             data={themeData.map((item) => ({ ...item, label: t(`settings.themes.${item.value}`) }))}
-            selectedValue={selectedTheme}
+            selectedValue={currentTheme}
             name="theme"
             onChange={handleThemeChange}
           />
@@ -80,7 +76,7 @@ export function Settings() {
               ...item,
               label: t(`settings.languages.${item.value}`),
             }))}
-            selectedValue={selectedLang}
+            selectedValue={currentLang}
             name="language"
             onChange={handleLangChange}
           />
