@@ -1,11 +1,11 @@
 FROM node:lts-alpine3.20 AS build
 WORKDIR /app
 COPY package*.json ./
-RUN yarn
+RUN yarn install --frozen-lockfile
 COPY . .
 RUN yarn build
 
 FROM fholzer/nginx-brotli:mainline-latest
 COPY --from=build /app/dist /usr/share/nginx/html
-COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
-ENTRYPOINT ["nginx", "-g", "deamon off"]
+COPY ./nginx.conf /etc/nginx/nginx.conf
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
