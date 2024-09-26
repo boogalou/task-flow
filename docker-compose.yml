@@ -1,0 +1,22 @@
+version: "3"
+services:
+  client:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    restart: always
+    container_name: taskflow-web
+    ports:
+      - "80:80"
+      - "443:443"
+    env_file:
+      - .env
+    depends_on:
+      - server
+    networks:
+      - common-network
+      - frontend
+
+networks:
+  common-network:
+  frontend:
