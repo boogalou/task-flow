@@ -39,7 +39,6 @@ export function Signup() {
     validateOnBlur: true,
     validateOnChange: true,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
       dispatch(
         signupRequest({
           user: {
