@@ -1,7 +1,7 @@
 import { InputField } from '../../shared/lib/createInputFields.ts';
-import { LoginData, RegistrationData } from '../../shared/types/types.ts';
+import { LoginRequestData, RegistrationRequestData } from '../../shared/types/types.ts';
 
-export const registrationFields: InputField<RegistrationData>[] = [
+export const registrationFields: InputField<RegistrationRequestData>[] = [
   {
     id: 'username',
     name: 'username',
@@ -32,7 +32,7 @@ export const registrationFields: InputField<RegistrationData>[] = [
   },
 ];
 
-export const loginFields: InputField<LoginData>[] = [
+export const loginFields: InputField<LoginRequestData>[] = [
   {
     id: 'email',
     name: 'email',

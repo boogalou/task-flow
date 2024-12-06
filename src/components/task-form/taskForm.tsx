@@ -34,8 +34,8 @@ export function TaskForm({ task, closeModal }: TaskFormProps) {
         description: task?.description || '',
         category: task?.category || '',
         color: task?.color || '',
-        date: parseDate(task.dueDate).dateString || '',
-        time: parseDate(task.dueDate).timeString || '',
+        date: parseDate(task.dueDate!).dateString || '',
+        time: parseDate(task.dueDate!).timeString || '',
       }
     : {
         title: '',
@@ -53,7 +53,7 @@ export function TaskForm({ task, closeModal }: TaskFormProps) {
         console.log('dispatch: ', JSON.stringify(values, null, 2));
         dispatch(
           updateTaskRequest({
-            id: task?.id,
+            id: task?.id!,
             title: values.title,
             description: values.description,
             category: values.category,

@@ -1,6 +1,6 @@
 import axios from 'axios';
+import { setAuthData } from '../../components/auth/model/auth.slice.ts';
 import { AuthDataResponse } from '../types/types.ts';
-import { setToken } from '../../components/auth/model/auth.slice.ts';
 
 const API_URL = `${import.meta.env.VITE_API_URL}`;
 
@@ -11,7 +11,7 @@ export const apiClient = axios.create({
 
 export function setupInterceptors(store: any) {
   apiClient.interceptors.request.use((config) => {
-    const token = store.getState().authSlice?.authData?.accessToken;
+    const token = store.getState().authSlice.authData?.accessToken;
     if (token) {
       config.headers['Authorization'] = `Bearer ${token}`;
     }
@@ -36,23 +36,24 @@ export function setupInterceptors(store: any) {
             return apiClient(config);
           }
         } catch (err) {
-          return Promise.reject(error);
+          return Promise.reject(err);
         }
       }
+      return Promise.reject(error);
     },
   );
 
   async function refreshToken() {
     try {
       const response = await axios.post<AuthDataResponse>(
-        API_URL + `/refresh`,
+        API_URL + `/auth/refresh`,
         {},
         { withCredentials: true },
       );
 
-      const token = response.data.accessToken;
-      if (token) {
-        store.dispatch(setToken(token));
+      const data = response.data;
+      if (data) {
+        store.dispatch(setAuthData(data));
       }
 
       return response;

@@ -1,30 +1,19 @@
 import { IconType } from '../ui-kit/icon/iconType.tsx';
 
-export type RegistrationData = {
+export type RegistrationRequestData = {
   username: string;
   email: string;
   password: string;
   confirmPassword: string;
 };
 
-export type LoginData = {
+export type LoginRequestData = {
   email: string;
   password: string;
 };
 
-export type RegistrationRequestData = {
-  user: RegistrationData;
-};
-
-export type LoginRequestData = {
-  user: LoginData;
-};
-
 export type AuthDataResponse = {
-  userId: number;
-  email: string;
-  username: string;
-  userPic: string | null;
+  token_type: string;
   accessToken: string;
 };
 
@@ -39,14 +28,14 @@ export type TaskFormData = {
 
 export type Task = {
   id: number;
-  title: string;
-  description: string;
-  dueDate: string;
-  category: string;
-  color: string;
-  createdAt: string;
-  updatedAt: string;
-  isCompleted: boolean;
+  title?: string;
+  description?: string;
+  dueDate?: string;
+  category?: string;
+  color?: string;
+  createdAt?: string;
+  updatedAt?: string;
+  isCompleted?: boolean;
 };
 
 export type CreateTaskRequest = {
@@ -55,6 +44,12 @@ export type CreateTaskRequest = {
   category: string;
   color: string;
   dueDate: string;
+  isCompleted: boolean;
+};
+
+export type UserSettings = {
+  theme: 'system' | 'light' | 'dark';
+  language: 'eng' | 'rus';
 };
 
 export type ErrorResponse = {
@@ -77,3 +72,5 @@ export type ButtonsData = {
   count: number;
   iconType: IconType;
 };
+
+export type FetchStatus = 'idle' | 'loading' | 'failed' | 'succeeded';

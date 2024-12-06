@@ -1,16 +1,13 @@
-import { asyncThunkCreator, buildCreateSlice, PayloadAction } from '@reduxjs/toolkit';
-import { createTaskRequest, deleteTask, updateTaskRequest } from './taskThunk.ts';
-import { ErrorResponse, FilterCriteria, Task } from '../../../shared/types/types.ts';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createTaskRequest, deleteTask, getTasks, updateTaskRequest } from './taskThunk.ts';
+import { ErrorResponse, FetchStatus, FilterCriteria, Task } from '../../../shared/types/types.ts';
 import { getUniqueCategories } from '../lib/getUniqueCategories.ts';
-import { taskApi } from '../api/TaskApi.ts';
-import axios from 'axios';
-import { calculateTasksCount } from '../lib/calculateTasksCount.ts';
 
 export interface TaskState {
   tasks: Task[];
   categories: string[];
   lastRemovedTask: Task | null;
-  taskFetchStatus: string;
+  taskFetchStatus: FetchStatus;
   error: ErrorResponse | null;
   filters: FilterCriteria;
 }
@@ -28,10 +25,6 @@ const initialState: TaskState = {
   },
 };
 
-const createSlice = buildCreateSlice({
-  creators: { asyncThunk: asyncThunkCreator },
-});
-
 export const taskSlice = createSlice({
   name: 'taskSlice',
   initialState,
@@ -40,51 +33,30 @@ export const taskSlice = createSlice({
     selectCategories: (state) => state.categories,
     selectError: (state) => state.error,
     selectFilter: (state) => state.filters,
-    selectTasksCount: (state) => {
-      return calculateTasksCount(state.tasks);
+    selectTaskFetchStatus: (state) => state.taskFetchStatus,
+  },
+
+  reducers: {
+    setCriteriaFilter(state, { payload }: PayloadAction<FilterCriteria>) {
+      state.filters = { ...state.filters, ...payload };
     },
   },
 
-  reducers: (create) => ({
-    setCriteriaFilter: create.reducer((state, { payload }: PayloadAction<FilterCriteria>) => {
-      state.filters = { ...state.filters, ...payload };
-    }),
-
-    fetchTasks: create.asyncThunk(
-      async (_payload: void, thunkApi) => {
-        try {
-          const response = await taskApi.getTasks();
-          return response.data;
-        } catch (err) {
-          if (axios.isAxiosError(err)) {
-            return thunkApi.rejectWithValue(err.response?.data);
-          }
-          throw new Error(`${err}`);
-        }
-      },
-      {
-        pending: (state) => {
-          state.taskFetchStatus = 'loading';
-          state.error = null;
-        },
-
-        fulfilled: (state, { payload }) => {
-          state.taskFetchStatus = 'succeeded';
-          state.tasks = payload;
-          state.categories = getUniqueCategories(payload);
-          state.error = null;
-        },
-
-        rejected: (state, action) => {
-          state.taskFetchStatus = 'failed';
-          state.error = action.payload as ErrorResponse;
-        },
-      },
-    ),
-  }),
-
   extraReducers: (builder) => {
     builder
+      .addCase(getTasks.pending, (state) => {
+        state.taskFetchStatus = 'loading';
+        state.error = null;
+      })
+      .addCase(getTasks.fulfilled, (state, action) => {
+        state.taskFetchStatus = 'succeeded';
+        state.tasks = action.payload;
+        state.error = null;
+      })
+      .addCase(getTasks.rejected, (state, action) => {
+        state.taskFetchStatus = 'failed';
+        state.error = action.payload as ErrorResponse;
+      })
       .addCase(createTaskRequest.pending, (state) => {
         state.taskFetchStatus = 'loading';
         state.error = null;
@@ -115,7 +87,6 @@ export const taskSlice = createSlice({
         state.taskFetchStatus = 'failed';
         state.error = action.payload as ErrorResponse;
       })
-
       .addCase(deleteTask.pending, (state, action) => {
         state.taskFetchStatus = 'loading';
         state.error = null;
@@ -140,9 +111,9 @@ export const taskSlice = createSlice({
   },
 });
 
-export const { selectTasks, selectError, selectFilter, selectCategories, selectTasksCount } =
+export const { selectTasks, selectError, selectFilter, selectCategories, selectTaskFetchStatus } =
   taskSlice.selectors;
-export const { setCriteriaFilter, fetchTasks } = taskSlice.actions;
+export const { setCriteriaFilter } = taskSlice.actions;
 export const selectTaskById = (state: TaskState, taskId: number) => {
   if (taskId) {
     return state.tasks.find((task) => task.id === taskId);

@@ -2,19 +2,22 @@ import styles from './nav-actions.module.scss';
 import cnBind from 'classnames/bind';
 import { Button } from '../../shared/ui-kit/button/button.tsx';
 import { Icon } from '../../shared/ui-kit/icon/icon.tsx';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/store/reduxHooks.ts';
-import { selectTasksCount, setCriteriaFilter } from '../task/model/taskSlice.ts';
+import { selectTasks, setCriteriaFilter } from '../task/model/taskSlice.ts';
 import { ButtonsData } from '../../shared/types/types.ts';
 import { useTranslation } from 'react-i18next';
+import { calculateTasksCount } from '../task/lib/calculateTasksCount.ts';
 
 const cx = cnBind.bind(styles);
 
 export function NavActions() {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const countTasks = useAppSelector(selectTasksCount);
+  const tasks = useAppSelector(selectTasks);
   const [buttonIsPressed, setButtonIsPressed] = useState<null | number>(null);
+
+  const countTasks = useMemo(() => calculateTasksCount(tasks), [tasks]);
 
   const handleOnClick = (id: number, action: string) => {
     setButtonIsPressed(id);

@@ -1,10 +1,9 @@
 import styles from './auth.module.scss';
 import cnBind from 'classnames/bind';
-import { LoginData } from '../../shared/types/types.ts';
 import { useAppDispatch } from '../../app/store/reduxHooks.ts';
 import { useForm } from './lib/useForm.ts';
 import { loginValidationSchema } from './lib/validationSchema.ts';
-import { signinRequest } from './model/auth.thunk.ts';
+import { loginRequest } from './model/auth.thunk.ts';
 import { createInputFields } from '../../shared/lib/createInputFields.ts';
 import Input from '../../shared/ui-kit/input/input.tsx';
 import { Button } from '../../shared/ui-kit/button/button.tsx';
@@ -14,6 +13,7 @@ import { Icon } from '../../shared/ui-kit/icon/icon.tsx';
 import { useShowPassword } from './lib/useShowPassword.ts';
 import { loginFields } from './inputConfig.ts';
 import { useTranslation } from 'react-i18next';
+import { LoginRequestData } from '../../shared/types/types.ts';
 
 const cx = cnBind.bind(styles);
 
@@ -24,7 +24,7 @@ export function Signin() {
     email: 'email',
     password: 'password',
   });
-  const form = useForm<LoginData>({
+  const form = useForm<LoginRequestData>({
     initialValues: {
       email: '',
       password: '',
@@ -33,13 +33,8 @@ export function Signin() {
     validateOnBlur: true,
     validateOnChange: true,
     onSubmit: (values) => {
-      dispatch(
-        signinRequest({
-          user: {
-            ...values,
-          },
-        }),
-      );
+      console.log(values);
+      dispatch(loginRequest(values));
       form.resetForm();
     },
   });
@@ -89,7 +84,7 @@ export function Signin() {
       </form>
       <div className={cx('link')}>
         {t('authPage.noAccount')}&nbsp;
-        <Link to={routes.SIGNUP_PAGE}>{t('authPage.registrationLink')}</Link>
+        <Link to={routes.REGISTRATION_PAGE}>{t('authPage.registrationLink')}</Link>
       </div>
     </div>
   );

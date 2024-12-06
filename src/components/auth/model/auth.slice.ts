@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { checkAuthRequest, logoutRequest, signinRequest, signupRequest } from './auth.thunk.ts';
-import { AuthDataResponse, ErrorResponse } from '../../../shared/types/types.ts';
+import { checkAuthRequest, logoutRequest, loginRequest, signupRequest } from './auth.thunk.ts';
+import { AuthDataResponse, ErrorResponse, FetchStatus } from '../../../shared/types/types.ts';
 
 export interface AuthState {
   authData: AuthDataResponse | null;
-  authFetchStatus: string;
+  authFetchStatus: FetchStatus;
   error: ErrorResponse | null;
   isAuth: boolean;
 }
@@ -25,10 +25,8 @@ export const authSlice = createSlice({
     selectIsAuth: (state) => state.isAuth,
   },
   reducers: {
-    setToken(state, { payload }: PayloadAction<string>) {
-      if (state.authData?.accessToken) {
-        state.authData.accessToken = payload;
-      }
+    setAuthData(state, { payload }: PayloadAction<AuthDataResponse>) {
+      state.authData = payload;
     },
   },
 
@@ -48,18 +46,19 @@ export const authSlice = createSlice({
         state.authFetchStatus = 'failed';
         state.error = action.payload as ErrorResponse;
       })
-      .addCase(signinRequest.pending, (state) => {
+      .addCase(loginRequest.pending, (state) => {
         state.authFetchStatus = 'loading';
         state.error = null;
       })
-      .addCase(signinRequest.fulfilled, (state, action) => {
+      .addCase(loginRequest.fulfilled, (state, action) => {
         state.authFetchStatus = 'succeeded';
         state.authData = action.payload || null;
         state.isAuth = true;
         state.error = null;
       })
-      .addCase(signinRequest.rejected, (state, action) => {
+      .addCase(loginRequest.rejected, (state, action) => {
         state.authFetchStatus = 'failed';
+        state.isAuth = false;
         state.error = action.payload as ErrorResponse;
       })
       .addCase(checkAuthRequest.pending, (state) => {
@@ -74,6 +73,7 @@ export const authSlice = createSlice({
       })
       .addCase(checkAuthRequest.rejected, (state, action) => {
         state.authFetchStatus = 'failed';
+        state.isAuth = false;
         state.error = action.payload as ErrorResponse;
       })
       .addCase(logoutRequest.pending, (state) => {
@@ -94,4 +94,4 @@ export const authSlice = createSlice({
 });
 
 export const { selectAuthData, selectAuthFetchStatus, selectIsAuth } = authSlice.selectors;
-export const { setToken } = authSlice.actions;
+export const { setAuthData } = authSlice.actions;

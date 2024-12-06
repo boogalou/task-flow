@@ -14,7 +14,7 @@ export function calculateTasksCount(tasks: Task[]) {
   };
 
   tasks.forEach((task) => {
-    const taskDueDate = new Date(task.dueDate);
+    const taskDueDate = new Date(task.dueDate as string);
 
     if (isToday(taskDueDate)) {
       tasksCount.today += 1;

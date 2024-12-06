@@ -1,14 +1,13 @@
-import { authApi } from '../api/AuthApi.ts';
+import { authService } from '../service/AuthService.ts';
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { LoginRequestData, RegistrationRequestData } from '../../../shared/types/types.ts';
-import { fetchTasks } from '../../task/model/taskSlice.ts';
 
 export const signupRequest = createAsyncThunk(
   'auth/signup',
   async (data: RegistrationRequestData, thunkApi) => {
     try {
-      const response = await authApi.signup(data);
+      const response = await authService.signup(data);
       return response.data;
     } catch (err) {
       if (axios.isAxiosError(err)) {
@@ -18,12 +17,11 @@ export const signupRequest = createAsyncThunk(
   },
 );
 
-export const signinRequest = createAsyncThunk(
-  'auth/signin',
+export const loginRequest = createAsyncThunk(
+  'auth/login',
   async (data: LoginRequestData, thunkApi) => {
     try {
-      const response = await authApi.signin(data);
-      await thunkApi.dispatch(fetchTasks());
+      const response = await authService.login(data);
       return response.data;
     } catch (err) {
       if (axios.isAxiosError(err)) {
@@ -37,8 +35,7 @@ export const checkAuthRequest = createAsyncThunk(
   'auth/refresh',
   async (_payload: void, thunkApi) => {
     try {
-      const response = await authApi.checkAuth();
-      await thunkApi.dispatch(fetchTasks());
+      const response = await authService.checkAuth();
       return response.data;
     } catch (err) {
       if (axios.isAxiosError(err)) {
@@ -50,7 +47,7 @@ export const checkAuthRequest = createAsyncThunk(
 
 export const logoutRequest = createAsyncThunk('auth/logout', async (_data, thunkApi) => {
   try {
-    const response = await authApi.logout();
+    const response = await authService.logout();
     return response.data;
   } catch (err) {
     if (axios.isAxiosError(err)) {

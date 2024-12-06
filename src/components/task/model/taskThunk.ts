@@ -1,13 +1,14 @@
 import axios from 'axios';
-import { taskApi } from '../api/TaskApi.ts';
+import { taskService } from '../service/TaskService.ts';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { Task, CreateTaskRequest } from '../../../shared/types/types.ts';
+import { CreateTaskRequest, Task } from '../../../shared/types/types.ts';
+import { AppState } from '../../../app/store/store.ts';
 
 export const createTaskRequest = createAsyncThunk(
   'task/create',
-  async (payload: CreateTaskRequest & { isCompleted: boolean }, thunkApi) => {
+  async (payload: CreateTaskRequest, thunkApi) => {
     try {
-      const response = await taskApi.createTask(payload);
+      const response = await taskService.createTask(payload);
       return response.data;
     } catch (err) {
       if (axios.isAxiosError(err)) {
@@ -20,9 +21,12 @@ export const createTaskRequest = createAsyncThunk(
 
 export const updateTaskRequest = createAsyncThunk(
   'task/update',
-  async (payload: Partial<Task & { id: number; isCompleted: boolean }>, thunkApi) => {
+  async (payload: Task, thunkApi) => {
+    const store = thunkApi.getState() as AppState;
+    const userId = store.authSlice.authData?.id;
+
     try {
-      const response = await taskApi.updateTask(payload);
+      const response = await taskService.updateTask(payload, userId!);
       return response.data;
     } catch (err) {
       if (axios.isAxiosError(err)) {
@@ -33,9 +37,9 @@ export const updateTaskRequest = createAsyncThunk(
   },
 );
 
-export const getTasks = createAsyncThunk('task/getAll', async (_payload: void, thunkApi) => {
+export const getTasks = createAsyncThunk('task/getAll', async (userId: number, thunkApi) => {
   try {
-    const response = await taskApi.getTasks();
+    const response = await taskService.getTasks(userId);
     return response.data;
   } catch (err) {
     if (axios.isAxiosError(err)) {
@@ -46,8 +50,11 @@ export const getTasks = createAsyncThunk('task/getAll', async (_payload: void, t
 });
 
 export const deleteTask = createAsyncThunk('task/delete', async (payload: number, thunkApi) => {
+  const store = thunkApi.getState() as AppState;
+  const userId = store.authSlice.authData?.id;
+
   try {
-    const response = await taskApi.deleteTask(payload);
+    const response = await taskService.deleteTask(payload, userId!);
     if (response.status === 204) {
       return { payload };
     } else {

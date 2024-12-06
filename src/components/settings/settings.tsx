@@ -14,6 +14,7 @@ import { nanoid } from '@reduxjs/toolkit';
 import { Icon } from '../../shared/ui-kit/icon/icon.tsx';
 import { RadioGroup } from '../../shared/ui-kit/radio-group/radioGroup.tsx';
 import { useTranslation } from 'react-i18next';
+import { updateSettingsRequest } from './model/settingsThunk.ts';
 
 const cx = cnBind.bind(styles);
 
@@ -49,6 +50,23 @@ export function Settings() {
     dispatch(toggleSettings());
   };
 
+  const handleSaveButton = () => {
+    dispatch(
+      updateSettingsRequest({
+        theme: currentTheme,
+        language: currentLang,
+      }),
+    );
+
+    localStorage.setItem(
+      'app-settings',
+      JSON.stringify({
+        theme: currentTheme,
+        language: currentLang,
+      }),
+    );
+  };
+
   return (
     <div className={cx('settings')}>
       <div className={cx('wrapper')}>
@@ -62,7 +80,10 @@ export function Settings() {
           <span className={cx('settings__subtitle')}>{t('settings.theme')}</span>
           <RadioGroup
             className={cx('settings__radio-group')}
-            data={themeData.map((item) => ({ ...item, label: t(`settings.themes.${item.value}`) }))}
+            data={themeData.map((item) => ({
+              ...item,
+              label: t(`settings.themes.${item.value}`),
+            }))}
             selectedValue={currentTheme}
             name="theme"
             onChange={handleThemeChange}
@@ -82,6 +103,9 @@ export function Settings() {
           />
         </div>
       </div>
+      <Button className="button--primary" onClick={handleSaveButton}>
+        Save
+      </Button>
     </div>
   );
 }

@@ -16,7 +16,7 @@ interface TaskProps extends ITask {
 
 export function Task(props: TaskProps) {
   const dispatch = useAppDispatch();
-  const expireDate = formatExpiryDate(props.dueDate);
+  const expireDate = formatExpiryDate(props.dueDate!);
   const [isDetailsVisible, setIsDetailsVisible] = useState(false);
 
   const handleOnChangeCheckBox = (evt: ChangeEvent<HTMLInputElement>) => {

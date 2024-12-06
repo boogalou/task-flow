@@ -2,7 +2,7 @@ import styles from './auth.module.scss';
 import cnBind from 'classnames/bind';
 import Input from '../../shared/ui-kit/input/input.tsx';
 import { Button } from '../../shared/ui-kit/button/button.tsx';
-import { RegistrationData } from '../../shared/types/types.ts';
+import { RegistrationRequestData } from '../../shared/types/types.ts';
 import { useAppDispatch } from '../../app/store/reduxHooks.ts';
 import { signupRequest } from './model/auth.thunk.ts';
 import { useForm } from './lib/useForm.ts';
@@ -28,7 +28,7 @@ export function Signup() {
     confirmPassword: 'password',
   });
 
-  const form = useForm<RegistrationData>({
+  const form = useForm<RegistrationRequestData>({
     initialValues: {
       username: '',
       email: '',
@@ -39,13 +39,7 @@ export function Signup() {
     validateOnBlur: true,
     validateOnChange: true,
     onSubmit: (values) => {
-      dispatch(
-        signupRequest({
-          user: {
-            ...values,
-          },
-        }),
-      );
+      dispatch(signupRequest({ ...values }));
       form.resetForm();
     },
   });
@@ -54,7 +48,7 @@ export function Signup() {
     <div className={cx('container')}>
       <h2 className={cx('title')}>{t('authPage.signUp')}</h2>
       <form className={cx('form')} onSubmit={form.handleSubmit} noValidate={true}>
-        {createInputFields<RegistrationData>(
+        {createInputFields<RegistrationRequestData>(
           form.values,
           registrationFields,
           form.error,
@@ -95,7 +89,7 @@ export function Signup() {
       </form>
       <div className={cx('link')}>
         {t('authPage.isRegister')}&nbsp;
-        <Link to={routes.SIGNIN_PAGE}>{t('authPage.loginLink')}</Link>
+        <Link to={routes.LOGIN_PAGE}>{t('authPage.loginLink')}</Link>
       </div>
     </div>
   );

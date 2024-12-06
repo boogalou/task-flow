@@ -1,16 +1,22 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { i18n } from '../../../app/i18n.ts';
+import { getSettingsRequest, updateSettingsRequest } from './settingsThunk.ts';
+import { ErrorResponse, FetchStatus, UserSettings } from '../../../shared/types/types.ts';
 
 type SettingsState = {
-  theme: 'system' | 'light' | 'dark';
-  language: 'eng' | 'rus';
+  settings: UserSettings;
   settingsIsActive: boolean;
+  settingsFetchStatus: FetchStatus;
+  error: ErrorResponse | null;
 };
 
 const initialState: SettingsState = {
-  theme: (localStorage.getItem('app-theme') as 'system' | 'light' | 'dark') || 'system',
-  language: (localStorage.getItem('app-language') as 'eng' | 'rus') || 'eng',
+  settings: {
+    theme: 'system',
+    language: 'eng',
+  },
   settingsIsActive: false,
+  settingsFetchStatus: 'idle',
+  error: null,
 };
 
 export const settingsSlice = createSlice({
@@ -18,26 +24,53 @@ export const settingsSlice = createSlice({
   initialState,
 
   selectors: {
-    selectTheme: (state) => state.theme,
-    selectLanguage: (state) => state.language,
+    selectTheme: (state) => state.settings.theme,
+    selectLanguage: (state) => state.settings.language,
     selectSettingsIsActive: (state) => state.settingsIsActive,
   },
 
   reducers: {
     setTheme(state, { payload }: PayloadAction<'system' | 'light' | 'dark'>) {
-      state.theme = payload;
-      localStorage.setItem('app-theme', payload);
+      state.settings.theme = payload;
     },
 
     setLanguage(state, { payload }: PayloadAction<'eng' | 'rus'>) {
-      state.language = payload;
-      localStorage.setItem('app-language', payload);
-      i18n.changeLanguage(payload === 'eng' ? 'en' : 'ru');
+      state.settings.language = payload;
     },
 
     toggleSettings(state) {
       state.settingsIsActive = !state.settingsIsActive;
     },
+  },
+
+  extraReducers: (builder) => {
+    builder
+      .addCase(getSettingsRequest.pending, (state) => {
+        state.settingsFetchStatus = 'loading';
+        state.error = null;
+      })
+      .addCase(getSettingsRequest.fulfilled, (state, action) => {
+        state.settingsFetchStatus = 'succeeded';
+        state.settings = action.payload;
+        state.error = null;
+      })
+      .addCase(getSettingsRequest.rejected, (state, action) => {
+        state.settingsFetchStatus = 'failed';
+        state.error = action.payload as ErrorResponse;
+      })
+      .addCase(updateSettingsRequest.pending, (state) => {
+        state.settingsFetchStatus = 'loading';
+        state.error = null;
+      })
+      .addCase(updateSettingsRequest.fulfilled, (state, action) => {
+        state.settingsFetchStatus = 'succeeded';
+        state.settings = action.payload;
+        state.error = null;
+      })
+      .addCase(updateSettingsRequest.rejected, (state, action) => {
+        state.settingsFetchStatus = 'failed';
+        state.error = action.payload as ErrorResponse;
+      });
   },
 });
 

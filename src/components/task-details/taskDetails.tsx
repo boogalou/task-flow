@@ -67,19 +67,19 @@ export function TaskDetails(props: TaskDetailsProps) {
     },
     {
       label: 'Expire',
-      value: formatDetailsDate(props.dueDate, currentLocale, true),
+      value: formatDetailsDate(props.dueDate!, currentLocale, true),
       className: 'details__expire',
       textClassName: 'details__expire-text',
     },
     {
       label: 'Created At',
-      value: formatDetailsDate(props.createdAt, currentLocale),
+      value: formatDetailsDate(props.createdAt!, currentLocale),
       className: 'details__created',
       textClassName: 'details__created-text',
     },
     {
       label: 'Updated At',
-      value: formatDetailsDate(props.updatedAt, currentLocale),
+      value: formatDetailsDate(props.updatedAt!, currentLocale),
       className: 'details__updated',
       textClassName: 'details__updated-text',
     },

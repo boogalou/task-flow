@@ -10,7 +10,7 @@ export interface AuthGuardProps {
 
 export function RequireAuthGuard({ children }: AuthGuardProps) {
   const isAuth = useAppSelector(selectIsAuth);
-  return !isAuth ? <Navigate to={routes.SIGNIN_PAGE} /> : <>{children}</>;
+  return !isAuth ? <Navigate to={routes.LOGIN_PAGE} /> : <>{children}</>;
 }
 
 export function RequireGuestGuard({ children }: AuthGuardProps) {
