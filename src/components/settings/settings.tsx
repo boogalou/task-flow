@@ -15,6 +15,8 @@ import { Icon } from '../../shared/ui-kit/icon/icon.tsx';
 import { RadioGroup } from '../../shared/ui-kit/radio-group/radioGroup.tsx';
 import { useTranslation } from 'react-i18next';
 import { updateSettingsRequest } from './model/settingsThunk.ts';
+import { storageAdapter } from '../../shared/lib/localStorageAdapter.ts';
+import { UserSettings } from '../../shared/types/types.ts';
 
 const cx = cnBind.bind(styles);
 
@@ -58,13 +60,10 @@ export function Settings() {
       }),
     );
 
-    localStorage.setItem(
-      'app-settings',
-      JSON.stringify({
-        theme: currentTheme,
-        language: currentLang,
-      }),
-    );
+    storageAdapter.save<UserSettings>('app-settings', {
+      theme: currentTheme,
+      language: currentLang,
+    });
   };
 
   return (
