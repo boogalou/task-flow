@@ -3,7 +3,7 @@ import cnBind from 'classnames/bind';
 import { Button } from '../../shared/ui-kit/button/button.tsx';
 import { Icon } from '../../shared/ui-kit/icon/icon.tsx';
 import { useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../app/store/reduxHooks.ts';
+import { useAppDispatch, useAppSelector } from '../../shared/lib/reduxHooks.ts';
 import { selectCategories, setCriteriaFilter } from '../task/model/taskSlice.ts';
 import { useTranslation } from 'react-i18next';
 

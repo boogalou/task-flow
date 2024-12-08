@@ -1,5 +1,5 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import { authSlice } from '../../components/auth/model/auth.slice.ts';
+import { authSlice } from '../../entities/auth/model/auth.slice.ts';
 import { taskSlice } from '../../components/task/model/taskSlice.ts';
 import { settingsSlice } from '../../components/settings/model/settings.slice.ts';
 

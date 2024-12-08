@@ -1,5 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { checkAuthRequest, logoutRequest, loginRequest, signupRequest } from './auth.thunk.ts';
+import {
+  checkAuthRequest,
+  logoutRequest,
+  loginRequest,
+  signupRequest,
+} from '../../../features/auth/usecases/auth.thunk.ts';
 import { AuthDataResponse, ErrorResponse, FetchStatus } from '../../../shared/types/types.ts';
 
 export interface AuthState {

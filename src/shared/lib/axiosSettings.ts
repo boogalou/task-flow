@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { setAuthData } from '../../components/auth/model/auth.slice.ts';
+import { setAuthData } from '../../entities/auth/model/auth.slice.ts';
 import { AuthDataResponse } from '../types/types.ts';
 
 const API_URL = `${import.meta.env.VITE_API_URL}`;

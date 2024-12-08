@@ -1,9 +1,9 @@
 import styles from './taskForm.module.scss';
 import cnBind from 'classnames/bind';
-import { useForm } from '../auth/lib/useForm.ts';
+import { useForm } from '../../entities/auth/lib/useForm.ts';
 import Input from '../../shared/ui-kit/input/input.tsx';
 import { Button } from '../../shared/ui-kit/button/button.tsx';
-import { useAppDispatch, useAppSelector } from '../../app/store/reduxHooks.ts';
+import { useAppDispatch, useAppSelector } from '../../shared/lib/reduxHooks.ts';
 import { createTaskRequest, updateTaskRequest } from '../task/model/taskThunk.ts';
 import { Task, TaskFormData } from '../../shared/types/types.ts';
 import { parseDate } from './lib/parseDate.ts';

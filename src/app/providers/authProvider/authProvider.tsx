@@ -1,28 +1,23 @@
-import { ReactElement, useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../../store/reduxHooks.ts';
-import { selectAuthFetchStatus } from '../../../components/auth/model/auth.slice.ts';
-import { checkAuthRequest } from '../../../components/auth/model/auth.thunk.ts';
+import { memo, ReactElement, useEffect, useRef } from 'react';
+import { useAppDispatch, useAppSelector } from '../../../shared/lib/reduxHooks.ts';
+import { selectAuthFetchStatus } from '../../../entities/auth/model/auth.slice.ts';
+import { checkAuthRequest } from '../../../features/auth/usecases/auth.thunk.ts';
 
 interface AuthProviderProps {
   children: ReactElement;
 }
 
-export function AuthProvider({ children }: AuthProviderProps) {
+export const AuthProvider = memo(function AuthProvider({ children }: AuthProviderProps) {
+  console.log('Call AuthProvider');
   const fetchStatus = useAppSelector(selectAuthFetchStatus);
   const dispatch = useAppDispatch();
+  const isDispatched = useRef(false);
 
   useEffect(() => {
-    let isMounted = true;
-
-    (async () => {
-      if (isMounted) {
-        dispatch(checkAuthRequest());
-      }
-    })();
-
-    return () => {
-      isMounted = false;
-    };
+    if (!isDispatched.current) {
+      dispatch(checkAuthRequest());
+      isDispatched.current = true;
+    }
   }, [dispatch]);
 
   if (fetchStatus === 'loading') {
@@ -30,4 +25,4 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }
 
   return children;
-}
+});

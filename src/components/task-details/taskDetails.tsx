@@ -5,7 +5,7 @@ import { Button } from '../../shared/ui-kit/button/button.tsx';
 import { Task } from '../../shared/types/types.ts';
 import { Icon } from '../../shared/ui-kit/icon/icon.tsx';
 import { deleteTask } from '../task/model/taskThunk.ts';
-import { useAppDispatch } from '../../app/store/reduxHooks.ts';
+import { useAppDispatch } from '../../shared/lib/reduxHooks.ts';
 import { Modal } from '../../shared/ui-kit/modal/modal.tsx';
 import { useModal } from '../../shared/ui-kit/modal/useModal.ts';
 import { useTranslation } from 'react-i18next';

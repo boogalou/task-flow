@@ -3,9 +3,9 @@ import { BaseLayout } from './layout/baseLayout.tsx';
 import { ErrorPage } from '../pages/error/error.page.tsx';
 import { MainPage } from '../pages/main/main.page.tsx';
 import { AuthLayout } from '../pages/auth/auth.page.tsx';
-import { Signup } from '../components/auth/signup.tsx';
+import { Registration } from '../widgets/registration/registration.tsx';
 import { routes } from '../shared/routes/routes.ts';
-import { Signin } from '../components/auth/signin.tsx';
+import { Signin } from '../widgets/login/signin.tsx';
 import { RequireAuthGuard, RequireGuestGuard } from './guards.tsx';
 
 export const appRouter = () =>
@@ -29,7 +29,7 @@ export const appRouter = () =>
               path: routes.REGISTRATION_PAGE,
               element: (
                 <RequireGuestGuard>
-                  <Signup />
+                  <Registration />
                 </RequireGuestGuard>
               ),
             },

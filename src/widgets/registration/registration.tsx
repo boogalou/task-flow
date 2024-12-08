@@ -1,51 +1,56 @@
-import styles from './auth.module.scss';
+import styles from '../../entities/auth/auth.module.scss';
 import cnBind from 'classnames/bind';
-import { useAppDispatch } from '../../app/store/reduxHooks.ts';
-import { useForm } from './lib/useForm.ts';
-import { loginValidationSchema } from './lib/validationSchema.ts';
-import { loginRequest } from './model/auth.thunk.ts';
-import { createInputFields } from '../../shared/lib/createInputFields.ts';
 import Input from '../../shared/ui-kit/input/input.tsx';
 import { Button } from '../../shared/ui-kit/button/button.tsx';
+import { RegistrationRequestData } from '../../shared/types/types.ts';
+import { useAppDispatch } from '../../shared/lib/reduxHooks.ts';
+import { useForm } from '../../entities/auth/lib/useForm.ts';
+import { registrationValidationSchema } from '../../entities/auth/lib/validationSchema.ts';
 import { Link } from 'react-router-dom';
 import { routes } from '../../shared/routes/routes.ts';
 import { Icon } from '../../shared/ui-kit/icon/icon.tsx';
-import { useShowPassword } from './lib/useShowPassword.ts';
-import { loginFields } from './inputConfig.ts';
+import { useShowPassword } from '../../entities/auth/lib/useShowPassword.ts';
+import { createInputFields } from '../../shared/lib/createInputFields.ts';
+import { registrationFields } from '../../entities/auth/inputConfig.ts';
 import { useTranslation } from 'react-i18next';
-import { LoginRequestData } from '../../shared/types/types.ts';
+import { signupRequest } from '../../features/auth/usecases/registration.usecase.ts';
 
 const cx = cnBind.bind(styles);
 
-export function Signin() {
+export function Registration() {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
+
   const { types, toggleType } = useShowPassword({
+    username: 'text',
     email: 'email',
     password: 'password',
+    confirmPassword: 'password',
   });
-  const form = useForm<LoginRequestData>({
+
+  const form = useForm<RegistrationRequestData>({
     initialValues: {
+      username: '',
       email: '',
       password: '',
+      confirmPassword: '',
     },
-    validationSchema: loginValidationSchema,
+    validationSchema: registrationValidationSchema,
     validateOnBlur: true,
     validateOnChange: true,
     onSubmit: (values) => {
-      console.log(values);
-      dispatch(loginRequest(values));
+      dispatch(signupRequest({ ...values }));
       form.resetForm();
     },
   });
 
   return (
     <div className={cx('container')}>
-      <h2 className={cx('title')}>{t('authPage.signIn')}</h2>
+      <h2 className={cx('title')}>{t('authPage.signUp')}</h2>
       <form className={cx('form')} onSubmit={form.handleSubmit} noValidate={true}>
-        {createInputFields(
+        {createInputFields<RegistrationRequestData>(
           form.values,
-          loginFields,
+          registrationFields,
           form.error,
           form.touched,
           types,
@@ -64,7 +69,7 @@ export function Signin() {
               placeholder={field.placeholder}
               label={field.label}
             />
-            {field.name === 'password' ? (
+            {field.name === 'password' || field.name === 'confirmPassword' ? (
               <div className={cx('form__icon')}>
                 <Icon
                   className={cx('icon--eye')}
@@ -78,13 +83,13 @@ export function Signin() {
             )}
           </div>
         ))}
-        <Button className={cx('form__button')} variant={'primary'} type="submit" disabled={false}>
-          {t('authPage.loginButton')}
+        <Button className={cx('form__button')} variant="primary" type="submit">
+          {t('authPage.registrationButton')}
         </Button>
       </form>
       <div className={cx('link')}>
-        {t('authPage.noAccount')}&nbsp;
-        <Link to={routes.REGISTRATION_PAGE}>{t('authPage.registrationLink')}</Link>
+        {t('authPage.isRegister')}&nbsp;
+        <Link to={routes.LOGIN_PAGE}>{t('authPage.loginLink')}</Link>
       </div>
     </div>
   );

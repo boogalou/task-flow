@@ -4,6 +4,7 @@ export class StorageAdapter {
   public save<T>(key: string, data: T): void {
     try {
       const stringifyValue = JSON.stringify(data);
+      console.log(stringifyValue);
       this.storage.setItem(key, stringifyValue);
     } catch (err) {
       console.error(`Failed to save data for key "${key}":`, err);

@@ -4,7 +4,7 @@ import { Task } from './task.tsx';
 import { Modal } from '../../shared/ui-kit/modal/modal.tsx';
 import { useModal } from '../../shared/ui-kit/modal/useModal.ts';
 import { useEffect, useState } from 'react';
-import { useAppSelector } from '../../app/store/reduxHooks.ts';
+import { useAppSelector } from '../../shared/lib/reduxHooks.ts';
 import { selectFilter, selectTaskById, selectTasks } from './model/taskSlice.ts';
 import { useFilterTasks } from './lib/useFilterTasks.ts';
 import { TaskForm } from '../task-form/taskForm.tsx';

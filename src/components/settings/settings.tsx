@@ -1,7 +1,7 @@
 import styles from './settigns.module.scss';
 import cnBind from 'classnames/bind';
 import { Button } from '../../shared/ui-kit/button/button.tsx';
-import { useAppDispatch, useAppSelector } from '../../app/store/reduxHooks.ts';
+import { useAppDispatch, useAppSelector } from '../../shared/lib/reduxHooks.ts';
 import {
   selectLanguage,
   selectTheme,
@@ -15,7 +15,7 @@ import { Icon } from '../../shared/ui-kit/icon/icon.tsx';
 import { RadioGroup } from '../../shared/ui-kit/radio-group/radioGroup.tsx';
 import { useTranslation } from 'react-i18next';
 import { updateSettingsRequest } from './model/settingsThunk.ts';
-import { storageAdapter } from '../../shared/lib/localStorageAdapter.ts';
+import { storageAdapter } from '../../shared/lib/storage.adapter.ts';
 import { UserSettings } from '../../shared/types/types.ts';
 
 const cx = cnBind.bind(styles);
