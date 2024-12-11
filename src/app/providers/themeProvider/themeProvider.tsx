@@ -1,13 +1,9 @@
 import { ReactNode } from 'react';
 import { useAppSelector } from '../../../shared/lib/reduxHooks.ts';
 import { selectTheme } from '../../../components/settings/model/settings.slice.ts';
-import { useTheme } from '../../../shared/lib/useTheme.ts';
+import { useTheme } from '../../../shared/lib/use-theme.ts';
 
-export interface ThemeProviderProps {
-  children: ReactNode;
-}
-
-export function ThemeProvider({ children }: ThemeProviderProps) {
+export function ThemeProvider({ children }: { children: ReactNode }) {
   const themePreference = useAppSelector(selectTheme);
   useTheme(themePreference);
 

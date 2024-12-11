@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import { useAppSelector } from '../shared/lib/reduxHooks.ts';
 import { selectIsAuth } from '../entities/auth/model/auth.slice.ts';
 import { Navigate } from 'react-router-dom';
-import { routes } from '../shared/routes/routes.ts';
+import { routes } from '../shared/constants/routes.ts';
 
 export interface AuthGuardProps {
   children: ReactNode;

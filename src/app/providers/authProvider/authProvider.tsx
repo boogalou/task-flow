@@ -1,13 +1,8 @@
-import { memo, ReactElement, useEffect, useRef } from 'react';
+import { memo, ReactNode, useEffect, useRef } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../shared/lib/reduxHooks.ts';
-import { selectAuthFetchStatus } from '../../../entities/auth/model/auth.slice.ts';
-import { checkAuthRequest } from '../../../features/auth/usecases/auth.thunk.ts';
+import { checkAuthRequest, selectAuthFetchStatus } from 'entities/auth';
 
-interface AuthProviderProps {
-  children: ReactElement;
-}
-
-export const AuthProvider = memo(function AuthProvider({ children }: AuthProviderProps) {
+export const AuthProvider = memo(function AuthProvider({ children }: { children: ReactNode }) {
   console.log('Call AuthProvider');
   const fetchStatus = useAppSelector(selectAuthFetchStatus);
   const dispatch = useAppDispatch();

@@ -1,18 +1,25 @@
 import { IconType } from '../ui-kit/icon/iconType.tsx';
 
-export type RegistrationRequestData = {
+export type User = {
+  id: number;
+  username: string;
+  email: string;
+  userPic: string;
+};
+
+export type RegistrationFormData = {
   username: string;
   email: string;
   password: string;
   confirmPassword: string;
 };
 
-export type LoginRequestData = {
+export type LoginFormData = {
   email: string;
   password: string;
 };
 
-export type AuthDataResponse = {
+export type AuthResponse = {
   token_type: string;
   accessToken: string;
 };

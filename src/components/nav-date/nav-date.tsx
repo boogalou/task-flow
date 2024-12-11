@@ -5,9 +5,9 @@ import { Icon } from '../../shared/ui-kit/icon/icon.tsx';
 import { Button } from '../../shared/ui-kit/button/button.tsx';
 import { useEffect, useMemo, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../shared/lib/reduxHooks.ts';
-import { selectTasks, setCriteriaFilter } from '../task/model/taskSlice.ts';
+import { selectTasks, setCriteriaFilter } from 'entities/task/model/taskSlice.ts';
 import { ButtonsData } from '../../shared/types/types.ts';
-import { calculateTasksCount } from '../task/lib/calculateTasksCount.ts';
+import { calculateTasksCount } from 'entities/task/lib/calculateTasksCount.ts';
 
 const cx = cnBind.bind(styles);
 

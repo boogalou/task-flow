@@ -3,13 +3,13 @@ import cnBind from 'classnames/bind';
 import { MouseEvent, useRef, useState } from 'react';
 import { Avatar } from '../../shared/ui-kit/avatar/avatar.tsx';
 import { useAppDispatch, useAppSelector } from '../../shared/lib/reduxHooks.ts';
-import { selectAuthData } from '../../entities/auth/model/auth.slice.ts';
+import { selectUser } from 'entities/user';
 import { Dropdown, DropdownItemData } from '../../shared/ui-kit/dropdown/dropdown.tsx';
 import { Button } from '../../shared/ui-kit/button/button.tsx';
 import { useOnClickOutside } from 'usehooks-ts';
 import { toggleSettings } from '../settings/model/settings.slice.ts';
-import { logoutRequest } from '../../features/auth/usecases/auth.thunk.ts';
 import { useTranslation } from 'react-i18next';
+import { logoutRequest } from 'entities/auth/model/logout.thunk.ts';
 
 const cx = cnBind.bind(styles);
 
@@ -21,7 +21,7 @@ const dropdownItems: DropdownItemData[] = [
 export function SidebarHeader() {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const user = useAppSelector(selectAuthData);
+  const user = useAppSelector(selectUser);
   const dropdownRef = useRef<HTMLUListElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [dropdownIsOpen, setDropdownIsOpen] = useState(false);

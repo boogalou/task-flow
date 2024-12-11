@@ -1,18 +1,30 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { AuthResponse, ErrorResponse, FetchStatus } from '../../../shared/types/types.ts';
+import {
+  handleLoginPending,
+  handleLoginRejected,
+  handleLoginFulfilled,
+  loginRequest,
+} from 'entities/auth/model/login.thunk.ts';
 import {
   checkAuthRequest,
+  handleCheckAuthFulfilled,
+  handleCheckAuthPending,
+  handleCheckAuthRejected,
+} from 'entities/auth/model/check-auth.thunk.ts';
+import {
   logoutRequest,
-  loginRequest,
-  signupRequest,
-} from '../../../features/auth/usecases/auth.thunk.ts';
-import { AuthDataResponse, ErrorResponse, FetchStatus } from '../../../shared/types/types.ts';
+  handleLogoutRequestFulfilled,
+  handleLogoutRequestPending,
+  handleLogoutRequestRejected,
+} from 'entities/auth/model/logout.thunk.ts';
 
-export interface AuthState {
-  authData: AuthDataResponse | null;
+export type AuthState = {
+  authData: AuthResponse | null;
   authFetchStatus: FetchStatus;
   error: ErrorResponse | null;
   isAuth: boolean;
-}
+};
 
 const initialState: AuthState = {
   authData: null,
@@ -30,71 +42,22 @@ export const authSlice = createSlice({
     selectIsAuth: (state) => state.isAuth,
   },
   reducers: {
-    setAuthData(state, { payload }: PayloadAction<AuthDataResponse>) {
+    setAuthData(state, { payload }: PayloadAction<AuthResponse>) {
       state.authData = payload;
     },
   },
 
   extraReducers: (builder) => {
     builder
-      .addCase(signupRequest.pending, (state) => {
-        state.authFetchStatus = 'loading';
-        state.error = null;
-      })
-      .addCase(signupRequest.fulfilled, (state, action) => {
-        state.authFetchStatus = 'succeeded';
-        state.authData = action.payload || null;
-        state.isAuth = true;
-        state.error = null;
-      })
-      .addCase(signupRequest.rejected, (state, action) => {
-        state.authFetchStatus = 'failed';
-        state.error = action.payload as ErrorResponse;
-      })
-      .addCase(loginRequest.pending, (state) => {
-        state.authFetchStatus = 'loading';
-        state.error = null;
-      })
-      .addCase(loginRequest.fulfilled, (state, action) => {
-        state.authFetchStatus = 'succeeded';
-        state.authData = action.payload || null;
-        state.isAuth = true;
-        state.error = null;
-      })
-      .addCase(loginRequest.rejected, (state, action) => {
-        state.authFetchStatus = 'failed';
-        state.isAuth = false;
-        state.error = action.payload as ErrorResponse;
-      })
-      .addCase(checkAuthRequest.pending, (state) => {
-        state.authFetchStatus = 'loading';
-        state.error = null;
-      })
-      .addCase(checkAuthRequest.fulfilled, (state, action) => {
-        state.authFetchStatus = 'succeeded';
-        state.authData = action.payload || null;
-        state.isAuth = true;
-        state.error = null;
-      })
-      .addCase(checkAuthRequest.rejected, (state, action) => {
-        state.authFetchStatus = 'failed';
-        state.isAuth = false;
-        state.error = action.payload as ErrorResponse;
-      })
-      .addCase(logoutRequest.pending, (state) => {
-        state.authFetchStatus = 'loading';
-        state.error = null;
-      })
-      .addCase(logoutRequest.fulfilled, (state) => {
-        state.authFetchStatus = 'succeeded';
-        state.authData = null;
-        state.isAuth = false;
-        state.error = null;
-      })
-      .addCase(logoutRequest.rejected, (state, action) => {
-        state.authFetchStatus = 'failed';
-        state.error = action.payload as ErrorResponse;
-      });
+      .addCase(loginRequest.pending, handleLoginPending)
+      .addCase(loginRequest.fulfilled, handleLoginFulfilled)
+      .addCase(loginRequest.rejected, handleLoginRejected)
+      .addCase(checkAuthRequest.pending, handleCheckAuthPending)
+      .addCase(checkAuthRequest.fulfilled, handleCheckAuthFulfilled)
+      .addCase(checkAuthRequest.rejected, handleCheckAuthRejected)
+      .addCase(logoutRequest.pending, handleLogoutRequestPending)
+      .addCase(logoutRequest.fulfilled, handleLogoutRequestFulfilled)
+      .addCase(logoutRequest.rejected, handleLogoutRequestRejected);
   },
 });
 
