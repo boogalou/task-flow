@@ -1,4 +1,4 @@
-import { apiClient } from './base-api.ts';
+import { apiClient } from './_base-api.ts';
 import axios, { AxiosResponse } from 'axios';
 import { AuthResponse, LoginFormData, RegistrationFormData } from '../types/types.ts';
 

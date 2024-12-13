@@ -4,11 +4,13 @@ import { withReduxProvider } from './reduxProvider/withReduxProvider.tsx';
 import { withThemeProvider } from './themeProvider/withThemeProvider.tsx';
 import { withAuthProvider } from './authProvider/withAuthProvider.tsx';
 import { withSettingsProvider } from './settingsProvider/withSettingsProvider.tsx';
+import { withDataLoadProvider } from 'app/providers/dataLoadProvider/with-data-load.provider.tsx';
 
 export const withProviders = compose(
   withReduxProvider,
   withI18nextProvider,
   withThemeProvider,
   withAuthProvider,
+  withDataLoadProvider,
   withSettingsProvider,
 );

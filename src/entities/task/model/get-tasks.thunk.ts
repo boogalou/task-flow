@@ -4,7 +4,7 @@ import { CaseReducer, PayloadAction } from '@reduxjs/toolkit';
 import { TaskState } from 'entities/task/model/taskSlice.ts';
 import { ErrorResponse, Task } from 'shared/types/types.ts';
 
-export const getTasks = createAsyncAction({
+export const getTasksRequest = createAsyncAction({
   actionType: 'task/getAll',
   method: taskService.getTasks,
 });

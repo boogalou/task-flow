@@ -1,7 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { deleteTask, updateTaskRequest } from './taskThunk.ts';
 import { ErrorResponse, FetchStatus, FilterCriteria, Task } from 'shared/types/types.ts';
-import { getUniqueCategories } from '../lib/getUniqueCategories.ts';
 import {
   createTaskFulfilled,
   createTaskPending,
@@ -9,11 +7,23 @@ import {
   createTaskRequest,
 } from 'entities/task/model/create-task.thunk.ts';
 import {
-  getTasks,
   getTasksFulfilled,
   getTasksPending,
   getTasksRejected,
+  getTasksRequest,
 } from 'entities/task/model/get-tasks.thunk.ts';
+import {
+  updateTaskFulfilled,
+  updateTaskPending,
+  updateTaskRejected,
+  updateTaskRequest,
+} from 'entities/task/model/update-task.thunk.ts';
+import {
+  deleteTaskFulfilled,
+  deleteTaskPending,
+  deleteTaskRejected,
+  deleteTaskRequest,
+} from 'entities/task/model/delete-task.thunk.ts';
 
 export interface TaskState {
   tasks: Task[];
@@ -56,49 +66,18 @@ export const taskSlice = createSlice({
 
   extraReducers: (builder) => {
     builder
-      .addCase(getTasks.pending, getTasksPending)
-      .addCase(getTasks.fulfilled, getTasksFulfilled)
-      .addCase(getTasks.rejected, getTasksRejected)
+      .addCase(getTasksRequest.pending, getTasksPending)
+      .addCase(getTasksRequest.fulfilled, getTasksFulfilled)
+      .addCase(getTasksRequest.rejected, getTasksRejected)
       .addCase(createTaskRequest.pending, createTaskPending)
       .addCase(createTaskRequest.fulfilled, createTaskFulfilled)
       .addCase(createTaskRequest.rejected, createTaskRejected)
-      .addCase(updateTaskRequest.pending, (state) => {
-        state.taskFetchStatus = 'loading';
-        state.error = null;
-      })
-      .addCase(updateTaskRequest.fulfilled, (state, { payload }: PayloadAction<Task>) => {
-        state.taskFetchStatus = 'succeeded';
-        state.tasks = state.tasks.map((task) =>
-          task.id === payload.id ? { ...task, ...payload } : task,
-        );
-        state.categories = getUniqueCategories(state.tasks);
-        state.error = null;
-      })
-      .addCase(updateTaskRequest.rejected, (state, action) => {
-        state.taskFetchStatus = 'failed';
-        state.error = action.payload as ErrorResponse;
-      })
-      .addCase(deleteTask.pending, (state, action) => {
-        state.taskFetchStatus = 'loading';
-        state.error = null;
-
-        state.lastRemovedTask = state.tasks.find((task) => task.id === action.meta.arg) || null;
-        state.tasks = state.tasks.filter((task) => task.id !== action.meta.arg);
-      })
-      .addCase(deleteTask.fulfilled, (state) => {
-        state.taskFetchStatus = 'succeeded';
-        state.lastRemovedTask = null;
-        state.categories = getUniqueCategories(state.tasks);
-        state.error = null;
-      })
-      .addCase(deleteTask.rejected, (state, action) => {
-        state.taskFetchStatus = 'failed';
-        if (state.lastRemovedTask) {
-          state.tasks.push(state.lastRemovedTask);
-          state.lastRemovedTask = null;
-        }
-        state.error = action.payload as ErrorResponse;
-      });
+      .addCase(updateTaskRequest.pending, updateTaskPending)
+      .addCase(updateTaskRequest.fulfilled, updateTaskFulfilled)
+      .addCase(updateTaskRequest.rejected, updateTaskRejected)
+      .addCase(deleteTaskRequest.pending, deleteTaskPending)
+      .addCase(deleteTaskRequest.fulfilled, deleteTaskFulfilled)
+      .addCase(deleteTaskRequest.rejected, deleteTaskRejected);
   },
 });
 

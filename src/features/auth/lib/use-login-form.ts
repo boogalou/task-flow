@@ -16,7 +16,6 @@ export function useLoginForm() {
     validateOnBlur: true,
     validateOnChange: true,
     onSubmit: (values) => {
-      console.log(values);
       dispatch(loginRequest(values));
       form.resetForm();
     },

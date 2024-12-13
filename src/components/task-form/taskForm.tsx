@@ -4,7 +4,7 @@ import { useFrom } from '../../shared/lib/forms/use-from.ts';
 import Input from '../../shared/ui-kit/input/input.tsx';
 import { Button } from '../../shared/ui-kit/button/button.tsx';
 import { useAppDispatch, useAppSelector } from '../../shared/lib/reduxHooks.ts';
-import { createTaskRequest, updateTaskRequest } from 'entities/task/model/taskThunk.ts';
+import { createTaskRequest, updateTaskRequest } from 'entities/task';
 import { Task, TaskFormData } from '../../shared/types/types.ts';
 import { parseDate } from './lib/parseDate.ts';
 import { useEffect } from 'react';
@@ -50,10 +50,9 @@ export function TaskForm({ task, closeModal }: TaskFormProps) {
     initialValues,
     onSubmit: (values) => {
       if (isEditMode) {
-        console.log('dispatch: ', JSON.stringify(values, null, 2));
         dispatch(
           updateTaskRequest({
-            id: task?.id!,
+            id: task!.id,
             title: values.title,
             description: values.description,
             category: values.category,
@@ -62,7 +61,6 @@ export function TaskForm({ task, closeModal }: TaskFormProps) {
           }),
         );
       } else {
-        console.log('dispatch: ', JSON.stringify(values, null, 2));
         dispatch(
           createTaskRequest({
             title: values.title,

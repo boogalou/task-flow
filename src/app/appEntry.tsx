@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { RouterProvider } from 'react-router-dom';
 import { appRouter } from './appRouter';
 import { withProviders } from './providers/withProviders.ts';
-import { setupInterceptors } from 'shared/api/base-api.ts';
+import { setupInterceptors } from 'shared/api/_base-api.ts';
 import { store } from './store/store.ts';
 
 export async function appInit() {

@@ -4,13 +4,13 @@ import { MouseEvent } from 'react';
 import { Button } from '../../shared/ui-kit/button/button.tsx';
 import { Task } from '../../shared/types/types.ts';
 import { Icon } from '../../shared/ui-kit/icon/icon.tsx';
-import { deleteTask } from 'entities/task/model/taskThunk.ts';
 import { useAppDispatch } from '../../shared/lib/reduxHooks.ts';
 import { Modal } from '../../shared/ui-kit/modal/modal.tsx';
 import { useModal } from '../../shared/ui-kit/modal/useModal.ts';
 import { useTranslation } from 'react-i18next';
 import { enUS, ru } from 'date-fns/locale';
 import { formatDetailsDate } from '../main-content/lib/formatDetailsDate.ts';
+import { deleteTaskRequest } from 'entities/task';
 
 const cx = cnBind.bind(styles);
 
@@ -37,7 +37,7 @@ export function TaskDetails(props: TaskDetailsProps) {
 
   const handleClickOnOkButton = (id: number) => {
     if (id) {
-      dispatch(deleteTask(id));
+      dispatch(deleteTaskRequest(id));
     }
   };
 

@@ -1,18 +1,23 @@
-import { memo, ReactNode, useEffect, useRef } from 'react';
+import { ReactNode, useEffect, useRef } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../shared/lib/reduxHooks.ts';
 import { checkAuthRequest, selectAuthFetchStatus } from 'entities/auth';
 
-export const AuthProvider = memo(function AuthProvider({ children }: { children: ReactNode }) {
-  console.log('Call AuthProvider');
+export function AuthProvider({ children }: { children: ReactNode }) {
   const fetchStatus = useAppSelector(selectAuthFetchStatus);
   const dispatch = useAppDispatch();
-  const isDispatched = useRef(false);
+  const isInitialized = useRef(false);
 
   useEffect(() => {
-    if (!isDispatched.current) {
-      dispatch(checkAuthRequest());
-      isDispatched.current = true;
-    }
+    const initialize = async () => {
+      if (!isInitialized.current) {
+        await dispatch(checkAuthRequest());
+        isInitialized.current = true;
+      }
+    };
+
+    initialize().catch((err) => {
+      console.error('Unhandled error during initialization:', err);
+    });
   }, [dispatch]);
 
   if (fetchStatus === 'loading') {
@@ -20,4 +25,4 @@ export const AuthProvider = memo(function AuthProvider({ children }: { children:
   }
 
   return children;
-});
+}
