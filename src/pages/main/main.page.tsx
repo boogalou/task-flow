@@ -4,9 +4,9 @@ import { MainHeader } from '../../components/main-header/main-header.tsx';
 import { Sidebar } from '../../components/sidebar/sidebar.tsx';
 import { useEffect, useState } from 'react';
 import { MainContent } from '../../components/main-content/main-content.tsx';
-import { Settings } from '../../components/settings/settings.tsx';
+import { Settings } from 'widgets/settings-manage/settings.tsx';
 import { useAppSelector } from '../../shared/lib/reduxHooks.ts';
-import { selectSettingsIsActive } from '../../components/settings/model/settings.slice.ts';
+import { selectSettingsIsActive } from 'entities/settings/model/settings.slice.ts';
 
 const cx = cnBind.bind(styles);
 

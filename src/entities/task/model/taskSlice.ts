@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ErrorResponse, FetchStatus, FilterCriteria, Task } from 'shared/types/types.ts';
+import { FilterCriteria } from 'shared/types/types.ts';
 import {
   createTaskFulfilled,
   createTaskPending,
@@ -24,15 +24,7 @@ import {
   deleteTaskRejected,
   deleteTaskRequest,
 } from 'entities/task/model/delete-task.thunk.ts';
-
-export interface TaskState {
-  tasks: Task[];
-  categories: string[];
-  lastRemovedTask: Task | null;
-  taskFetchStatus: FetchStatus;
-  error: ErrorResponse | null;
-  filters: FilterCriteria;
-}
+import { TaskState } from 'entities/task/types.ts';
 
 const initialState: TaskState = {
   tasks: [],
@@ -84,6 +76,7 @@ export const taskSlice = createSlice({
 export const { selectTasks, selectError, selectFilter, selectCategories, selectTaskFetchStatus } =
   taskSlice.selectors;
 export const { setCriteriaFilter } = taskSlice.actions;
+
 export const selectTaskById = (state: TaskState, taskId: number) => {
   if (taskId) {
     return state.tasks.find((task) => task.id === taskId);

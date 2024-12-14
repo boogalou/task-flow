@@ -1,7 +1,7 @@
 import { combineReducers } from '@reduxjs/toolkit';
 import { authSlice } from 'entities/auth';
 import { taskSlice } from 'entities/task/model/taskSlice.ts';
-import { settingsSlice } from '../../components/settings/model/settings.slice.ts';
+import { settingsSlice } from 'entities/settings';
 import { userSlice } from 'entities/user';
 
 export const rootReducer = combineReducers({

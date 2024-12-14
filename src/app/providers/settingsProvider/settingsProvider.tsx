@@ -2,9 +2,9 @@ import { ReactNode, useEffect, useRef } from 'react';
 import { storageAdapter } from '../../../shared/lib/storage.adapter.ts';
 import { UserSettings } from '../../../shared/types/types.ts';
 import { useAppDispatch, useAppSelector } from '../../../shared/lib/reduxHooks.ts';
-import { setLanguage, setTheme } from '../../../components/settings/model/settings.slice.ts';
-import { getSettingsRequest } from '../../../components/settings/model/settingsThunk.ts';
+import { setLanguage, setTheme } from 'entities/settings/model/settings.slice.ts';
 import { selectIsAuth } from 'entities/auth';
+import { getSettingsRequest } from 'entities/settings';
 
 export function SettingsProvider({ children }: { children: ReactNode }) {
   const dispatch = useAppDispatch();

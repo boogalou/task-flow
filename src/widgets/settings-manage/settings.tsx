@@ -1,30 +1,24 @@
 import styles from './settigns.module.scss';
 import cnBind from 'classnames/bind';
-import { Button } from '../../shared/ui-kit/button/button.tsx';
-import { useAppDispatch, useAppSelector } from '../../shared/lib/reduxHooks.ts';
+import { Button } from 'shared/ui-kit/button/button.tsx';
+import { useAppDispatch, useAppSelector } from 'shared/lib/reduxHooks.ts';
 import {
   selectLanguage,
   selectTheme,
   setLanguage,
-  setTheme,
   toggleSettings,
-} from './model/settings.slice.ts';
+} from 'entities/settings/model/settings.slice.ts';
 import { ChangeEvent } from 'react';
 import { nanoid } from '@reduxjs/toolkit';
-import { Icon } from '../../shared/ui-kit/icon/icon.tsx';
-import { RadioGroup } from '../../shared/ui-kit/radio-group/radioGroup.tsx';
+import { Icon } from 'shared/ui-kit/icon/icon.tsx';
+import { RadioGroup } from 'shared/ui-kit/radio-group/radioGroup.tsx';
 import { useTranslation } from 'react-i18next';
-import { updateSettingsRequest } from './model/settingsThunk.ts';
-import { storageAdapter } from '../../shared/lib/storage.adapter.ts';
-import { UserSettings } from '../../shared/types/types.ts';
+import { updateSettingsRequest } from 'entities/settings/model/update-settings.thunk.ts';
+import { storageAdapter } from 'shared/lib/storage.adapter.ts';
+import { UserSettings } from 'shared/types/types.ts';
+import { ToggleTheme } from 'features/settings';
 
 const cx = cnBind.bind(styles);
-
-const themeData = [
-  { id: '1', value: 'system', label: 'System:' },
-  { id: '2', value: 'light', label: 'Light:' },
-  { id: '3', value: 'dark', label: 'Dark:' },
-];
 
 const langData = [
   { id: nanoid(), value: 'eng', label: 'Eng:' },
@@ -36,11 +30,6 @@ export function Settings() {
   const dispatch = useAppDispatch();
   const currentTheme = useAppSelector(selectTheme);
   const currentLang = useAppSelector(selectLanguage);
-
-  const handleThemeChange = (evt: ChangeEvent<HTMLInputElement>) => {
-    const newTheme = evt.target.value as 'system' | 'light' | 'dark';
-    dispatch(setTheme(newTheme));
-  };
 
   const handleLangChange = (evt: ChangeEvent<HTMLInputElement>) => {
     const newLang = evt.target.value as 'rus' | 'eng';
@@ -75,19 +64,7 @@ export function Settings() {
       </div>
       <h3 className={cx('settings__title')}>{t('settings.title')}</h3>
       <div className={cx('settings__content')}>
-        <div className={cx('settings__theme')}>
-          <span className={cx('settings__subtitle')}>{t('settings.theme')}</span>
-          <RadioGroup
-            className={cx('settings__radio-group')}
-            data={themeData.map((item) => ({
-              ...item,
-              label: t(`settings.themes.${item.value}`),
-            }))}
-            selectedValue={currentTheme}
-            name="theme"
-            onChange={handleThemeChange}
-          />
-        </div>
+        <ToggleTheme />
         <div className={cx('settings__language')}>
           <span className={cx('settings__subtitle')}>{t('settings.language')}</span>
           <RadioGroup

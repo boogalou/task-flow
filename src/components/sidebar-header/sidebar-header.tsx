@@ -7,7 +7,7 @@ import { selectUser } from 'entities/user';
 import { Dropdown, DropdownItemData } from '../../shared/ui-kit/dropdown/dropdown.tsx';
 import { Button } from '../../shared/ui-kit/button/button.tsx';
 import { useOnClickOutside } from 'usehooks-ts';
-import { toggleSettings } from '../settings/model/settings.slice.ts';
+import { toggleSettings } from 'entities/settings/model/settings.slice.ts';
 import { useTranslation } from 'react-i18next';
 import { logoutRequest } from 'entities/auth/model/logout.thunk.ts';
 

@@ -1,6 +1,6 @@
 import { apiClient } from 'shared/api/_base-api.ts';
 import { AxiosResponse } from 'axios';
-import { UserSettings } from '../../../shared/types/types.ts';
+import { UserSettings } from 'shared/types/types.ts';
 
 class SettingsService {
   public async getSettings(): Promise<AxiosResponse<UserSettings>> {

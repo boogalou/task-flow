@@ -1,4 +1,4 @@
-@import 'src/shared/styles/index';
+@import '../../shared/styles/index';
 
 .settings {
   display: flex;
@@ -34,13 +34,13 @@
   }
 }
 
-  &__content, &__theme, &__language {
+  &__content, &__language {
     display: flex;
     flex-direction: column;
     row-gap: $gap-xs;
   }
 
-  &__theme, &__language {
+   &__language {
     padding: $gap-md 0 $gap-md 0;
     border-bottom: 1px solid var(--color-secondary-bg);
   }
