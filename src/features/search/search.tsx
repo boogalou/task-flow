@@ -1,8 +1,8 @@
 import { ChangeEvent, useRef, useState } from 'react';
 import styles from './search.module.scss';
 import cnBind from 'classnames/bind';
-import Input from '../../shared/ui-kit/input/input.tsx';
-import { Icon } from '../../shared/ui-kit/icon/icon.tsx';
+import Input from 'shared/ui-kit/input/input.tsx';
+import { Icon } from 'shared/ui-kit/icon/icon.tsx';
 
 const cx = cnBind.bind(styles);
 

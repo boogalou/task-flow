@@ -1,7 +1,7 @@
 import styles from './sidebar.module.scss';
 import cnBind from 'classnames/bind';
 import { NavDate } from '../nav-date/nav-date.tsx';
-import { Drawer } from '../drawer/drawer.tsx';
+import { Drawer } from '@/src/components/drawer/drawer.tsx';
 import { SidebarHeader } from '../sidebar-header/sidebar-header.tsx';
 import { NavTags } from '../nav-tags/nav-tags.tsx';
 import { NavActions } from '../nav-actions/nav-actions.tsx';

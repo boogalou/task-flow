@@ -3,6 +3,7 @@ import { createAsyncAction } from 'shared/lib/thunk.adapter.ts';
 import { CaseReducer, PayloadAction } from '@reduxjs/toolkit';
 import { SettingsState } from 'entities/settings/types.ts';
 import { ErrorResponse, UserSettings } from 'shared/types/types.ts';
+import toast from 'react-hot-toast';
 
 export const updateSettingsRequest = createAsyncAction({
   actionType: 'settings/update',
@@ -21,9 +22,12 @@ export const updateSettingsFulfilled: CaseReducer<SettingsState, PayloadAction<U
   state.settingsFetchStatus = 'succeeded';
   state.settings = action.payload;
   state.error = null;
+  toast.success('Settings successfully update');
 };
 
 export const updateSettingsRejected: CaseReducer<SettingsState> = (state, action) => {
   state.settingsFetchStatus = 'failed';
   state.error = action.payload as ErrorResponse;
+  toast.dismiss();
+  toast.error(state.error.message);
 };

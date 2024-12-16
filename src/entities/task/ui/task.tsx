@@ -5,7 +5,7 @@ import { formatExpiryDate } from '../lib/formatExpiryDate.ts';
 import { CustomInput } from 'shared/ui-kit/checkbox/customInput.tsx';
 import { useAppDispatch } from 'shared/lib/reduxHooks.ts';
 import { updateTaskRequest } from 'entities/task';
-import { TaskDetails } from '../../../components/task-details/taskDetails.tsx';
+import { TaskDetails } from 'entities/task/ui/task-details.tsx';
 import { Task as ITask } from 'shared/types/types.ts';
 
 const cx = cnBind.bind(styles);

@@ -6,22 +6,13 @@ import { Button } from 'shared/ui-kit/button/button.tsx';
 import { Link } from 'react-router-dom';
 import { routes } from 'shared/constants/routes.ts';
 import { Icon } from 'shared/ui-kit/icon/icon.tsx';
-import { useShowPassword } from 'shared/lib/forms/use-show-password.ts';
 import { loginFields } from './input.config.ts';
-import { useTranslation } from 'react-i18next';
 import { useLoginForm } from 'features/auth/lib/use-login-form.ts';
 
 const cx = cnBind.bind(styles);
 
 export function Login() {
-  const { t } = useTranslation();
-
-  const form = useLoginForm();
-
-  const { types, toggleType } = useShowPassword({
-    email: 'email',
-    password: 'password',
-  });
+  const { form, types, toggleType, t } = useLoginForm();
 
   return (
     <div className={cx('container')}>

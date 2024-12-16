@@ -1,9 +1,9 @@
 import styles from './mainPage.module.scss';
 import cnBind from 'classnames/bind';
 import { MainHeader } from '../../components/main-header/main-header.tsx';
-import { Sidebar } from '../../components/sidebar/sidebar.tsx';
+import { Sidebar } from '@/src/components/sidebar/sidebar.tsx';
 import { useEffect, useState } from 'react';
-import { MainContent } from '../../components/main-content/main-content.tsx';
+import { MainContent } from 'widgets/main-content/main-content.tsx';
 import { Settings } from 'widgets/settings-manage/settings.tsx';
 import { useAppSelector } from '../../shared/lib/reduxHooks.ts';
 import { selectSettingsIsActive } from 'entities/settings/model/settings.slice.ts';

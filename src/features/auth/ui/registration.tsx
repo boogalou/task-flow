@@ -6,24 +6,14 @@ import { RegistrationFormData } from 'shared/types/types.ts';
 import { Link } from 'react-router-dom';
 import { routes } from 'shared/constants/routes.ts';
 import { Icon } from 'shared/ui-kit/icon/icon.tsx';
-import { useShowPassword } from 'shared/lib/forms/use-show-password.ts';
 import { createInputFields } from 'shared/lib/forms/createInputFields.ts';
-import { useTranslation } from 'react-i18next';
 import { useRegistrationForm } from '../lib/use-registration-form.ts';
 import { registrationFields } from 'features/auth/ui/input.config.ts';
 
 const cx = cnBind.bind(styles);
 
 export function Registration() {
-  const { t } = useTranslation();
-  const { types, toggleType } = useShowPassword({
-    username: 'text',
-    email: 'email',
-    password: 'password',
-    confirmPassword: 'password',
-  });
-
-  const form = useRegistrationForm();
+  const { form, types, toggleType, t } = useRegistrationForm();
 
   return (
     <div className={cx('container')}>

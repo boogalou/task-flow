@@ -3,7 +3,7 @@ import cnBind from 'classnames/bind';
 import { Task } from './task.tsx';
 import { Modal } from 'shared/ui-kit/modal/modal.tsx';
 import { useModal } from 'shared/ui-kit/modal/useModal.ts';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useAppSelector } from 'shared/lib/reduxHooks.ts';
 import { selectFilter, selectTaskById, selectTasks } from '../model/taskSlice.ts';
 import { useFilterTasks } from '../lib/useFilterTasks.ts';
@@ -28,20 +28,14 @@ export function TaskList() {
   const handleClickOnEdit = (id: number) => {
     if (id) {
       setTaskId(id);
+      openModal();
     }
   };
 
-  useEffect(() => {
-    if (taskId !== null) {
-      openModal();
-    }
-  }, [taskId, openModal]);
-
-  useEffect(() => {
-    if (!isOpen) {
-      setTaskId(null);
-    }
-  }, [isOpen]);
+  const handleCloseModal = () => {
+    setTaskId(null);
+    closeModal();
+  };
 
   return (
     <>
@@ -57,8 +51,8 @@ export function TaskList() {
           </div>
         ))}
       </div>
-      <Modal isOpen={isOpen} closeModal={closeModal}>
-        {task && <TaskForm task={task} closeModal={closeModal} />}
+      <Modal isOpen={isOpen} closeModal={handleCloseModal}>
+        {task && <TaskForm task={task} closeModal={handleCloseModal} />}
       </Modal>
     </>
   );
