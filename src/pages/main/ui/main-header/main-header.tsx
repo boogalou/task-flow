@@ -1,8 +1,8 @@
 import styles from './main-header.module.scss';
 import cnBind from 'classnames/bind';
-import { Icon } from '../../shared/ui-kit/icon/icon.tsx';
+import { Icon } from 'shared/ui-kit/icon/icon.tsx';
 import { Search } from 'features/search/search.tsx';
-import { Button } from '../../shared/ui-kit/button/button.tsx';
+import { Button } from 'shared/ui-kit/button/button.tsx';
 
 const cx = cnBind.bind(styles);
 

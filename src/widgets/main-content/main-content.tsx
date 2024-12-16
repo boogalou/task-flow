@@ -4,7 +4,7 @@ import { addDays, format } from 'date-fns';
 import { enUS, ru } from 'date-fns/locale';
 import { Button } from 'shared/ui-kit/button/button.tsx';
 import { Icon } from 'shared/ui-kit/icon/icon.tsx';
-import { TaskForm } from '../../components/task-form/taskForm.tsx';
+import { TaskForm } from 'widgets/task-form/taskForm.tsx';
 import { Modal } from 'shared/ui-kit/modal/modal.tsx';
 import { useModal } from 'shared/ui-kit/modal/useModal.ts';
 import { TaskList } from 'entities/task/ui/task-list.tsx';

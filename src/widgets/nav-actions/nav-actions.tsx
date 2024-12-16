@@ -1,11 +1,11 @@
 import styles from './nav-actions.module.scss';
 import cnBind from 'classnames/bind';
-import { Button } from '../../shared/ui-kit/button/button.tsx';
-import { Icon } from '../../shared/ui-kit/icon/icon.tsx';
+import { Button } from 'shared/ui-kit/button/button.tsx';
+import { Icon } from 'shared/ui-kit/icon/icon.tsx';
 import { useMemo, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../shared/lib/reduxHooks.ts';
+import { useAppDispatch, useAppSelector } from 'shared/lib/reduxHooks.ts';
 import { selectTasks, setCriteriaFilter } from 'entities/task/model/taskSlice.ts';
-import { ButtonsData } from '../../shared/types/types.ts';
+import { ButtonsData } from 'shared/types/types.ts';
 import { useTranslation } from 'react-i18next';
 import { calculateTasksCount } from 'entities/task/lib/calculateTasksCount.ts';
 

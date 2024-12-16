@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { BaseLayout } from './layout/baseLayout.tsx';
 import { ErrorPage } from '../pages/error/error.page.tsx';
-import { MainPage } from '../pages/main/main.page.tsx';
+import { MainPage } from 'pages/main/ui/main.page.tsx';
 import { AuthLayout } from '../pages/auth/auth.page.tsx';
 import { Registration } from 'features/auth/ui/registration.tsx';
 import { routes } from '../shared/constants/routes.ts';

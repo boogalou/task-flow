@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { useAppSelector } from 'shared/lib/reduxHooks.ts';
 import { selectFilter, selectTaskById, selectTasks } from '../model/taskSlice.ts';
 import { useFilterTasks } from '../lib/useFilterTasks.ts';
-import { TaskForm } from '../../../components/task-form/taskForm.tsx';
+import { TaskForm } from 'widgets/task-form/taskForm.tsx';
 import { groupTasksByDate } from '../lib/groupTasksByDate.ts';
 import { useTranslation } from 'react-i18next';
 import { enUS, ru } from 'date-fns/locale';

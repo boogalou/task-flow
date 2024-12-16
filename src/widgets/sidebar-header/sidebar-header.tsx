@@ -1,11 +1,11 @@
 import styles from './sidebar-header.module.scss';
 import cnBind from 'classnames/bind';
 import { MouseEvent, useRef, useState } from 'react';
-import { Avatar } from '../../shared/ui-kit/avatar/avatar.tsx';
-import { useAppDispatch, useAppSelector } from '../../shared/lib/reduxHooks.ts';
+import { Avatar } from 'shared/ui-kit/avatar/avatar.tsx';
+import { useAppDispatch, useAppSelector } from 'shared/lib/reduxHooks.ts';
 import { selectUser } from 'entities/user';
-import { Dropdown, DropdownItemData } from '../../shared/ui-kit/dropdown/dropdown.tsx';
-import { Button } from '../../shared/ui-kit/button/button.tsx';
+import { Dropdown, DropdownItemData } from 'shared/ui-kit/dropdown/dropdown.tsx';
+import { Button } from 'shared/ui-kit/button/button.tsx';
 import { useOnClickOutside } from 'usehooks-ts';
 import { toggleSettings } from 'entities/settings/model/settings.slice.ts';
 import { useTranslation } from 'react-i18next';

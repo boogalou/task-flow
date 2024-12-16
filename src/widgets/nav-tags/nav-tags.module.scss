@@ -1,4 +1,4 @@
-@import 'src/shared/styles/index';
+@import '../../shared/styles/index';
 
 @mixin button-pressed-styles {
   background-color: var(--color-primary);
@@ -10,30 +10,42 @@
   border-radius: $border-rad-4;
 }
 
-.nav-actions {
+.nav-tags {
   $this: &;
   border-bottom: 1px solid var(--color-hover-bg);
   display: flex;
   flex-direction: column;
   gap: $gap-sm 0;
 
+  &__action {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 px-to-rem(24px) 0 px-to-rem(24px);
+  }
+
   @layer utility {
     &__button {
       display: flex;
       align-items: center;
-      justify-content: space-between;
       border-radius:  0 $border-rad-4 $border-rad-4 0;
       padding: $gap-sm $gap-md $gap-sm $gap-lg;
-      background-color: transparent;
+      background-color: var(--color-main-bg);
       color: var(--color-primary-font);
 
       &--pressed {
         @include button-pressed-styles;
 
+        @include respond-to('desktop') {
+          &:hover {
+            @include button-hover-styles;
+          }
+        }
+
         #{$this}__icon {
           svg {
-            stroke: var(--color-secondary-icon);
-            fill: var(--color-primary);
+            stroke: var(--color-icon-bg);
+            fill: var(--color-selected);
           }
         }
       }
@@ -41,7 +53,6 @@
       @include respond-to('desktop') {
         &:hover {
           @include button-hover-styles;
-
         }
 
         &--pressed:hover {
@@ -49,22 +60,22 @@
         }
       }
     }
-  }
 
-  &__wrapper {
-    display: flex;
-    align-items: center;
-    column-gap: px-to-rem(8px);
-  }
+    &__button--add {
+      display: flex;
+      justify-content: space-between;
+      background-color: var(--color-main-bg);
+      color: var(--color-primary-font);
+      font-weight: bold;
 
-  @layer utility {
-    &__icon {
       svg {
-        width: $icon-size-md;
-        height: $icon-size-md;
-        fill: var(--color-main-bg);
+        fill: var(--color-primmary-icon);
         stroke: var(--color-primmary-icon);
+        transform: rotate(45deg);
+        width: px-to-rem(14px);
       }
     }
   }
+
+
 }
