@@ -4,18 +4,21 @@ import { addDays, format } from 'date-fns';
 import { enUS, ru } from 'date-fns/locale';
 import { Button } from 'shared/ui-kit/button/button.tsx';
 import { Icon } from 'shared/ui-kit/icon/icon.tsx';
-import { TaskForm } from 'widgets/task-form/taskForm.tsx';
+import { TaskForm } from 'features/task/create-update-task/taskForm.tsx';
 import { Modal } from 'shared/ui-kit/modal/modal.tsx';
 import { useModal } from 'shared/ui-kit/modal/useModal.ts';
-import { TaskList } from 'entities/task/ui/task-list.tsx';
 import { useAppSelector } from 'shared/lib/reduxHooks.ts';
 import { selectFilter } from 'entities/task/model/taskSlice.ts';
 import { useTranslation } from 'react-i18next';
-import { useMemo } from 'react';
+import { ReactNode, useMemo } from 'react';
 
 const cx = cnBind.bind(styles);
 
-export function MainContent() {
+interface MainContentProps {
+  TaskList: ReactNode;
+}
+
+export function MainContent({ TaskList }: MainContentProps) {
   const { t, i18n } = useTranslation();
   const currentLocale = i18n.language === 'ru' ? ru : enUS;
   const { isOpen, openModal, closeModal } = useModal();
@@ -45,7 +48,7 @@ export function MainContent() {
           <div className={cx('content__subtitle')}>{subtitleDate}</div>
         )}
       </header>
-      <TaskList />
+      {TaskList}
       <Button
         className={cx('content__button', 'content__button-add')}
         variant="primary"

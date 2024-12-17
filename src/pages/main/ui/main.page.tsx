@@ -9,6 +9,7 @@ import { NavDate } from 'widgets/nav-date/nav-date.tsx';
 import { NavTags } from 'widgets/nav-tags/nav-tags.tsx';
 import { NavActions } from 'widgets/nav-actions/nav-actions.tsx';
 import { useMainPage } from 'pages/main/lib/use-main-page.ts';
+import { TaskList } from 'pages/main/ui/task-list/task-list.tsx';
 
 const cx = cnBind.bind(styles);
 
@@ -26,7 +27,7 @@ export function MainPage() {
         NavTags={<NavTags />}
         NavActions={<NavActions />}
       />
-      {settingsIsActive ? <Settings /> : <MainContent />}
+      {settingsIsActive ? <Settings /> : <MainContent TaskList={<TaskList />} />}
     </div>
   );
 }

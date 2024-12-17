@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import styles from './taskForm.module.scss';
 import cnBind from 'classnames/bind';
 import { useFrom } from 'shared/lib/forms/use-from.ts';
@@ -7,10 +8,9 @@ import { useAppDispatch, useAppSelector } from 'shared/lib/reduxHooks.ts';
 import { createTaskRequest, updateTaskRequest } from 'entities/task';
 import { Task, TaskFormData } from 'shared/types/types.ts';
 import { parseDate } from './lib/parseDate.ts';
-import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Textarea } from 'shared/ui-kit/textarea/textarea.tsx';
 import { selectCategories } from 'entities/task/model/taskSlice.ts';
+import { Textarea } from 'shared/ui-kit/textarea/textarea.tsx';
 import { InputSelect } from 'shared/ui-kit/select/inputSelect.tsx';
 import { Colorpicker } from 'shared/ui-kit/colorpicker/colorpicker.tsx';
 

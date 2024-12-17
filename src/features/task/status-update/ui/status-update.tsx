@@ -12,7 +12,7 @@ export function StatusUpdate({ id, isCompleted }: StatusUpdateProps) {
   return (
     <div onClick={handleClickOnCheckbox}>
       <CustomInput
-        id={`${id}`}
+        id={id.toString()}
         type="checkbox"
         onChange={handleOnChangeCheckBox}
         checked={isCompleted}

@@ -10,9 +10,9 @@ export function useFilterTasks(tasks: Task[], criteria: FilterCriteria) {
       const tomorrow = addDays(today, 1);
 
       if (criteria.date === 'today') {
-        dateMatch = isToday(new Date(task.dueDate));
+        dateMatch = isToday(new Date(task.dueDate!));
       } else if (criteria.date === 'week') {
-        dateMatch = isWithinInterval(new Date(task.dueDate), {
+        dateMatch = isWithinInterval(new Date(task.dueDate!), {
           start: startOfDay(tomorrow),
           end: endOfDay(addDays(tomorrow, 6)),
         });

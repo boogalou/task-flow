@@ -5,7 +5,7 @@ import { Locale } from 'date-fns';
 export function groupTasksByDate(tasks: Task[], locale: Locale) {
   return tasks.reduce(
     (grouped, task) => {
-      const dataKey = format(toZonedTime(task.dueDate, 'UTC'), 'EEE, MMM dd', { locale });
+      const dataKey = format(toZonedTime(task.dueDate!, 'UTC'), 'EEE, MMM dd', { locale });
       if (!grouped[dataKey]) {
         grouped[dataKey] = [];
       }
