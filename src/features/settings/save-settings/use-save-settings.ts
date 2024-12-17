@@ -1,12 +1,12 @@
-import { selectedTheme, selectLang, updateSettingsRequest } from 'entities/settings';
+import { themeSelector, langSelector, updateSettingsRequest } from 'entities/settings';
 import { storageAdapter } from 'shared/lib/storage.adapter.ts';
 import { UserSettings } from 'shared/types/types.ts';
 import { useAppDispatch } from 'shared/lib/reduxHooks.ts';
 
 export function useSaveSettings() {
   const dispatch = useAppDispatch();
-  const currentTheme = selectedTheme();
-  const currentLang = selectLang();
+  const currentTheme = themeSelector();
+  const currentLang = langSelector();
 
   const handleSaveButton = () => {
     dispatch(

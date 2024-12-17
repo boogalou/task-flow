@@ -1,6 +1,6 @@
 import styles from './task.module.scss';
 import cnBind from 'classnames/bind';
-import { Task } from './task.tsx';
+import { TaskItem } from './task-item.tsx';
 import { Modal } from 'shared/ui-kit/modal/modal.tsx';
 import { useModal } from 'shared/ui-kit/modal/useModal.ts';
 import { useState } from 'react';
@@ -11,6 +11,7 @@ import { TaskForm } from 'widgets/task-form/taskForm.tsx';
 import { groupTasksByDate } from '../lib/groupTasksByDate.ts';
 import { useTranslation } from 'react-i18next';
 import { enUS, ru } from 'date-fns/locale';
+import { StatusUpdate } from 'features/task';
 
 const cx = cnBind.bind(styles);
 
@@ -46,7 +47,12 @@ export function TaskList() {
               <div className={cx('task-list__group-header')}>{date}</div>
             )}
             {tasksForDate.map((it) => (
-              <Task key={it.id} {...it} handleClickOnEdit={handleClickOnEdit} />
+              <TaskItem
+                key={it.id}
+                {...it}
+                statusUpdate={<StatusUpdate id={it.id} isCompleted={it.isCompleted!} />}
+                handleClickOnEdit={handleClickOnEdit}
+              />
             ))}
           </div>
         ))}

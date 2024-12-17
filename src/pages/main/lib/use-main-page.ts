@@ -1,9 +1,8 @@
-import { useState, useEffect, useCallback } from 'react';
-import { useAppSelector } from 'shared/lib/reduxHooks.ts';
-import { selectSettingsIsActive } from 'entities/settings/model/settings.slice.ts';
+import { useCallback, useEffect, useState } from 'react';
+import { settingsIsActiveSelector } from 'entities/settings';
 
 export function useMainPage() {
-  const settingsIsActive = useAppSelector(selectSettingsIsActive);
+  const settingsIsActive = settingsIsActiveSelector();
   const [drawerIsOpen, setDrawerIsOpen] = useState(false);
 
   const handleOnClickMenu = useCallback(() => {

@@ -2,11 +2,11 @@ import { useTranslation } from 'react-i18next';
 import { ChangeEvent } from 'react';
 import { setLanguage } from 'entities/settings/model/settings.slice.ts';
 import { useAppDispatch } from 'shared/lib/reduxHooks.ts';
-import { selectLang } from 'entities/settings';
+import { langSelector } from 'entities/settings';
 
 export function useToggleLanguage() {
   const dispatch = useAppDispatch();
-  const currentLang = selectLang();
+  const currentLang = langSelector();
   const { t, i18n } = useTranslation();
 
   const handleLangChange = (evt: ChangeEvent<HTMLInputElement>) => {
