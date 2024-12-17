@@ -3,7 +3,7 @@ import cnBind from 'classnames/bind';
 import { useTranslation } from 'react-i18next';
 import { Icon } from 'shared/ui-kit/icon/icon.tsx';
 import { Button } from 'shared/ui-kit/button/button.tsx';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'shared/lib/reduxHooks.ts';
 import { selectTasks, setCriteriaFilter } from 'entities/task/model/taskSlice.ts';
 import { ButtonsData } from 'shared/types/types.ts';
@@ -22,10 +22,6 @@ export function NavDate() {
   };
 
   const countTasks = useMemo(() => calculateTasksCount(tasks), [tasks]);
-
-  useEffect(() => {
-    dispatch(setCriteriaFilter({ date: 'all' }));
-  }, []);
 
   const buttonsData: ButtonsData[] = [
     {
@@ -72,5 +68,3 @@ export function NavDate() {
     </div>
   );
 }
-
-//TODO: refactoring

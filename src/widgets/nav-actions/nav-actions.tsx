@@ -20,8 +20,13 @@ export function NavActions() {
   const countTasks = useMemo(() => calculateTasksCount(tasks), [tasks]);
 
   const handleOnClick = (id: number, action: string) => {
-    setButtonIsPressed(id);
-    dispatch(setCriteriaFilter({ isCompleted: action }));
+    if (buttonIsPressed === id) {
+      setButtonIsPressed(null);
+      dispatch(setCriteriaFilter({ isCompleted: null }));
+    } else {
+      setButtonIsPressed(id);
+      dispatch(setCriteriaFilter({ isCompleted: action }));
+    }
   };
 
   const buttonsData: ButtonsData[] = [
