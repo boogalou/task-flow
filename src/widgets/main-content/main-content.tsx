@@ -1,16 +1,11 @@
 import styles from './main-content.module.scss';
 import cnBind from 'classnames/bind';
-import { addDays, format } from 'date-fns';
-import { enUS, ru } from 'date-fns/locale';
 import { Button } from 'shared/ui-kit/button/button.tsx';
 import { Icon } from 'shared/ui-kit/icon/icon.tsx';
 import { TaskForm } from 'features/task/create-update-task/taskForm.tsx';
 import { Modal } from 'shared/ui-kit/modal/modal.tsx';
-import { useModal } from 'shared/ui-kit/modal/useModal.ts';
-import { useAppSelector } from 'shared/lib/reduxHooks.ts';
-import { selectFilter } from 'entities/task/model/taskSlice.ts';
-import { useTranslation } from 'react-i18next';
-import { ReactNode, useMemo } from 'react';
+import { ReactNode } from 'react';
+import { useMianContent } from 'widgets/main-content/lib/useMianContent.ts';
 
 const cx = cnBind.bind(styles);
 
@@ -19,26 +14,7 @@ interface MainContentProps {
 }
 
 export function MainContent({ TaskList }: MainContentProps) {
-  const { t, i18n } = useTranslation();
-  const currentLocale = i18n.language === 'ru' ? ru : enUS;
-  const { isOpen, openModal, closeModal } = useModal();
-  const filters = useAppSelector(selectFilter);
-
-  const subtitleDate = useMemo(() => {
-    if (filters.date === 'today') {
-      return format(new Date(), 'EEE, MMM dd', { locale: currentLocale });
-    } else if (filters.date === 'week') {
-      const today = new Date();
-      const tomorrow = addDays(today, 1);
-      const endDate = addDays(tomorrow, 6);
-      return `${format(tomorrow, 'EEE, MMM dd', { locale: currentLocale })} - ${format(endDate, 'EEE, MMM dd', { locale: currentLocale })}`;
-    }
-    return '';
-  }, [filters, currentLocale]);
-
-  const handleOpenModal = () => {
-    openModal();
-  };
+  const { filters, isOpen, closeModal, handleOpenModal, subtitleDate, t } = useMianContent();
 
   return (
     <div className={cx('content')}>
