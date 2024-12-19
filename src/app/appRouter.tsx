@@ -7,6 +7,9 @@ import { Registration } from 'features/auth/ui/registration.tsx';
 import { routes } from '../shared/constants/routes.ts';
 import { Login } from 'features/auth/ui/login.tsx';
 import { RequireAuthGuard, RequireGuestGuard } from './guards.tsx';
+import { Settings } from 'widgets/settings-manage/settings.tsx';
+import { TaskList } from 'pages/main/ui/task-list/task-list.tsx';
+import { MainContent } from 'widgets/main-content/main-content.tsx';
 
 export const appRouter = () =>
   createBrowserRouter([
@@ -21,6 +24,16 @@ export const appRouter = () =>
               <MainPage />
             </RequireAuthGuard>
           ),
+          children: [
+            {
+              path: routes.SETTINGS_PAGE,
+              element: <Settings />,
+            },
+            {
+              path: routes.MAIN_PAGE,
+              element: <MainContent TaskList={<TaskList />} />,
+            },
+          ],
         },
         {
           element: <AuthLayout />,

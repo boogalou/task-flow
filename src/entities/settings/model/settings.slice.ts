@@ -41,10 +41,6 @@ export const settingsSlice = createSlice({
     setLanguage(state, { payload }: PayloadAction<'eng' | 'rus'>) {
       state.settings.language = payload;
     },
-
-    toggleSettings(state) {
-      state.settingsIsActive = !state.settingsIsActive;
-    },
   },
 
   extraReducers: (builder) => {
@@ -59,4 +55,4 @@ export const settingsSlice = createSlice({
 });
 
 export const { selectTheme, selectLanguage, selectSettingsIsActive } = settingsSlice.selectors;
-export const { setTheme, setLanguage, toggleSettings } = settingsSlice.actions;
+export const { setTheme, setLanguage } = settingsSlice.actions;

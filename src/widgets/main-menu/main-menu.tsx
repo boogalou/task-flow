@@ -1,7 +1,6 @@
 import styles from './main-menu.module.scss';
 import cnBind from 'classnames/bind';
 import { Dropdown, DropdownItemData } from 'shared/ui-kit/dropdown/dropdown.tsx';
-import { toggleSettings } from 'entities/settings/model/settings.slice.ts';
 import { logoutRequest } from 'entities/auth';
 import { useOnClickOutside } from 'usehooks-ts';
 import { useAppDispatch } from 'shared/lib/reduxHooks.ts';
@@ -34,7 +33,6 @@ export function MainMenu(props: MainMenuProps) {
 
   const handleSelectDropdownItem = (action: string) => {
     if (action === 'settings') {
-      dispatch(toggleSettings());
       props.setDropdownIsOpen(false);
     }
 
