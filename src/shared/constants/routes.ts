@@ -3,4 +3,5 @@ export const routes = {
   REGISTRATION_PAGE: '/auth/registration',
   LOGIN_PAGE: '/auth/login',
   SETTINGS_PAGE: '/settings',
+  PROFILE_PAGE: '/profile',
 };

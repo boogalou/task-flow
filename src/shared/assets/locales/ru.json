@@ -24,7 +24,8 @@
   },
   "mainMenu": {
     "settings": "Настройки",
-    "logout": "Выйти"
+    "logout": "Выйти",
+    "profile": "Профиль"
   },
   "taskForm": {
     "formTitle": "{{action}} задачу",

@@ -24,7 +24,8 @@
   },
   "mainMenu": {
     "settings": "Settings",
-    "logout": "Logout"
+    "logout": "Logout",
+    "profile": "Profile"
   },
   "taskForm": {
     "formTitle": "{{action}} Task",

@@ -10,6 +10,7 @@ import { RequireAuthGuard, RequireGuestGuard } from './guards.tsx';
 import { Settings } from 'widgets/settings-manage/settings.tsx';
 import { TaskList } from 'pages/main/ui/task-list/task-list.tsx';
 import { MainContent } from 'widgets/main-content/main-content.tsx';
+import { ProfilePage } from 'pages/profile/profile.page.tsx';
 
 export const appRouter = () =>
   createBrowserRouter([
@@ -26,12 +27,16 @@ export const appRouter = () =>
           ),
           children: [
             {
+              path: routes.MAIN_PAGE,
+              element: <MainContent TaskList={<TaskList />} />,
+            },
+            {
               path: routes.SETTINGS_PAGE,
               element: <Settings />,
             },
             {
-              path: routes.MAIN_PAGE,
-              element: <MainContent TaskList={<TaskList />} />,
+              path: routes.PROFILE_PAGE,
+              element: <ProfilePage />,
             },
           ],
         },

@@ -17,7 +17,8 @@ const dropdownItems: DropdownItemData[] = [
     action: 'settings',
     href: '/settings',
   },
-  { id: 2, label: 'mainMenu.logout', iconType: 'logout', action: 'logout' },
+  { id: 2, label: 'mainMenu.profile', iconType: 'profile', action: 'profile', href: 'profile' },
+  { id: 3, label: 'mainMenu.logout', iconType: 'logout', action: 'logout' },
 ];
 
 interface MainMenuProps {
