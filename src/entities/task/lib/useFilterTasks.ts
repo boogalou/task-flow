@@ -5,27 +5,28 @@ import { addDays, endOfDay, isToday, isWithinInterval, startOfDay } from 'date-f
 export function useFilterTasks(tasks: Task[], criteria: FilterCriteria) {
   return useMemo(() => {
     return tasks.filter((task) => {
-      let dateMatch = false;
       const today = new Date();
       const tomorrow = addDays(today, 1);
 
-      if (criteria.date === 'today') {
-        dateMatch = isToday(new Date(task.dueDate!));
-      } else if (criteria.date === 'week') {
-        dateMatch = isWithinInterval(new Date(task.dueDate!), {
-          start: startOfDay(tomorrow),
-          end: endOfDay(addDays(tomorrow, 6)),
-        });
-      } else if (criteria.date === 'all') {
-        dateMatch = true;
-      }
+      const dateMatch =
+        criteria.date === 'today'
+          ? isToday(new Date(task.dueDate!))
+          : criteria.date === 'week'
+            ? isWithinInterval(new Date(task.dueDate!), {
+                start: startOfDay(tomorrow),
+                end: endOfDay(addDays(tomorrow, 6)),
+              })
+            : criteria.date === 'all';
 
       const categoryMatch = criteria.category ? task.category === criteria.category : true;
 
       const completionMatch =
-        criteria.isCompleted !== null ? task.isCompleted === Boolean(criteria.isCompleted) : true;
+        criteria.isCompleted !== null ? task.isCompleted === criteria.isCompleted : true;
 
-      return dateMatch && categoryMatch && completionMatch;
+      const expiredMatch =
+        criteria.isExpired !== null ? new Date(task.dueDate!) < today === criteria.isExpired : true;
+
+      return dateMatch && categoryMatch && completionMatch && expiredMatch;
     });
   }, [tasks, criteria]);
 }

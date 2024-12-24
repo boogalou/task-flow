@@ -1,8 +1,9 @@
 import styles from './sidebar.module.scss';
 import cnBind from 'classnames/bind';
-import { Drawer } from 'widgets/drawer/drawer.tsx';
+
 import { SidebarHeader } from '../sidebar-header/sidebar-header.tsx';
 import { ReactNode } from 'react';
+import { Drawer } from '../drawer/drawer.tsx';
 
 const cx = cnBind.bind(styles);
 
@@ -10,9 +11,9 @@ interface SidebarProps {
   drawerIsOpen: boolean;
   onCloseDrawer: () => void;
   SidebarHeader: ReactNode;
-  NavDate: ReactNode;
-  NavTags: ReactNode;
-  NavActions: ReactNode;
+  TaskFiltersPanel: ReactNode;
+  TaskListPanel: ReactNode;
+  TaskManagementPanel: ReactNode;
 }
 
 export function Sidebar(props: SidebarProps) {
@@ -21,9 +22,9 @@ export function Sidebar(props: SidebarProps) {
       <aside className={cx('sidebar')}>
         {props.SidebarHeader}
         <div className={cx('sidebar__navigation')}>
-          {props.NavDate}
-          {props.NavTags}
-          {props.NavActions}
+          {props.TaskFiltersPanel}
+          {props.TaskListPanel}
+          {props.TaskManagementPanel}
         </div>
       </aside>
       <Drawer
@@ -32,9 +33,9 @@ export function Sidebar(props: SidebarProps) {
         onCloseDrawer={props.onCloseDrawer}
       >
         <div className={cx('sidebar__navigation')}>
-          {props.NavDate}
-          {props.NavTags}
-          {props.NavActions}
+          {props.TaskFiltersPanel}
+          {props.TaskListPanel}
+          {props.TaskManagementPanel}
         </div>
       </Drawer>
     </>

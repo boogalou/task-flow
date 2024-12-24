@@ -50,7 +50,7 @@ export function MainMenu(props: MainMenuProps) {
     props.setDropdownIsOpen(false);
   };
 
-  useOnClickOutside(dropdownRef, handleOutsideClick);
+  useOnClickOutside(dropdownRef as RefObject<HTMLElement>, handleOutsideClick);
 
   return (
     <Dropdown

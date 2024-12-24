@@ -1,6 +1,6 @@
 import { createAsyncAction } from 'shared/lib/thunk.adapter.ts';
 import { taskService } from 'shared/api/task.service.ts';
-import { TaskState } from 'entities/task/model/taskSlice.ts';
+import { TaskState } from '../types';
 import { CaseReducer, PayloadAction } from '@reduxjs/toolkit';
 import { ErrorResponse, Task } from 'shared/types/types.ts';
 import { getUniqueCategories } from 'entities/task/lib/getUniqueCategories.ts';

@@ -11,6 +11,6 @@ export async function appInit() {
   ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(<AppWithProviders />);
 }
 
-await appInit();
+appInit();
 
 setupInterceptors(store);

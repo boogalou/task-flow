@@ -10,7 +10,7 @@ export function calculateTasksCount(tasks: Task[]) {
     week: 0,
     all: 0,
     completed: 0,
-    trash: 0,
+    expired: 0,
   };
 
   tasks.forEach((task) => {
@@ -26,6 +26,10 @@ export function calculateTasksCount(tasks: Task[]) {
 
     if (task.isCompleted) {
       tasksCount.completed += 1;
+    }
+
+    if (new Date(task.dueDate!) < today) {
+      tasksCount.expired += 1;
     }
 
     tasksCount.all += 1;

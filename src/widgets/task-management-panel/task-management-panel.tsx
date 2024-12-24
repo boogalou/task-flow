@@ -1,17 +1,17 @@
-import styles from './nav-actions.module.scss';
+import styles from './task-management-panel.module.scss';
 import cnBind from 'classnames/bind';
 import { Button } from 'shared/ui-kit/button/button.tsx';
 import { Icon } from 'shared/ui-kit/icon/icon.tsx';
 import { useMemo, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'shared/lib/reduxHooks.ts';
 import { selectTasks, setCriteriaFilter } from 'entities/task/model/taskSlice.ts';
-import { ButtonsData } from 'shared/types/types.ts';
+import { ButtonsData, FilterCriteria } from 'shared/types/types.ts';
 import { useTranslation } from 'react-i18next';
 import { calculateTasksCount } from 'entities/task/lib/calculateTasksCount.ts';
 
 const cx = cnBind.bind(styles);
 
-export function NavActions() {
+export function TaskManagementPanel() {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const tasks = useAppSelector(selectTasks);
@@ -20,13 +20,20 @@ export function NavActions() {
   const countTasks = useMemo(() => calculateTasksCount(tasks), [tasks]);
 
   const handleOnClick = (id: number, action: string) => {
-    if (buttonIsPressed === id) {
-      setButtonIsPressed(null);
-      dispatch(setCriteriaFilter({ isCompleted: null }));
-    } else {
-      setButtonIsPressed(id);
-      dispatch(setCriteriaFilter({ isCompleted: action }));
+    setButtonIsPressed((prevId) => (prevId === id ? null : id));
+
+    const newFilter: Partial<FilterCriteria> = {
+      isCompleted: null,
+      isExpired: null,
+    };
+
+    if (action === 'completed') {
+      newFilter.isCompleted = buttonIsPressed === id ? null : true;
+    } else if (action === 'expired') {
+      newFilter.isExpired = buttonIsPressed === id ? null : true;
     }
+
+    dispatch(setCriteriaFilter(newFilter));
   };
 
   const buttonsData: ButtonsData[] = [
@@ -39,10 +46,10 @@ export function NavActions() {
     },
     {
       id: 2,
-      label: t('sidebar.trash'),
-      iconType: 'trash-bin',
-      action: 'trash',
-      count: countTasks.trash,
+      label: t('sidebar.expired'),
+      iconType: 'alert',
+      action: 'expired',
+      count: countTasks.expired,
     },
   ];
 

@@ -3,7 +3,7 @@ import { createAsyncAction } from 'shared/lib/thunk.adapter.ts';
 import { CaseReducer, PayloadAction } from '@reduxjs/toolkit';
 import { ErrorResponse, Task } from 'shared/types/types.ts';
 import { getUniqueCategories } from 'entities/task/lib/getUniqueCategories.ts';
-import { TaskState } from 'entities/task/model/taskSlice.ts';
+import { TaskState } from 'entities/task/types.ts';
 
 export const updateTaskRequest = createAsyncAction({
   actionType: 'task/update',

@@ -69,7 +69,8 @@ export type ErrorResponse = {
 export type FilterCriteria = {
   date?: string;
   category?: string | null;
-  isCompleted?: string | null;
+  isCompleted?: boolean | null;
+  isExpired?: boolean | null;
 };
 
 export type ButtonsData = {

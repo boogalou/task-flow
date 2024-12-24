@@ -6,17 +6,17 @@ import { nanoid } from '@reduxjs/toolkit';
 const cx = cnBind.bind(styles);
 
 const buttonData = [
-  { id: nanoid(), color: '#faafa9', colorName: '' },
-  { id: nanoid(), color: '#f29f75', colorName: '' },
-  { id: nanoid(), color: '#fff8b8', colorName: '' },
-  { id: nanoid(), color: '#e2f6d3', colorName: '' },
-  { id: nanoid(), color: '#b4ded3', colorName: '' },
-  { id: nanoid(), color: '#d3e4ec', colorName: '' },
-  { id: nanoid(), color: '#afccdc', colorName: '' },
-  { id: nanoid(), color: '#d3bedb', colorName: '' },
-  { id: nanoid(), color: '#f5e2dc', colorName: '' },
-  { id: nanoid(), color: '#e9e3d3', colorName: '' },
-  { id: nanoid(), color: '#efeff1', colorName: '' },
+  { id: nanoid(), color: '#E68EA6', colorName: '' },
+  { id: nanoid(), color: '#E5A96D', colorName: '' },
+  { id: nanoid(), color: '#DED882', colorName: '' },
+  { id: nanoid(), color: '#C6E3A0', colorName: '' },
+  { id: nanoid(), color: '#AACBA4', colorName: '' },
+  { id: nanoid(), color: '#82BFD0', colorName: '' },
+  { id: nanoid(), color: '#9ABEE2', colorName: '' },
+  { id: nanoid(), color: '#B7A6D5', colorName: '' },
+  { id: nanoid(), color: '#D7BFD7', colorName: '' },
+  { id: nanoid(), color: '#D9CCB0', colorName: '' },
+  { id: nanoid(), color: '#E9E9E9', colorName: '' },
 ];
 
 interface ColorpickerProps {

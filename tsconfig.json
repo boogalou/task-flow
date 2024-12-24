@@ -19,7 +19,6 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "types": ["vitest/globals"],
     "baseUrl": ".",
 
     "paths": {
@@ -33,7 +32,7 @@
     },
 
   },
-  "include": ["src", "**/*.ts", "**/*.tsx", "setupTests.ts"],
+  "include": ["src", "src/**/*.{ts, tsx}"],
   "exclude": ["node_modules"],
   "references": [{"path": "./tsconfig.node.json"}]
 }
