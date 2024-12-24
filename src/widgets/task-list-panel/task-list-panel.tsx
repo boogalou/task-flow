@@ -30,7 +30,6 @@ export function TaskListPanel() {
     }
   };
 
-  console.log('categories: ', categories);
   const categoriesButton: ButtonsData[] = categories.map((it, index) => ({
     id: index + 1,
     label: it,

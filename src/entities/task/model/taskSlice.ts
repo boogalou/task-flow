@@ -37,6 +37,7 @@ const initialState: TaskState = {
     category: null,
     isCompleted: null,
     isExpired: null,
+    searchQuery: '',
   },
 };
 

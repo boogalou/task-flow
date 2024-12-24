@@ -26,7 +26,13 @@ export function useFilterTasks(tasks: Task[], criteria: FilterCriteria) {
       const expiredMatch =
         criteria.isExpired !== null ? new Date(task.dueDate!) < today === criteria.isExpired : true;
 
-      return dateMatch && categoryMatch && completionMatch && expiredMatch;
+      const searchQuery = criteria.searchQuery!.toLowerCase();
+      const matchesSearch =
+        task.title?.toLowerCase().includes(searchQuery) ||
+        task.description?.toLowerCase().includes(searchQuery) ||
+        task.dueDate?.toLowerCase().includes(searchQuery);
+
+      return dateMatch && categoryMatch && completionMatch && expiredMatch && matchesSearch;
     });
   }, [tasks, criteria]);
 }
