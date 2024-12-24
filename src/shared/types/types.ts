@@ -71,6 +71,7 @@ export type FilterCriteria = {
   category?: string | null;
   isCompleted?: boolean | null;
   isExpired?: boolean | null;
+  searchQuery?: string;
 };
 
 export type ButtonsData = {

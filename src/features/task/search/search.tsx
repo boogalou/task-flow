@@ -3,13 +3,15 @@ import styles from './search.module.scss';
 import cnBind from 'classnames/bind';
 import Input from 'shared/ui-kit/input/input.tsx';
 import { Icon } from 'shared/ui-kit/icon/icon.tsx';
+import { useAppDispatch, useAppSelector } from 'shared/lib/reduxHooks.ts';
+import { selectFilter, setCriteriaFilter } from 'entities/task/model/taskSlice.ts';
 
 const cx = cnBind.bind(styles);
 
 export function Search() {
-  // const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
+  const filters = useAppSelector(selectFilter);
   const inputRef = useRef<HTMLInputElement>(null);
-  const [searchTerm, setSearchTerm] = useState('');
   const [isInputVisible, setIsInputVisible] = useState(false);
 
   const handleOnClick = () => {
@@ -19,11 +21,10 @@ export function Search() {
 
   const onBlur = () => {
     setIsInputVisible(false);
-    setSearchTerm('');
   };
 
   const handleOnChange = (evt: ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(evt.target.value);
+    dispatch(setCriteriaFilter({ searchQuery: evt.target.value }));
   };
 
   return (
@@ -34,7 +35,7 @@ export function Search() {
         type="text"
         name="search"
         placeholder="Search"
-        value={searchTerm}
+        value={filters.searchQuery}
         onChange={handleOnChange}
         onBlur={onBlur}
         ref={inputRef}
