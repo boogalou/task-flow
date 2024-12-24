@@ -36,6 +36,7 @@ const initialState: TaskState = {
     date: 'all',
     category: null,
     isCompleted: null,
+    isExpired: null,
   },
 };
 

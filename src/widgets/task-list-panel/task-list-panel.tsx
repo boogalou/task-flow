@@ -1,4 +1,4 @@
-import styles from './nav-tags.module.scss';
+import styles from './task-list-panel.module.scss';
 import cnBind from 'classnames/bind';
 import { Button } from 'shared/ui-kit/button/button.tsx';
 import { Icon } from 'shared/ui-kit/icon/icon.tsx';
@@ -14,7 +14,7 @@ type ButtonsData = {
   label: string;
 };
 
-export function NavTags() {
+export function TaskListPanel() {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const categories = useAppSelector(selectCategories);
@@ -30,6 +30,7 @@ export function NavTags() {
     }
   };
 
+  console.log('categories: ', categories);
   const categoriesButton: ButtonsData[] = categories.map((it, index) => ({
     id: index + 1,
     label: it,

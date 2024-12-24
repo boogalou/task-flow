@@ -5,7 +5,7 @@
     "all": "All",
     "myList": "My List",
     "completed": "Completed",
-    "trash": "Trash"
+    "expired": "Expired"
   },
   "settings": {
     "title": "Settings",

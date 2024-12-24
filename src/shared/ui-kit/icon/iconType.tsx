@@ -19,6 +19,7 @@ import Settings from '../../assets/icons/gear.svg?react';
 import Logout from '../../assets/icons/logout.svg?react';
 import Edit from '../../assets/icons/edit.svg?react';
 import Profile from '../../assets/icons/profile.svg?react';
+import Alert from '../../assets/icons/alert.svg?react';
 
 const keyGen = () => nanoid(12);
 
@@ -42,7 +43,8 @@ export type IconType =
   | 'settings'
   | 'logout'
   | 'edit'
-  | 'profile';
+  | 'profile'
+  | 'alert';
 
 export const iconTypes = new Map([
   ['auth-splash', <AuthSplash key={keyGen()} />],
@@ -65,4 +67,5 @@ export const iconTypes = new Map([
   ['logout', <Logout key={keyGen()} />],
   ['edit', <Edit key={keyGen()} />],
   ['profile', <Profile key={keyGen()} />],
+  ['alert', <Alert key={keyGen()} />],
 ]);

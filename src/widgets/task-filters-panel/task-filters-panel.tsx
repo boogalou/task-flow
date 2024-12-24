@@ -1,4 +1,4 @@
-import styles from './nav-date.module.scss';
+import styles from './task-filters-panel.module.scss';
 import cnBind from 'classnames/bind';
 import { useTranslation } from 'react-i18next';
 import { Icon } from 'shared/ui-kit/icon/icon.tsx';
@@ -11,7 +11,7 @@ import { calculateTasksCount } from 'entities/task/lib/calculateTasksCount.ts';
 
 const cx = cnBind.bind(styles);
 
-export function NavDate() {
+export function TaskFiltersPanel() {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const tasks = useAppSelector(selectTasks);

@@ -1,8 +1,9 @@
 import { createAsyncAction } from 'shared/lib/thunk.adapter.ts';
 import { taskService } from 'shared/api/task.service.ts';
 import { CaseReducer, PayloadAction } from '@reduxjs/toolkit';
-import { TaskState } from 'entities/task/model/taskSlice.ts';
+import { TaskState } from 'entities/task/types.ts';
 import { ErrorResponse, Task } from 'shared/types/types.ts';
+import { getUniqueCategories } from 'entities/task/lib/getUniqueCategories.ts';
 
 export const getTasksRequest = createAsyncAction({
   actionType: 'task/getAll',
@@ -17,6 +18,7 @@ export const getTasksPending: CaseReducer<TaskState> = (state) => {
 export const getTasksFulfilled: CaseReducer<TaskState, PayloadAction<Task[]>> = (state, action) => {
   state.taskFetchStatus = 'succeeded';
   state.tasks = action.payload;
+  state.categories = getUniqueCategories(action.payload);
   state.error = null;
 };
 

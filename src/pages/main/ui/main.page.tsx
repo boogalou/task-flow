@@ -3,9 +3,9 @@ import cnBind from 'classnames/bind';
 import { MainHeader } from 'pages/main/ui/main-header/main-header.tsx';
 import { Sidebar } from 'widgets/sidebar/sidebar.tsx';
 import { SidebarHeader } from 'widgets/sidebar-header/sidebar-header.tsx';
-import { NavDate } from 'widgets/nav-date/nav-date.tsx';
-import { NavTags } from 'widgets/nav-tags/nav-tags.tsx';
-import { NavActions } from 'widgets/nav-actions/nav-actions.tsx';
+import { TaskFiltersPanel } from 'widgets/task-filters-panel/task-filters-panel.tsx';
+import { TaskListPanel } from 'widgets/task-list-panel/task-list-panel.tsx';
+import { TaskManagementPanel } from 'widgets/task-management-panel/task-management-panel.tsx';
 import { useMainPage } from 'pages/main/lib/use-main-page.ts';
 import { Outlet } from 'react-router-dom';
 
@@ -21,9 +21,9 @@ export function MainPage() {
         drawerIsOpen={drawerIsOpen}
         onCloseDrawer={onCloseDrawer}
         SidebarHeader={<SidebarHeader />}
-        NavDate={<NavDate />}
-        NavTags={<NavTags />}
-        NavActions={<NavActions />}
+        TaskFiltersPanel={<TaskFiltersPanel />}
+        TaskListPanel={<TaskListPanel />}
+        TaskManagementPanel={<TaskManagementPanel />}
       />
       <Outlet />
     </div>
