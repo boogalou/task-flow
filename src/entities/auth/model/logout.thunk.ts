@@ -21,6 +21,7 @@ export const handleLogoutRequestFulfilled: CaseReducer<AuthState, PayloadAction<
   state.authData = null;
   state.isAuth = false;
   state.error = null;
+  window.location.reload();
 };
 
 export const handleLogoutRequestRejected: CaseReducer<AuthState> = (state, action) => {

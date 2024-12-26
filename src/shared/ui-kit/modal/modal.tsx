@@ -8,7 +8,7 @@ import { Portal } from '../portal/portal.tsx';
 const cx = cnBind.bind(styles);
 
 interface ModalProps {
-  children: ReactNode;
+  children?: ReactNode;
   isOpen: boolean;
   closeModal: () => void;
 }

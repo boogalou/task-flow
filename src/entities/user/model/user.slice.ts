@@ -1,5 +1,17 @@
 import { ErrorResponse, FetchStatus, User } from '../../../shared/types/types.ts';
 import { createSlice } from '@reduxjs/toolkit';
+import { getUserRequest } from 'entities/user';
+import {
+  getUserFulfilled,
+  getUserPending,
+  getUserRejected,
+} from 'entities/user/model/get-user.thunk.ts';
+import {
+  updateUserFulfilled,
+  updateUserPending,
+  updateUserRejected,
+  updateUserRequest,
+} from 'entities/user/model/update-user.thunk.ts';
 
 export type UserState = {
   user: User | null;
@@ -20,7 +32,16 @@ export const userSlice = createSlice({
     selectUser: (state) => state.user,
   },
   reducers: {},
+
+  extraReducers: (builder) => {
+    builder
+      .addCase(getUserRequest.pending, getUserPending)
+      .addCase(getUserRequest.fulfilled, getUserFulfilled)
+      .addCase(getUserRequest.rejected, getUserRejected)
+      .addCase(updateUserRequest.pending, updateUserPending)
+      .addCase(updateUserRequest.fulfilled, updateUserFulfilled)
+      .addCase(updateUserRequest.rejected, updateUserRejected);
+  },
 });
 
 export const { selectUser } = userSlice.selectors;
-export const {} = userSlice.actions;
