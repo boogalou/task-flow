@@ -1,7 +1,7 @@
 import { ReactNode, useEffect, useRef } from 'react';
 import { useAppDispatch, useAppSelector } from 'shared/lib/reduxHooks.ts';
 import { getTasksRequest } from 'entities/task';
-import { getUserRequest } from 'entities/user/model/getUserRequest.ts';
+import { getUserRequest } from 'entities/user/model/get-user.thunk.ts';
 import { selectIsAuth } from 'entities/auth';
 
 export function DataLoadProvider({ children }: { children?: ReactNode }) {

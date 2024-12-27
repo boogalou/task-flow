@@ -32,14 +32,14 @@ export function MainMenu(props: MainMenuProps) {
   const dispatch = useAppDispatch();
   const dropdownRef = useRef<HTMLUListElement>(null);
 
-  const handleSelectDropdownItem = (action: string) => {
+  const handleSelectDropdownItem = async (action: string) => {
     if (action === 'settings') {
       props.setDropdownIsOpen(false);
     }
 
     if (action === 'logout') {
-      dispatch(logoutRequest());
       props.setDropdownIsOpen(false);
+      await dispatch(logoutRequest());
     }
   };
 

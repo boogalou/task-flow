@@ -7,6 +7,11 @@ export type User = {
   userPic: string;
 };
 
+export type UserUpdate = {
+  username?: string;
+  email?: string;
+};
+
 export type RegistrationFormData = {
   username: string;
   email: string;

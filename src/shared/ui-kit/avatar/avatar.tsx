@@ -1,5 +1,5 @@
-import cnBind from 'classnames/bind';
 import styles from './avatar.module.scss';
+import cnBind from 'classnames/bind';
 
 const cx = cnBind.bind(styles);
 

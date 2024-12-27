@@ -16,7 +16,7 @@ const resources = {
 
 const savedSettings = storageAdapter.get<UserSettings>('app-settings')!;
 
-const savedLanguage = savedSettings.language === 'rus' ? 'ru' : 'en';
+const savedLanguage = savedSettings && savedSettings.language === 'rus' ? 'ru' : 'en';
 
 i18n.use(initReactI18next).init({
   resources,
