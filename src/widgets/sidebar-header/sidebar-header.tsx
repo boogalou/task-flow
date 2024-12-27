@@ -21,7 +21,9 @@ export function SidebarHeader() {
   return (
     <header className={cx('sidebar-header')}>
       <Button className={cx('sidebar-header__button')} onClick={toggleDropdown} ref={buttonRef}>
-        <Avatar avatarUrl={user?.userPic} name={user?.username} />
+        <div className={cx('sidebar-header__avatar')}>
+          <Avatar avatarUrl={user?.userPic} name={user?.username} />
+        </div>
         <div>{user?.username}</div>
       </Button>
       <MainMenu
