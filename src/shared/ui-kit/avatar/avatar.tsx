@@ -1,5 +1,6 @@
 import styles from './avatar.module.scss';
 import cnBind from 'classnames/bind';
+import { ReactNode } from 'react';
 
 const cx = cnBind.bind(styles);
 
@@ -9,9 +10,10 @@ export interface AvatarProps {
   avatarUrl?: string | null;
   name?: string;
   isOnline?: boolean;
+  children?: ReactNode;
 }
 
-export function Avatar({ avatarUrl }: AvatarProps) {
+export function Avatar({ avatarUrl, children }: AvatarProps) {
   return (
     <div className={cx('avatar')}>
       {avatarUrl ? (
@@ -21,6 +23,7 @@ export function Avatar({ avatarUrl }: AvatarProps) {
           {'NM'}
         </div>
       )}
+      {children}
     </div>
   );
 }
