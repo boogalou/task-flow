@@ -1,6 +1,5 @@
-import stylse from './profile-page.module.scss';
+import style from './profile-page.module.scss';
 import cnBind from 'classnames/bind';
-import { Avatar } from 'shared/ui-kit/avatar/avatar.tsx';
 import { updateUserRequest, userSelector } from 'entities/user';
 import { ChangeEvent, useState } from 'react';
 import { Button } from 'shared/ui-kit/button/button.tsx';
@@ -9,8 +8,10 @@ import { useModal } from 'shared/ui-kit/modal/useModal.ts';
 import Input from 'shared/ui-kit/input/input.tsx';
 import { UserUpdate } from 'shared/types/types.ts';
 import { useAppDispatch } from 'shared/lib/reduxHooks.ts';
+import { Icon } from 'shared/ui-kit/icon/icon.tsx';
+import { ProfileAvatar } from 'features/user/update-avatar/profile-avatar.tsx';
 
-const cx = cnBind.bind(stylse);
+const cx = cnBind.bind(style);
 
 export const ProfilePage = () => {
   const dispatch = useAppDispatch();
@@ -46,9 +47,7 @@ export const ProfilePage = () => {
   return (
     <>
       <div className={cx('profile')}>
-        <div className={cx('profile__avatar')}>
-          <Avatar />
-        </div>
+        <ProfileAvatar />
 
         <div className={cx('profile__form')}>
           <div
@@ -68,6 +67,7 @@ export const ProfilePage = () => {
             Update
           </Button>
         </div>
+        <Icon iconType="camera" />
       </div>
       <Modal isOpen={isOpen} closeModal={closeModal}>
         <div className={cx('popup')}>
