@@ -1,6 +1,5 @@
 import style from './profile-page.module.scss';
 import cnBind from 'classnames/bind';
-import { Avatar } from 'shared/ui-kit/avatar/avatar.tsx';
 import { updateUserRequest, userSelector } from 'entities/user';
 import { ChangeEvent, useState } from 'react';
 import { Button } from 'shared/ui-kit/button/button.tsx';

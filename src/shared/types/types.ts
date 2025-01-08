@@ -10,6 +10,7 @@ export type User = {
 export type UserUpdate = {
   username?: string;
   email?: string;
+  avatarImg?: File;
 };
 
 export type RegistrationFormData = {

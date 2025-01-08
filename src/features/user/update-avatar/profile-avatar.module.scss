@@ -1,4 +1,4 @@
-@import '../../../shared/styles/index';
+@import 'src/shared/styles/index';
 
 .avatar {
   $this: &;
@@ -8,7 +8,7 @@
   border-radius: 50%;
   overflow: hidden;
 
-  &:hover #{$this}__icon-overlayre {
+  &:hover .avatar__icon-overlay {
     opacity: 1;
   }
 
@@ -46,6 +46,10 @@
   }
 }
 
+
+.modal {
+  width: 800px;
+}
 
 
 

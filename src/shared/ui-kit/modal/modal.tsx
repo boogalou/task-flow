@@ -8,12 +8,13 @@ import { Portal } from '../portal/portal.tsx';
 const cx = cnBind.bind(styles);
 
 interface ModalProps {
+  className?: string;
   children?: ReactNode;
   isOpen: boolean;
   closeModal: () => void;
 }
 
-export function Modal({ children, isOpen, closeModal }: ModalProps) {
+export function Modal({ children, isOpen, closeModal, className }: ModalProps) {
   const handleOverlayClick = (evt: MouseEvent<HTMLDivElement>) => {
     evt.stopPropagation();
     if (evt.target === evt.currentTarget) {
@@ -28,7 +29,7 @@ export function Modal({ children, isOpen, closeModal }: ModalProps) {
 
   return (
     <Portal>
-      <div className={cx('modal', { 'modal--active': isOpen })}>
+      <div className={cx('modal', { 'modal--active': isOpen }, className)}>
         <div className={cx('modal__overlay')} onClick={handleOverlayClick}>
           <div className={cx('modal__content')}>
             <div className={cx('modal__control')}>

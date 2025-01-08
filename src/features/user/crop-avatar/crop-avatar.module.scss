@@ -1,0 +1,38 @@
+
+.cropper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 700px;
+  height: 400px;
+  z-index: 1;
+  bottom: 80px;
+
+  &__content {
+
+  }
+
+  &__controls {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    height: 25%;
+    padding: 10px;
+    row-gap: 30px;
+    right: 0;
+    bottom: 0;
+  }
+
+  &__buttons {
+    display: flex;
+    column-gap: 15px;
+    flex-direction: row;
+  }
+}
+
+.crop-container {
+  background-color: #fff;
+  border-radius: 8px;
+}
