@@ -22,7 +22,7 @@ export function CropAvatar({ imageSrc, clearSelectedFile }: CropAvatarProps) {
   const [zoom, setZoom] = useState(1);
   const [cropArea, setCropArea] = useState<Area | null>(null);
 
-  const onCropComplete = useCallback((croppedAreaPixels: Area) => {
+  const onCropComplete = useCallback((_croppedArea: Area, croppedAreaPixels: Area) => {
     setCropArea(croppedAreaPixels);
   }, []);
 
@@ -31,7 +31,6 @@ export function CropAvatar({ imageSrc, clearSelectedFile }: CropAvatarProps) {
       const file = await getCroppedImage(imageSrc, cropArea);
       dispatch(updateUserAvatarRequest({ id: user.id, avatarImg: file }));
       clearSelectedFile();
-      console.log(file);
     }
   };
 
