@@ -26,7 +26,7 @@ export function ProfileAvatar({ avatarUrl }: ProfileAvatarProps) {
   const clearSelectedFile = () => {
     setSelectedFile(null);
   };
-
+  console.log(avatarUrl);
   return (
     <>
       <div className={cx('avatar')}>

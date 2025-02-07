@@ -47,7 +47,7 @@ export const ProfilePage = () => {
   return (
     <>
       <div className={cx('profile')}>
-        <ProfileAvatar />
+        <ProfileAvatar avatarUrl={user?.userPic} />
 
         <div className={cx('profile__form')}>
           <div

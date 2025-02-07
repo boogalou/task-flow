@@ -1,4 +1,4 @@
-import { ErrorResponse, FetchStatus, User } from '../../../shared/types/types.ts';
+import { ErrorResponse, FetchStatus, User } from 'shared/types/types.ts';
 import { createSlice } from '@reduxjs/toolkit';
 import { getUserRequest } from 'entities/user';
 import {
