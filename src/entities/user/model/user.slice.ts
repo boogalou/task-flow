@@ -12,6 +12,12 @@ import {
   updateUserRejected,
   updateUserRequest,
 } from 'entities/user/model/update-user.thunk.ts';
+import {
+  updateUserAvatarFulfilled,
+  updateUserAvatarPending,
+  updateUserAvatarRejected,
+  updateUserAvatarRequest,
+} from 'entities/user/model/update-avatar.thunk.ts';
 
 export type UserState = {
   user: User | null;
@@ -40,7 +46,10 @@ export const userSlice = createSlice({
       .addCase(getUserRequest.rejected, getUserRejected)
       .addCase(updateUserRequest.pending, updateUserPending)
       .addCase(updateUserRequest.fulfilled, updateUserFulfilled)
-      .addCase(updateUserRequest.rejected, updateUserRejected);
+      .addCase(updateUserRequest.rejected, updateUserRejected)
+      .addCase(updateUserAvatarRequest.pending, updateUserAvatarPending)
+      .addCase(updateUserAvatarRequest.fulfilled, updateUserAvatarFulfilled)
+      .addCase(updateUserAvatarRequest.rejected, updateUserAvatarRejected);
   },
 });
 
