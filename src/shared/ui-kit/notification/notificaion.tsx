@@ -3,9 +3,9 @@ import { Toaster } from 'react-hot-toast';
 export function Notificaion() {
   return (
     <Toaster
-      position={'bottom-right'}
+      position={'top-right'}
       toastOptions={{
-        duration: 3500,
+        duration: 3000,
       }}
     />
   );
