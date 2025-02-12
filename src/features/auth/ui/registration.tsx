@@ -3,17 +3,34 @@ import cnBind from 'classnames/bind';
 import Input from 'shared/ui-kit/input/input.tsx';
 import { Button } from 'shared/ui-kit/button/button.tsx';
 import { RegistrationFormData } from 'shared/types/types.ts';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { routes } from 'shared/constants/routes.ts';
 import { Icon } from 'shared/ui-kit/icon/icon.tsx';
 import { createInputFields } from 'shared/lib/forms/createInputFields.ts';
 import { useRegistrationForm } from '../lib/use-registration-form.ts';
 import { registrationFields } from 'features/auth/ui/input.config.ts';
+import { useAppDispatch, useAppSelector } from 'shared/lib/reduxHooks.ts';
+import { clearRegister, selectIsRegister } from 'entities/auth';
+import { useEffect } from 'react';
+import toast from 'react-hot-toast';
 
 const cx = cnBind.bind(styles);
 
 export function Registration() {
+  const dispatch = useAppDispatch();
   const { form, types, toggleType, t } = useRegistrationForm();
+  const isRegister = useAppSelector(selectIsRegister);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    let timeoutId = null;
+    if (isRegister) {
+      toast.success(`Пользователь был успешно зарегистрирован, переход на страницу входа...`);
+      timeoutId = setTimeout(() => navigate(routes.LOGIN_PAGE), 3000);
+      dispatch(clearRegister());
+    }
+    return () => clearTimeout(timeoutId!);
+  }, []);
 
   return (
     <div className={cx('container')}>

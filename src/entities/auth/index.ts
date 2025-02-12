@@ -1,5 +1,10 @@
 export { authSlice } from './model/auth.slice';
-export { selectIsAuth, selectAuthFetchStatus } from './model/auth.slice';
+export {
+  selectIsAuth,
+  selectAuthFetchStatus,
+  selectIsRegister,
+  clearRegister,
+} from './model/auth.slice';
 export { loginRequest } from 'entities/auth/model/login.thunk.ts';
 export { registrationRequest } from 'entities/auth/model/registration.thunk.ts';
 export { logoutRequest } from 'entities/auth/model/logout.thunk.ts';
