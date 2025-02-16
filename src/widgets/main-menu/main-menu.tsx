@@ -24,7 +24,7 @@ const dropdownItems: DropdownItemData[] = [
 interface MainMenuProps {
   setDropdownIsOpen: (param: boolean) => void;
   dropdownIsOpen: boolean;
-  buttonRef: RefObject<HTMLButtonElement>;
+  buttonRef: RefObject<HTMLButtonElement | null>;
 }
 
 export function MainMenu(props: MainMenuProps) {
