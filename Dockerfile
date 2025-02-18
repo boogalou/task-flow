@@ -57,7 +57,7 @@ RUN apk add --no-cache certbot gettext dcron
 COPY --from=build /app/dist /usr/share/nginx/html
 COPY nginx.conf.template /etc/nginx/nginx.conf.template
 
-RUN certbot certonly --staging --webroot --webroot-path=/usr/share/nginx/html --non-interactive --agree-tos --no-eff-email -m $ADMIN_EMAIL -d $SITE_DOMAIN, $SITE_DOMAIN_WWW
+RUN certbot certonly --staging --webroot --webroot-path=/usr/share/nginx/html --non-interactive --agree-tos --no-eff-email -m $ADMIN_EMAIL -d $SITE_DOMAIN -d $SITE_DOMAIN_WWW
 RUN echo "0 0 * * * certbot renew --quiet" > /etc/crontabs/root \
     && crond
 
