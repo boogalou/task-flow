@@ -5,7 +5,7 @@ events {
 http {
     server {
         listen 80;
-        server_name taskflow-web;
+        server_name $SITE_DOMAIN $SITE_DOMAIN_WWW;
         return 301 https://$host$request_uri;
     }
 
