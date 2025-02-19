@@ -13,8 +13,8 @@ services:
     restart: always
     container_name: taskflow-web
     volumes:
-      - ./certbot-www:/usr/share/nginx/html
-      - ./certbot-letsencrypt:/etc/letsencrypt
+      - certbot-www:/usr/share/nginx/html
+      - certbot-letsencrypt:/etc/letsencrypt
     ports:
       - "80:80"
       - "443:443"
@@ -31,8 +31,8 @@ services:
     depends_on:
       - taskflow-web
     volumes:
-      - ./certbot-www:/usr/share/nginx/html
-      - ./certbot-letsencrypt:/etc/letsencrypt
+      - certbot-www:/usr/share/nginx/html
+      - certbot-letsencrypt:/etc/letsencrypt
     entrypoint: >
       sh -c "certbot certonly --staging --webroot --webroot-path=/usr/share/nginx/html 
       --email $ADMIN_EMAIL --agree-tos --no-eff-email 
@@ -43,8 +43,6 @@ services:
 volumes:
   certbot-www:
   certbot-letsencrypt:
-
-
 
 networks:
   taskflow-network:
