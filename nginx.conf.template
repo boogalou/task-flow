@@ -9,7 +9,8 @@ http {
     listen 80;
         server_name $SITE_DOMAIN $SITE_DOMAIN_WWW;
 
-        location /.well-known/acme-challenge/ {
+        location ~/.well-known/acme-challenge/ {
+            allow all;
             root /usr/share/nginx/html;
         }
 
