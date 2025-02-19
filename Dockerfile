@@ -44,7 +44,6 @@ ARG ADMIN_EMAIL
 ARG SITE_DOMAIN
 ARG SITE_DOMAIN_WWW
 
-
 ENV SSL_CERT_PATH=$SSL_CERT_PATH
 ENV SSL_CERT_KEY_PATH=$SSL_CERT_KEY_PATH
 ENV ORIGIN_URL=$ORIGIN_URL
@@ -52,15 +51,9 @@ ENV ADMIN_EMAIL=$ADMIN_EMAIL
 ENV SITE_DOMAIN=$SITE_DOMAIN
 ENV SITE_DOMAIN_WWW=$SITE_DOMAIN_WWW
 
-RUN apk add --no-cache certbot gettext dcron
-
 COPY --from=build /app/dist /usr/share/nginx/html
 COPY nginx.conf.template /etc/nginx/nginx.conf.template
 
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+RUN envsubst '$SSL_CERT_PATH $SSL_CERT_KEY_PATH $ORIGIN_URL $ADMIN_EMAIL $SITE_DOMAIN $SITE_DOMAIN_WWW' < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf
 
-
-ENTRYPOINT ["/entrypoint.sh"]
-
-
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
