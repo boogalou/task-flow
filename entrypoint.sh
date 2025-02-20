@@ -1,4 +1,4 @@
-!/bin/sh
+#!/bin/sh
 
 nginx -g 'daemon off;' &
 
@@ -14,4 +14,3 @@ envsubst '$SSL_CERT_PATH $SSL_CERT_KEY_PATH $ORIGIN_URL $ADMIN_EMAIL $SITE_DOMAI
 nginx -s reload
 
 tail -f /dev/null
-
