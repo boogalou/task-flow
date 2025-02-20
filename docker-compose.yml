@@ -34,7 +34,7 @@ services:
     volumes:
       - certbot-www:/usr/share/nginx/html
       - certbot-letsencrypt:/etc/letsencrypt
-    command: certonly --staging --webroot --webroot-path=/usr/share/nginx/html --email $ADMIN_EMAIL --agree-tos --no-eff-email  -d $SITE_DOMAIN -d $SITE_DOMAIN_WWW
+    command: certonly --webroot --webroot-path=/usr/share/nginx/html --email $ADMIN_EMAIL --agree-tos --no-eff-email  -d $SITE_DOMAIN -d $SITE_DOMAIN_WWW
 
 volumes:
   certbot-www:
