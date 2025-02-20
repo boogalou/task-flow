@@ -35,7 +35,6 @@ RUN envsubst '$SSL_CERT_PATH $SSL_CERT_KEY_PATH $ORIGIN_URL' < /etc/nginx/nginx.
 
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
 
-
 FROM fholzer/nginx-brotli:mainline-latest AS prod
 ARG SSL_CERT_PATH
 ARG SSL_CERT_KEY_PATH
@@ -53,7 +52,10 @@ ENV SITE_DOMAIN_WWW=$SITE_DOMAIN_WWW
 
 COPY --from=build /app/dist /usr/share/nginx/html
 COPY nginx.conf.template /etc/nginx/nginx.conf.template
+COPY nginx.default.conf /etc/nginx/nginx.conf
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 
-RUN envsubst '$SSL_CERT_PATH $SSL_CERT_KEY_PATH $ORIGIN_URL $ADMIN_EMAIL $SITE_DOMAIN $SITE_DOMAIN_WWW' < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf
+RUN chmod +x /usr/local/bin/entrypoint.sh
 
-ENTRYPOINT ["nginx", "-g", "daemon off;"]
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+

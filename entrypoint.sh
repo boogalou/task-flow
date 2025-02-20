@@ -1,14 +1,17 @@
-#!/usr/bin/env sh
+!/bin/sh
 
-# Get SSL-certs
-certbot certonly --staging --webroot --webroot-path=/usr/share/nginx/html --non-interactive --agree-tos --no-eff-email -m $ADMIN_EMAIL -d $SITE_DOMAIN -d $SITE_DOMAIN_WWW
+nginx -g 'daemon off;' &
 
-# Config Nginx
-envsubst '$SSL_CERT_PATH $SSL_CERT_KEY_PATH $ORIGIN_URL' < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf
+echo "Waiting for certificates from Let's Encrypt..."
+while [ ! -f /etc/letsencrypt/live/$SITE_DOMAIN/fullchain.pem ]; do
+    sleep 5
+done
 
-# Run cron for autoupdate certs
-echo "0 0 * * * certbot renew --quiet" > /etc/crontabs/root
-crond
+echo "Certificates received, update Nginx configuration..."
 
-# Run Nginx
-nginx -g "daemon off;"
+envsubst '$SSL_CERT_PATH $SSL_CERT_KEY_PATH $ORIGIN_URL $ADMIN_EMAIL $SITE_DOMAIN $SITE_DOMAIN_WWW' < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf
+
+nginx -s reload
+
+tail -f /dev/null
+
