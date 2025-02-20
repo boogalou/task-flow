@@ -2,6 +2,7 @@ services:
   taskflow-web:
     build:
       context: .
+      dockerfile: Dockerfile
       target: ${BUILD_MODE}
       args:
         - SSL_CERT_PATH
@@ -23,7 +24,7 @@ services:
     networks:
       - taskflow-network
       - frontend
-    command: ["sh", "-c", "nginx -g 'daemon off;' & while :; do sleep 12h & wait $!; nginx -s reload; done"]
+    command: ["sh", "-c", "nginx -g 'daemon off;' & while true; do sleep 12h; nginx -s reload; done"]
 
   certbot:
     image: certbot/certbot
@@ -33,12 +34,7 @@ services:
     volumes:
       - certbot-www:/usr/share/nginx/html
       - certbot-letsencrypt:/etc/letsencrypt
-    entrypoint: >
-      sh -c "certbot certonly --staging --webroot --webroot-path=/usr/share/nginx/html 
-      --email $ADMIN_EMAIL --agree-tos --no-eff-email 
-      -d $SITE_DOMAIN -d $SITE_DOMAIN_WWW &&
-      crond -f"
-    restart: unless-stopped
+    command: certonly --staging --webroot --webroot-path=/usr/share/nginx/html --email $ADMIN_EMAIL --agree-tos --no-eff-email  -d $SITE_DOMAIN -d $SITE_DOMAIN_WWW
 
 volumes:
   certbot-www:
